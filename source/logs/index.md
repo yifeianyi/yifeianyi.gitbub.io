@@ -16,8 +16,8 @@ date: 2020-10-06 22:18:35
   - [参考](https://github.com/litten/hexo-theme-yilia/issues/835)
 - 添加左边栏显示文章总数
 - 修复本地上传时插图无法显示问题 
-  - [过程讨论]()
-  - [解决方案]([https://zhouhangzooo.github.io/2019/05/15/Hexo%E4%B8%8D%E6%98%BE%E7%A4%BA%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/](https://zhouhangzooo.github.io/2019/05/15/Hexo不显示本地图片解决方案/))
+  - [过程讨论](https://www.v2ex.com/t/712637#reply5)
+  - [解决方案](https://zhouhangzooo.github.io/2019/05/15/Hexo不显示本地图片解决方案/)
 
 ##### 2020-10-4
 
