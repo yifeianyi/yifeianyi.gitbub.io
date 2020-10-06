@@ -7,19 +7,24 @@ date: 2020-10-06 22:18:35
 
 - 添加版权出现误操作，不会修复，导致炸站
 - 重新部署网站，并把原始文件备份至github
-- 添加不蒜子统计, 单篇文章点击量，访问量(疑似失败)
+- 添加不蒜子统计, 单篇文章点击量，访问量
 - 添加建站日志页面，附上相关配置指引，以防日后需要
 
 ##### 2020-10-5
 
-- 添加目录页面(分类、标签)
+- 添加目录页面(分类、标签) 
+  - [参考](https://github.com/litten/hexo-theme-yilia/issues/835)
 - 添加左边栏显示文章总数
-- 修复本地上传时插图无法显示问题
+- 修复本地上传时插图无法显示问题 
+  - [过程讨论]()
+  - [解决方案]([https://zhouhangzooo.github.io/2019/05/15/Hexo%E4%B8%8D%E6%98%BE%E7%A4%BA%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/](https://zhouhangzooo.github.io/2019/05/15/Hexo不显示本地图片解决方案/))
 
 ##### 2020-10-4
 
 使用Hexo搭建个人博客，采用yilia主题。
 - 设置域名lzyblog.site
+  - [参考](https://zhuanlan.zhihu.com/p/44213627)
 - 修改头像
 - 修复yilia不显示作者和副标题等问题
+  - [解决方案](https://github.com/JoeyBling/hexo-theme-yilia-plus/pull/63)
 - 修复“所有文章”的缺失模块
