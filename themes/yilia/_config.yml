@@ -3,7 +3,8 @@
 menu:
   主页: /
   目录: /categories
-  随笔: /tags/随笔/
+  # 随笔: /tags/随笔/
+  日志: /logs
   -关于我-: /AboutMe
 
 # SubNav
