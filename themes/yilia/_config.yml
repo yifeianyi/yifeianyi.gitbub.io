@@ -1,10 +1,11 @@
 # Header
 
 menu:
-  主页: /
-  目录: /categories
-  # 随笔: /tags/随笔/
+  主页: /archives
+  目录: /categories/
+  随笔: /tags/随笔
   日志: /logs
+  # 归档: /
   -关于我-: /AboutMe
 
 # SubNav
@@ -121,7 +122,11 @@ smart_menu:
   innerArchive: '所有文章'
   friends: '友链'
   # aboutme: '关于我'
+  # archive: '归档'
 
 friends:
   偶像——稚晖君: http://pengzhihui.xyz/archives/
   Sengxian's Blog: https://blog.sengxian.com/
+
+# archive:
+#   2020年: http://lzyblog.site/archives/archives/2020/
