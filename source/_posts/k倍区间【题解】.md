@@ -3,6 +3,7 @@ title: k倍区间【题解】
 date: 2020-10-08 18:52:23
 tags: [蓝桥杯,算法]
 categories: 题解
+mathjax: true
 ---
 
 ### 问题描述
@@ -10,6 +11,8 @@ categories: 题解
 给定一个长度为 N的数列，A<sub>1</sub>,A<sub>2</sub>,…A<sub>N</sub>，如果其中一段连续的子序列 A<sub>i</sub>,A<sub>i+1</sub>,…A<sub>j</sub>之和是 K的倍数，我们就称这个区间 【i,j】 是 K倍区间。
 
 你能求出数列中总共有多少个 K 倍区间吗？
+
+<!--more-->
 
 #### 输入格式
 

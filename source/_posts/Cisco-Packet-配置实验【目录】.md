@@ -15,24 +15,16 @@ categories: 杂项
 
 <!-- more-->
 
-个人觉得讲述知识点最好的方式莫过于：
-
-我们有一个需求。对于这个需求，在实现的过程存在某些问题。
-
-在处理这些问题的过程中需要哪些技术，这些技术是怎样的？我们可以怎么去实现它。
-
-路由交换的配置实验实质上就可以理解为	是实现网络互联的一个个小需求，所以我将按照以上逻辑推导模式去记述它们。
+下列记述各个配置实验不会涉及太多的原理。涉及到的相关详细原理讨论，等我应付完这波在慢慢记录。。。
 
 ### 目录
 
-- {% post_link Cisco-路由交换基本配置 Cisco-路由交换基本配置 %}
+- {% post_link Cisco-路由交换基础配置 Cisco-路由交换基础配置 %}
 - {% post_link Cisco-Telnet与SSH配置 Cisco-Telnet与SSH配置 %}
-- {% post_link 静态路由配置 静态路由配置 %}
-- {% post_link RIP配置 RIP配置 %}
-- {% post_link Telnet与SSH配置 Telnet与SSH配置 %}
-- {% post_link Telnet与SSH配置 Telnet与SSH配置 %}
-- [vlan配置](#)
-- [单臂路由与DHCP配置](#)
+- {% post_link Cisco-静态路由配置 Cisco-静态路由配置 %}
+- {% post_link Cisco-动态路由协议之RIP配置 动态路由协议之Cisco-RIP配置 %}
+- {% post_link Cisco-VLAN与单臂路由配置 Cisco-VLAN与单臂路由配置 %}
+- {% post_link Cisco-DHCP配置 Cisco-DHCP配置 %}
 - [NAT配置](#)
 - [ACL配置](#)
 - 未完待续...
