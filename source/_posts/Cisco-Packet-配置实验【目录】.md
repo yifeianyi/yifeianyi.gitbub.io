@@ -21,8 +21,7 @@ categories: 杂项
 
 - {% post_link Cisco-路由交换基础配置 Cisco-路由交换基础配置 %}
 - {% post_link Cisco-Telnet与SSH配置 Cisco-Telnet与SSH配置 %}
-- {% post_link Cisco-静态路由配置 Cisco-静态路由配置 %}
-- {% post_link Cisco-动态路由协议之RIP配置 动态路由协议之Cisco-RIP配置 %}
+- {% post_link Cisco-静态路由与动态路由RIP配置  Cisco-静态路由与动态路由RIP配置 %}
 - {% post_link Cisco-VLAN与单臂路由配置 Cisco-VLAN与单臂路由配置 %}
 - {% post_link Cisco-DHCP配置 Cisco-DHCP配置 %}
 - [NAT配置](#)

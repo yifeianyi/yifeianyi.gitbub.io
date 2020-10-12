@@ -1,5 +1,5 @@
 ---
-title: k倍区间【题解】
+title: Acwing 1230.k倍区间
 date: 2020-10-08 18:52:23
 tags: [蓝桥杯,算法]
 categories: 题解
