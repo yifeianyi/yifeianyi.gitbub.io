@@ -40,7 +40,7 @@ typedef  long long LL;
 const int N = 1e6;
 LL n,k;
 LL a[N];
-//纯暴力做法:枚举起始点后，再用一重循环求得子序和
+//纯暴力做法:枚举起始位置、终点位置后，再用一重循环求得子序和
 LL fun1(){
 	LL ans = 0;
 	for(int R=1;R<=n;R++){

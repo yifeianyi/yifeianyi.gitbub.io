@@ -2,5 +2,6 @@
 title: {{ title }}
 tags:
 categories:
-mathjax:
+mathjax: true
 ---
+
