@@ -1,7 +1,7 @@
 ---
-title: 【初入电子坑之stm32篇（一）】初识stm32与点灯
+title: 【初入电子坑之stm32篇（一）】初识stm32与寄存器编程
 mathjax: true
-date: 2020-12-26 13:49:19
+date: 2021-1-4 13:49:19
 tags: [stm32]
 categories: 电子
 ---
@@ -37,7 +37,7 @@ categories: 电子
 
 全称：In-System Programmability，即：在系统可编程。
 
-一开始我看到这名字的时候有点蒙蔽，ISP下载？啥玩意儿，网络运营商下载？查过资料才知道，在很久很久之前~~~老前辈们烧录程序时居然还要把芯片取下来，拿到专门烧录的程序机器上烧录程序，然后再插会电路板上，十分麻烦。而ISP下载，就是现在习以为常的在板上插根线，直接连接电脑烧录程序的方式。
+一开始我看到这名字的时候有点蒙蔽，ISP下载？啥玩意儿，网络运营商下载？查过资料才知道，在很久很久之前~~~老前辈们烧录程序时居然还要把芯片取下来，拿到专门烧录程序的机器上烧录程序，然后再插会电路板上，十分麻烦。而ISP下载，就是现在习以为常的在板上插根线，直接连接电脑烧录程序的方式。
 
 在目前“以实现功能为主，不深究具体实现。”的学习思想指导下，对于这东西，没啥需要注意的。了解一下，表达下对前辈们的敬意即可。
 
@@ -138,10 +138,12 @@ AHB通过桥接的方式分出APB1、APB2两条外设总线，它们分别挂载
 
 想要令GPIO的I/O口输入/输出值，要进行以下流程：
 
-1. 开启对应端口的时钟使能端（为了节省功耗，外设的使能默认关闭）。
+1. 开启对应端口的时钟使能端（为了节省功耗，外设的使能默认关闭）
 2. 选择引脚，并配置对应的IO模式、若是输出模式选择输出速率。
 3. 控制端口寄存器CRL/CRH清零
-4. 设置引脚(即：数据输出/输入寄存器ODR)的值。
+4. 两种情况：
+   1. 输出模式：设置引脚(即：数据输出/输入寄存器ODR)的值
+   2. 输入模式：读取引脚对应引脚信息，以便加以利用（如开关）
 
 由以上对GPIO的认知，我们可以引申出两种在stm32上不同的编程方式：
 
@@ -168,7 +170,7 @@ AHB通过桥接的方式分出APB1、APB2两条外设总线，它们分别挂载
 
 从而得出Level1版的点灯程序：
 
-#### Level_1：
+#### Level_1：无脑表示外设寄存器地址
 
 ##### 宏定义：
 
@@ -179,7 +181,7 @@ AHB通过桥接的方式分出APB1、APB2两条外设总线，它们分别挂载
 	#define GPIOB_ODR *(uint*)0x40010C0C
 ~~~
 
-##### 核心操作：
+##### 主函数：
 
 ~~~c
 	/***********初始化*************/
@@ -207,14 +209,18 @@ AHB通过桥接的方式分出APB1、APB2两条外设总线，它们分别挂载
 *(uint*)0x40010C0C;		//解引用
 ```
 
-但以上做法过于简单粗暴，即使以基于纯寄存器开发角度，代码的维护性也过于的差。所以引申出level2版，基于基址+偏址的宏定义版本。
+但以上做法过于简单粗暴，每个寄存器都用一个8位十六进制表示，写起来麻烦不说，还容易出错且调试麻烦，代码的维护性比较困难。所以很自然的引申出level2版，基于基址+偏址的宏定义版本。
 
-#### Level_2:
+***
+
+#### Level_2: 基于基址+偏址 
+
+基址+偏址的方法的好处是，每次定义寄存器地址的时候都可以借用之前定义的宏，写的时候更加便于理解且调试比Level1方便不要太多。
 
 ##### 宏定义：
 
 ```c
-ypedef unsigned int uint;
+typedef unsigned int uint;
 
 //外设宏定义 peripheral
 #define PERIPH_BASE  			(uint)0x40000000
@@ -232,6 +238,173 @@ ypedef unsigned int uint;
 #define GPIO_ODR		*(uint*)(GPIOB_BASE + 0X0C)
 ```
 
+##### 主函数：
+
+同 level1。
+
+本人用Level_2的方式耍了两个多小时，发现GPIO的宏定义都要加上同一个偏址且每次初始化GPIO端口干的是都差不多。这就导致产生了很多冗余代码，这能忍吗？必然不能！
+
+因为每个GPIO口内部的地址都是规律连续的。所以很容易引申出Level_3——结构体与函数封装
+
 ***
 
-未完待续~~~
+#### Level_3：初步封装
+
+##### 头文件：
+
+以下代码没有进行任何模块化处理，更详细的分块源码与注释，请移步：
+
+【github链接。。。】
+
+~~~c
+typedef unsigned int uint32_t;
+typedef unsigned short uint16_t;
+
+/********************总线基址编号***********************/
+#define PERIPHER_BASE           ((uint32_t)0x40000000)
+#define PERIPHERAHB_BASE        (PERIPHER_BASE + 0x20000)
+#define PERIPHERAPB2_BASE       (PERIPHER_BASE + 0x10000)
+
+/*****************GPIO基址and时钟基址编号*********************/
+#define GPIOA_BASE              (PERIPHERAPB2_BASE + 0x0800 )
+#define GPIOB_BASE              (PERIPHERAPB2_BASE + 0x0C00 )
+#define RCC_BASE                (PERIPHERAHB_BASE  + 0x1000 )
+
+/****************结构体设置*********************/
+//GPIO
+typedef struct 
+{
+    uint32_t CRL;
+    uint32_t CRH;
+    uint32_t IDR;   
+    uint32_t ODR;
+    uint32_t BSRR;
+    uint32_t BRR;
+    uint32_t LCKR;
+
+}GPIO_TypeDef;
+//RCC
+typedef struct
+{
+    uint32_t CRR_CR;
+    uint32_t CRR_CFGR;
+    uint32_t RCC_CIR;
+    uint32_t RCC_APB2RSTR;
+    uint32_t RCC_APB1RSTR;
+    uint32_t RCC_AHBENR;
+    uint32_t RCC_APB2ENR;
+    uint32_t RCC_APB1ENR;
+    uint32_t RCC_BDCR;
+    uint32_t RCC_CSR;
+}RCC_TypeDef;
+
+/***************编号转化为地址****************/
+#define GPIOA                   ((GPIO_TypeDef*) GPIOA_BASE) 
+#define GPIOB                   ((GPIO_TypeDef*) GPIOB_BASE)     
+#define RCC                     ((RCC_TypeDef* ) RCC_BASE)
+
+/***********************GPIO引脚*************************/
+    /*
+        以下宏定义一般用于IDR or ODR的配置，所以一般16位即可
+    */
+    #define GPIO_PIN_0              ((uint16_t)0x0001)
+    #define GPIO_PIN_1              ((uint16_t)0x0002)
+    #define GPIO_PIN_2              ((uint16_t)0x0004)
+    #define GPIO_PIN_3              ((uint16_t)0x0008)
+    #define GPIO_PIN_4              ((uint16_t)0x0010)
+    #define GPIO_PIN_5              ((uint16_t)0x0020)
+    #define GPIO_PIN_6              ((uint16_t)0x0040)
+    #define GPIO_PIN_7              ((uint16_t)0x0080)
+
+    #define GPIO_PIN_8              ((uint16_t)0x0100)
+    #define GPIO_PIN_9              ((uint16_t)0x0200)
+    #define GPIO_PIN_10             ((uint16_t)0x0400)
+    #define GPIO_PIN_11             ((uint16_t)0x0800)
+    #define GPIO_PIN_12             ((uint16_t)0x1000)
+    #define GPIO_PIN_13             ((uint16_t)0x2000)
+    #define GPIO_PIN_14             ((uint16_t)0x4000)
+    #define GPIO_PIN_15             ((uint16_t)0x8000)
+    #define GPIO_PIN_ALL            ((uint16_t)0xffff)
+ /*************************RCC引脚*************************/
+	#define RCC_GPIOA             ((uint32_t)0x00000004)
+	#define RCC_GPIOB             ((uint32_t)0x00000008)
+	#define enum{ ENABLE = 0, UNENABLE = 1}State;
+
+ /*******************初始化变量枚举定义***********************/
+    typedef enum{
+        GPIO_SPEED_10MHz = 1,
+        GPIO_SPEED_20MHz ,
+        GPIO_SPEED_50MHz ,
+    }GPIOSPEED_TypeDef;
+
+    typedef enum{
+        GPIO_MODE_AIN = 0x0,
+        GPIO_MODE_AIN = 0x4,
+        GPIO_MODE_AIN = 0X28,
+        GPIO_MODE_AIN = 0x48,
+
+        GPIO_MODE_AIN = 0x14,
+        GPIO_MODE_AIN = 0x10,
+        GPIO_MODE_AIN = 0x1C,
+        GPIO_MODE_AIN = 0x18
+    }GPIOMODE_TypeDef;
+
+	/******************GPIO初始化结构体******************/
+    typedef struct 
+    {
+        uint16_t Pin;
+        GPIOSPEED_TypeDef Speed;
+        GPIOMODE_TypeDef Mode;
+    }GPIO_InitTypeDef;
+
+	/***********************相关库函数**************************/
+    void RCC_InitConfig(RCC_TypeDef*RCC_Def,State NewState);		
+    void GPIOx_Setbit(GPIO_TypeDef*GPIOx,uint16_t Pin);
+    void GPIOx_Retbit(GPIO_TypeDef*GPIOx,uint16_t Pin);
+    void GPIOx_Cofig(GPIO_TypeDef*GPIOx,GPIO_InitTypeDef* GPIO_Init);
+~~~
+
+做完以上的工作，就可以对初步的对GPIO为所欲为了。
+
+至于上面4个库函数的实现分析，请移步以下链接：【链接】
+
+##### 主函数：
+
+~~~c
+int main(void){
+    GPIO_InitTypeDef GPIO_INIT;
+    /***********时钟配置************/
+	RCC_InitConfig(LED_CLK,ENABLE);
+
+    /***********GPIO初始化**********/
+    GPIO_INIT.GPIO_Pin 	 = GPIO_PIN_0;
+	GPIO_INIT.GPIO_Mode	 = GPIO_Mode_Out_PP;
+	GPIO_INIT.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB,&GPIO_INIT);
+	
+	while(1){
+		GPIOx_Setbit(GPIOB,GPIO_PIN_0);
+	 }
+}
+
+~~~
+
+至此基于寄存器编程的基本操作原理算是结束了。
+
+#### 总结：
+
+纯寄存器编程而言应该是Level_2的阶段，Leve_3因为封装使用了函数调用，比只用寄存器而言消耗的cpu资源必然会更多。不过只要不是对性能苛刻到相当高的程度的话，这点开销就忽略不算了。
+
+总的来说，寄存器编程开发遵从以下步骤：
+- 看着数据手册，先把相关的寄存器映射、引脚顺序定义
+- 根据需求找到对应的寄存器
+- 利用定好的引脚去改变寄存器的值
+
+
+
+#### 寄存器编程的意义
+
+- 开销低，抠性能的时候就是它发挥威力的时候。
+- 当芯片商家没有提供相关底层库时可以自食其力（以后不可能只用st公司的芯片不是）
+- 用库时做到心中有数，出bug时可以有的放矢（不要过分相信官方库）
+
