@@ -24,7 +24,7 @@ mathjax: true
 
 由题意我们大概可以简要得到下图的信息。
 
-<img src="示例图（1）.PNG" alt="示例图（1）" style="zoom:33%;" />
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051634.PNG" alt="示例图（1）" style="zoom:50%;" />
 $$
 \begin{cases}
   A<C<D \\
@@ -45,7 +45,7 @@ $$
 
 这种后一个的放法，仅受前一个放法影响的问题，显然具备无后效性，可以用DP的思想思考它。
 
-<img src="DP分析过程.PNG" alt="DP分析过程" style="zoom: 33%;" />
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051649.PNG" alt="DP分析过程" style="zoom:33%;" />
 
 上述的 $ f\[i][j] $表示第一行有 i 个数，第二行有 j 个数放法。
 
@@ -58,7 +58,7 @@ $$
 
 所以，当出现如下图这种$ i = j $的情况时：
 
-<img src="流程解释.png" alt="流程解释" style="zoom:33%;" />
+![流程解释](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051726.png)
 
 新的数必然只能放第一行，此时的放法总数与 $ f\[i][j-1]  $ 相等。
 
