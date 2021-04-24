@@ -8,12 +8,14 @@ categories: 电子
 
 ##  前言
 
-> 时钟系统是MCU必不可少的一部分。本文将针对以下问题展开讨论
+> 时钟系统是MCU必不可少的一部分。本文将针对以下问题展开讨论：
 >
 > - 什么是时钟？
-> - 如何理解stm32时钟树？
+> - 如何理解stm32时钟结构？
 > - 为什么MCU会有多个时钟源？
 > - stm32如何配置时钟？
+>
+> 当然，由于本人学识不足，且时钟略复杂，所以这里只能说是对时钟有一个感性的初步理解，如有错误，还望不吝指正。
 
 <!--more-->
 
@@ -36,17 +38,19 @@ categories: 电子
 
 以上三个周期的关系图如下：
 
-<img src="理解时钟.png" alt="理解时钟" style="zoom:80%;" />
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%90%86%E8%A7%A3%E6%97%B6%E9%92%9F.png" alt="理解时钟" style="zoom:80%;" />
 
 （其中蓝色部分包括了四个机器周期）
 
 而因为时钟信号也是电信号的一种，所以它还兼具了供能的作用，且因电平变化的时间间隔一定，我们甚至可以用时钟来计时。
 
+（PS：经老师纠正，时钟“供能”的说法是错的，时钟并不起供能作用。不过个人认为，从初学者角度来看，这样感性理解问题也不大，只要记得这种说法是不对的即可。）
+
 ## 二、stm32时钟树
 
 有了以上的感观认识后，我们先来看看stm32f10x的时钟树：
 
-![stm32时钟树](stm32时钟树.png)
+![stm32时钟树](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/stm32%E6%97%B6%E9%92%9F%E6%A0%91.png)
 
 ### 2.1、stm32f10x时钟源
 
@@ -55,13 +59,15 @@ categories: 电子
 - HSE：高速外部时钟（High speed external），可外接4-16MHz的晶振作为时钟源。
 - LSE：低速外部时钟，外接32.768kHz时钟源。
 - LSI：低速内部时钟，由内部RC振荡器产生，频率为32kHz。
-- PLL：锁相环输出。可以做到输入时钟的2-16倍的倍频输出。
+- PLL：锁相环倍频输出。可以做到输入时钟的2-16倍的倍频输出。
+
+这里把PLL也列为时钟源是参考了诸如野火资料的说法，个人觉得实际的时钟源只能算4个，因为PLL本身只起倍频作用，本身并不能产生时钟频率。当然，这些都是人为定义的东西，不影响使用和对该知识点的理解。
 
 （PS：RC振荡器产生的时钟精度相对较低。）
 
 ### 2.2、系统时钟
 
-知道有哪些时钟源后，我们可以发现时钟树的右边是我们熟悉的AHB、APB1、APB2总线。
+知道有哪些时钟源后，我们可以发现时钟树是我们熟悉的AHB、APB1、APB2总线。
 
 时钟源与这些外设之间都通过红色部分的**系统时钟SYSCLK**连接在一起，由此观之这个**系统时钟SYSCLK**很重要！！！
 
@@ -78,7 +84,7 @@ categories: 电子
 
 对了，SYSCLK选择还连着个叫CSS的东西，查下数据手册，得到以下描述：
 
-![时钟安全系统](时钟安全系统.png)
+![时钟安全系统](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%97%B6%E9%92%9F%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F.png)
 
 可以看到，这东西简单来说就是个报警器。。。帮你检测HSE有没有出问题，有的话就先切到内部时钟源，然后给出相关提示信息。
 
@@ -93,14 +99,14 @@ categories: 电子
 
 ### 3.1、时钟频率
 
-从2.1和2.2的讨论中，我们可以发现，系统时钟正常工作的时钟频率是72MHz。但实际输入的系统时钟频率最高到可以到128MHz，最低8MHz（排除)，这意味着我们可以不遵循数据手册的规定，做点"违规操作"。
+从2.1和2.2的讨论中，我们可以发现，系统时钟正常工作的时钟频率是72MHz。但实际输入的系统时钟频率最高到可以到128MHz，最低8MHz，这意味着我们可以不遵循数据手册的规定，做点"违规操作"。
 
 “违规操作”会怎样？由于目前只会点灯，而且LED这哥们对时钟没啥要求。。。基本上改变频率也就是亮灭快慢不同的事，看不出啥，于是我又去现查了下资料：~~（本菜鸡最近在补数电了 TAT ）~~
 
 [时钟频率是个什么概念？？ - 虞己某的回答 - 知乎 ](https://www.zhihu.com/question/29685396/answer/145507426)
 
 从这个回答中，我们大概可出一下结论：
-- 频率低了，满足设备的频率要求的话，可能无法启动设备。
+- 频率低了，不能满足设备的频率要求的话，可能无法启动设备。
 - 频率高了，系统稳定性会受影响。具体表现是进行通信的时候，外设可能无法接受到准确的信号。
 
 ### 3.2、多个时钟源
@@ -118,21 +124,21 @@ categories: 电子
 
 stm32的时钟树理解后，就是时钟配置问题了。
 
-实际上，如果我们使用固件库的话，在main函数开始前，启动文件就已经调用了库函数对系统时钟初始化了。
+实际上，当我们创建工程导入启动文件的时候，在main函数开始调用前，启动文件就已经调用了SystemInit函数对系统时钟进行初始化了。
 
-![启动文件&时钟](启动文件&时钟.png)
+![启动文件&时钟](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6&%E6%97%B6%E9%92%9F.png)
 
 那为什么还需要做配置分析？直接拿来用不就好了嘛？
 
-且不论其它芯片如何，单就看stm32的固件库给我们提供的库函数（下图为system_stm32f10x.c的截图）：
+我们且不论其它芯片如何，单就看stm32的固件库给我们提供的库函数（下图为system_stm32f10x.c的截图）：
 
-![库函数系统时钟设置](库函数系统时钟设置.png)
+![库函数系统时钟设置](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%BA%93%E5%87%BD%E6%95%B0%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F%E8%AE%BE%E7%BD%AE.png)
 
 人家ST官方只提供了24MHz，36MHz，48MHz，56MHz，72MHz五种频率的系统时钟设置。
 
 如果项目对时钟有这5种频率外的需求还是得自己动手。基于以上原因，对时钟配置的分析就是刚需了。
 
-![stm32时钟树](stm32时钟树.png)
+![stm32时钟树](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/stm32%E6%97%B6%E9%92%9F%E6%A0%91.png)
 
 那么，先让我们对着时钟树的图再梳理一遍系统时钟的来龙去脉。
 
@@ -151,13 +157,13 @@ stm32的时钟树理解后，就是时钟配置问题了。
 - 输出至AHB总线，经预分频器可做 1~512 分频。
 - AHB总线预分频后，经低速外设总线APB1和高速总线APB2。
 
-因为考虑到功耗的问题，外设只有用到的时候才会开启时钟，SYSCLK只需要初始化总线时钟即可。
+因为考虑到功耗的问题，外设只有用到的时候才会开启时钟，所以SYSCLK只需要初始化总线时钟即可。
 
 基于这个原因，对于系统时钟配置的流程大概可以总结为以下步骤：
 
-- 选择并开启时钟源（使用PLL作为系统时钟源还需要选择倍频）。
-- 选择APB1、APB2的预分频。
-- 选择AHB预分频。
+1. 选择并开启时钟源（使用PLL作为系统时钟源还需要选择倍频）。
+2. 选择APB1、APB2的预分频。
+3. 选择AHB预分频。
 
 为什么不是照着图从左到右的顺序配置？
 
@@ -272,11 +278,13 @@ static void SetSysClockTo72(void)
 
 然后干嘛？当然是去查查手册这些寄存器是干嘛用的呀！由于还是小萌新阶段，只需要了解上面每个寄存器大概的作用结合源码学习即可，手册暂时不必深究。
 
-![RCC_CR](RCC_CR.png)
+![RCC_CR](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/RCC_CR.png)
 
-![RCC_CFGR](RCC_CFGR.png)
+![RCC_CFGR](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/RCC_CFGR.png)
 
-![FLASH_ACR](FLASH_ACR.png)
+![FLASH_ACR](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/FLASH_ACR.png)
+
+
 
 结合以上认识，下面我们来一段一段分析源码：
 
@@ -285,7 +293,7 @@ static void SetSysClockTo72(void)
 ```c
 /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
   /* Enable HSE */    
-  RCC->CR |= ((uint32_t)RCC_CR_HSEON);
+  RCC->CR |= ((uint32_t)RCC_CR_HSEON);//HSEON -> HSE_ON
 ```
 
 ### 2、等待HSE就绪
@@ -296,10 +304,12 @@ static void SetSysClockTo72(void)
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
-    HSEStatus = RCC->CR & RCC_CR_HSERDY;
+    HSEStatus = RCC->CR & RCC_CR_HSERDY;//HSERDY -> HSE_Ready
     StartUpCounter++;  
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
+/** HSE如果就绪，HSEStatus = 1 **/
 
+/** 如果HSE_Ready = RESET，即:HSE没有准备就绪 **/
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
   {
     HSEStatus = (uint32_t)0x01;
@@ -310,9 +320,11 @@ static void SetSysClockTo72(void)
   }  
 ~~~
 
-### 3、HSE状态正常就继续，异常就处理
+### 3、HSE状态正常就继续，异常就立刻处理
 
-![HSE状态判断](HSE状态判断.png)
+状态异常的话，经条件语句跳转到下图的模块处理异常。
+
+![HSE状态判断](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/HSE%E7%8A%B6%E6%80%81%E5%88%A4%E6%96%AD.png)
 
 #### 3.1、HSE状态正常情况分析
 
@@ -348,6 +360,8 @@ static void SetSysClockTo72(void)
     /*  PLL configuration: PLLCLK = HSE * 9 = 72 MHz */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE |
                                         RCC_CFGR_PLLMULL));
+
+	/*		HSE 与上 PLLMULL9 做到 72MHz的系统时钟输出		*/
     RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL9);
 ```
 

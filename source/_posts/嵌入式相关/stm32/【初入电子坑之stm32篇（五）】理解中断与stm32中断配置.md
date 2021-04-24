@@ -272,4 +272,4 @@ EXTI 可分为两大部分功能，一个是产生中断，另一个是产生事
 
 [STM32的“外部中断”和“事件”区别和理解](https://blog.csdn.net/tanyjin/article/details/53359883?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control)
 
-[浅谈中断挂起与中断标志的区别]([https://blog.csdn.net/weixin_45590473/article/details/108039950?utm_term=stm32%E4%B8%AD%E6%96%AD%E6%8C%82%E8%B5%B7&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-2-108039950&spm=3001.4430](https://blog.csdn.net/weixin_45590473/article/details/108039950?utm_term=stm32中断挂起&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-2-108039950&spm=3001.4430))
+[浅谈中断挂起与中断标志的区别](https://blog.csdn.net/weixin_45590473/article/details/108039950?utm_term=stm32中断挂起&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-2-108039950&spm=3001.4430)
