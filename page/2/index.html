@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     阿逸的个站
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">阿逸的个站</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['饮冰十年，难凉热血', '生死看淡，不服就干', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-嵌入式相关/汇编/汇编语言(一)基础知识与寄存器"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/19/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/%E6%B1%87%E7%BC%96/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E4%B8%80)%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8/"
+    >汇编语言(一)基础知识与寄存器</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/12/19/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/%E6%B1%87%E7%BC%96/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E4%B8%80)%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8/" class="article-date">
+  <time datetime="2020-12-19T08:49:06.000Z" itemprop="datePublished">2020-12-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="前言">前言</h2>
+<blockquote>
+<p>这是一个记录本人学习汇编的笔记及思考的系列文章。</p>
+<p>本文为王爽的《汇编语言》第1-3章笔记。</p>
+<p>按照我的个人习惯，我会尽量把每个知识点的前后逻辑关系、相关的学习感悟都捋丝滑，尽力做到水到渠成。但若想系统学习汇编语言，个人觉得还是有必要自己去刷一遍王爽的《编译语言》。</p>
+</blockquote> 
+      <a class="article-more-link" href="/2020/12/19/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/%E6%B1%87%E7%BC%96/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E4%B8%80)%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-题解/蓝桥杯/第十一届蓝桥杯B组—E矩阵"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFB%E7%BB%84%E2%80%94E%E7%9F%A9%E9%98%B5/"
+    >第十一届蓝桥杯B组—E矩阵</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFB%E7%BB%84%E2%80%94E%E7%9F%A9%E9%98%B5/" class="article-date">
+  <time datetime="2020-10-14T15:33:30.000Z" itemprop="datePublished">2020-10-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="问题描述">问题描述</h3>
+<blockquote>
+<p>把 1 ∼ 2020 放在 2 × 1010 的矩阵里。</p>
+<p>要求同一行中右边的比左边大，同一列中下边的比上边的大。一共有多少种方案？</p>
+<p>答案很大，你只需要给出方案数除以 2020 的余数即可。</p>
+</blockquote>
+<p><strong>答案提交</strong><br>
+这是一道结果填空题，你只需要算出结果后提交即可。<br>
+本题的结果为一个整数，在提交答案时只填写这个整数，填写多余的内容将无法得分。</p> 
+      <a class="article-more-link" href="/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFB%E7%BB%84%E2%80%94E%E7%9F%A9%E9%98%B5/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag">蓝桥杯</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-题解/蓝桥杯/蓝桥杯-整数拼接"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/"
+    >蓝桥杯 整数拼接</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/" class="article-date">
+  <time datetime="2020-10-14T03:42:37.000Z" itemprop="datePublished">2020-10-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/2070/">题目链接</a></p>
+<h3 id="问题描述">问题描述</h3>
+<p>给定一个长度为 n 的数组 A<sub>1</sub> , A<sub>2</sub> ,⋅⋅⋅, A<sub>n</sub> 。</p>
+<p>你可以从中选出两个数 A<sub>i</sub> 和A<sub>j</sub>   (i 不等于 j)，然后将 A<sub>i</sub>  和 A<sub>j</sub> 一前一后拼成一个新的整数。</p>
+<p>例如 12 和 345 可以拼成 12345 或 34512。</p>
+<p>注意交换 A<sub>i</sub>  和 A<sub>j</sub>   的顺序总是被视为 2种拼法，即便是  A<sub>i</sub>  = A<sub>j</sub>   时。</p>
+<p>请你计算有多少种拼法满足拼出的整数是 K 的倍数。</p> 
+      <a class="article-more-link" href="/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag">蓝桥杯</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-算法知识整理/贪心习题整理"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/12/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/%E8%B4%AA%E5%BF%83%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/"
+    >贪心习题整理</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/12/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/%E8%B4%AA%E5%BF%83%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/" class="article-date">
+  <time datetime="2020-10-12T11:32:19.000Z" itemprop="datePublished">2020-10-12</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="前言">前言</h2>
+<blockquote>
+<p>DP虽无固定套路，但起码还有点思维套路可言。我们可以通过积累一定的经典例题去推导出状态转移方程。</p>
+<p>而贪心就真的很玄学，大部分情况下需要靠直觉去猜。而猜出结论后，证明难度往往也是大到让人怀疑人生，考场上几乎无证明出来可能~~（如有大佬可以，请受小弟一拜）~~。</p>
+<p>对与错，除了交给测评机外验证外，只能靠找反例来验证，极度玄学。。。。。。</p>
+<p>结合以上叙述的种种，本蒟蒻唯有靠积累做贪心的经验、加强数学思维锻炼，以增强自身直觉能力一途可走。</p>
+<p>以下为本人做过的贪心习题记录与我自己写的题解分析总结。</p>
+</blockquote> 
+      <a class="article-more-link" href="/2020/10/12/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/%E8%B4%AA%E5%BF%83%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9B%AE%E5%BD%95/" rel="tag">目录</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-杂/Cisco-VLAN与单臂路由配置"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/09/%E6%9D%82/Cisco-VLAN%E4%B8%8E%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/"
+    >Cisco-VLAN与单臂路由配置</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/09/%E6%9D%82/Cisco-VLAN%E4%B8%8E%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2020-10-08T16:25:28.000Z" itemprop="datePublished">2020-10-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="简介">简介</h3>
+<blockquote>
+<p>我们都知道交换机共用一个广播域，当计算机A尝试获得计算机B的MAC地址，建立连接的时候必须先广播ARP请求。</p>
+<p>考虑这么一个情况：</p>
+<ul>
+<li>网络由多个交换机相连</li>
+<li>计算机A和计算机B连接在同一个交换机上</li>
+<li>计算机A发送ARP请求，尝试与计算机B建立连接</li>
+</ul>
+<p>对于以上叙述的情况，由于交换机有泛洪的特性，ARP请求除了向连接在同一交换机计算机B发送外，还会向其他接口发送ARP请求。</p>
+<p>显然，这么做会造成资源浪费。为了尽可能减少这种情况的影响，划分一个大的广播域的需求就应运而生了。</p>
+<p>而划分广播域用到的技术就是——VLAN(虚拟局域网)。</p>
+</blockquote> 
+      <a class="article-more-link" href="/2020/10/09/%E6%9D%82/Cisco-VLAN%E4%B8%8E%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cisco/" rel="tag">cisco</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-杂/Cisco-静态路由与动态路由RIP配置"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/09/%E6%9D%82/Cisco-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1RIP%E9%85%8D%E7%BD%AE/"
+    >Cisco-静态路由与动态路由协议RIP配置</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/09/%E6%9D%82/Cisco-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1RIP%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2020-10-08T16:23:26.000Z" itemprop="datePublished">2020-10-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="简介">简介</h3>
+<blockquote>
+<p>我个人对“路由”的这个名字的理解是，“路由哪里来，路到哪里去”。</p>
+<p>所以控制报文传输的机器就叫路由器，选择传输路径的协议就叫路由协议。</p>
+<p>本文将记述其中最简单的静态路由、动态路由RIP的配置流程</p>
+</blockquote> 
+      <a class="article-more-link" href="/2020/10/09/%E6%9D%82/Cisco-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1RIP%E9%85%8D%E7%BD%AE/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cisco/" rel="tag">cisco</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-杂/Cisco-Telnet与SSH配置"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/09/%E6%9D%82/Cisco-Telnet%E4%B8%8ESSH%E9%85%8D%E7%BD%AE/"
+    >Cisco Telnet与SSH配置</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/09/%E6%9D%82/Cisco-Telnet%E4%B8%8ESSH%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2020-10-08T16:18:03.000Z" itemprop="datePublished">2020-10-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="简介">简介</h3>
+<blockquote>
+<p>对于诸如像路由器、交换机、服务器这种东西，如果要亲身待在机器面前做相关配置未免过于不便。所以远程访问控制就成了刚需。</p>
+<p>而远程访问的常用协议有Telnet和SSH两个，它们的区别可以简单的理解为：</p>
+<p>Telnet在传输过程中直接以明文传输，简单粗暴。</p>
+<p>SSH考虑到安全性问题，传输经过加密，相对Telnet而言消耗多了一丢丢计算资源。</p>
+</blockquote> 
+      <a class="article-more-link" href="/2020/10/09/%E6%9D%82/Cisco-Telnet%E4%B8%8ESSH%E9%85%8D%E7%BD%AE/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cisco/" rel="tag">cisco</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-题解/蓝桥杯/蓝桥杯-分巧克力"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E5%88%86%E5%B7%A7%E5%85%8B%E5%8A%9B/"
+    >蓝桥杯 分巧克力</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E5%88%86%E5%B7%A7%E5%85%8B%E5%8A%9B/" class="article-date">
+  <time datetime="2020-10-08T12:15:41.000Z" itemprop="datePublished">2020-10-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1229/">题目链接</a></p>
+<h4 id="问题描述">问题描述</h4>
+<p>儿童节那天有 K 位小朋友到小明家做客。</p>
+<p>小明拿出了珍藏的巧克力招待小朋友们。</p>
+<p>小明一共有 N 块巧克力，其中第 i 块是 H<sub>i</sub>×W<sub>i</sub> 的方格组成的长方形。</p>
+<p>为了公平起见，小明需要从这 N 块巧克力中切出 K 块巧克力分给小朋友们。</p>
+<p>切出的巧克力需要满足：</p>
+<ol>
+<li>形状是正方形，边长是整数</li>
+<li>大小相同</li>
+</ol>
+<p>例如一块 6×5 的巧克力可以切出 6 块 2×2 的巧克力或者 2 块 3×3 的巧克力。</p>
+<p>当然小朋友们都希望得到的巧克力尽可能大，你能帮小明计算出最大的边长是多少么？</p> 
+      <a class="article-more-link" href="/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E5%88%86%E5%B7%A7%E5%85%8B%E5%8A%9B/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag">蓝桥杯</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-题解/蓝桥杯/蓝桥杯-k倍区间"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-k%E5%80%8D%E5%8C%BA%E9%97%B4/"
+    >蓝桥杯 k倍区间</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-k%E5%80%8D%E5%8C%BA%E9%97%B4/" class="article-date">
+  <time datetime="2020-10-08T10:52:23.000Z" itemprop="datePublished">2020-10-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1232/">题目链接</a></p>
+<h3 id="问题描述">问题描述</h3>
+<p>给定一个长度为 N的数列，A<sub>1</sub>,A<sub>2</sub>,…A<sub>N</sub>，如果其中一段连续的子序列 A<sub>i</sub>,A<sub>i+1</sub>,…A<sub>j</sub>之和是 K的倍数，我们就称这个区间 【i,j】 是 K倍区间。</p>
+<p>你能求出数列中总共有多少个 K 倍区间吗？</p> 
+      <a class="article-more-link" href="/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-k%E5%80%8D%E5%8C%BA%E9%97%B4/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag">蓝桥杯</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-计算机基础/体系结构/CSAPP之信息的表示和处理"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/CSAPP%E4%B9%8B%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/"
+    >CSAPP之信息的表示和处理</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/CSAPP%E4%B9%8B%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/" class="article-date">
+  <time datetime="2020-10-08T02:26:28.000Z" itemprop="datePublished">2020-10-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">计算机系统结构</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="前言">前言</h2>
+<blockquote>
+<p>这章很有意思，它深入浅出的讲述了信息在计算机中的表示方式。</p>
+<p>通过图像形象生动的展现了底层运算过程中存在的问题。</p>
+<p>并在相关知识点最后给出了对应的应用场景和习题令读者加深理解。</p>
+<p>以下为本人对本章的学习笔记</p>
+</blockquote> 
+      <a class="article-more-link" href="/2020/10/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/CSAPP%E4%B9%8B%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> 逸非安逸
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/弑.jpg" alt="阿逸的个站"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/logs">日志</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/AboutMe">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+        
+    
+
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+  </div>
+</body>
+
+</html>
