@@ -1,6 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>以设计者的角度学习vim</title>
+    <url>/2021/05/19/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/%E4%BB%A5%E8%AE%BE%E8%AE%A1%E8%80%85%E7%9A%84%E8%A7%92%E5%BA%A6%E5%AD%A6%E4%B9%A0vim/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<blockquote>
+<p>vim这款文本编辑器很强大，但由于它的模式多样、指令繁多，容易让初学者感到入门，畏惧不前。而由于本人近期学习安排中也需要用到vim（避无可避的程度），无奈之下只能试着硬上了，在这个过程中无意想通了正确的学习姿势，以下是个人的思考笔记。</p>
+</blockquote>
+<h2 id="本文大纲">本文大纲</h2>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519200921571.png" alt="image-20210519200921571"></p>
+<h2 id="理清问题">理清问题</h2>
+<p>通过的思考，我发现vim之所以难学，有这么几个原因：</p>
+<ol>
+<li>模式多。</li>
+<li>各模式的命令不少。</li>
+<li>网上搜到的教程几乎都是指令的堆砌，对初学者不太友好。</li>
+</ol>
+<p>基于以上原因，在没有一个清晰的学习思路指引下，很容易会陷入死记命令的泥潭中。而走出这个泥潭的的常见办法是——用大量实践堆砌熟练度，说白的就是熟能生巧。</p>
+<p>而我是个很懒的人。。。我想偷懒，以最少的练习量、最少的时间，尽可能的提高使用vim的使用效率。于是乎，我问了自己这么个问题：</p>
+<ul>
+<li><strong>vim是什么？vim是一个文本编辑器啊。</strong></li>
+</ul>
+<p>是啊，vim是一个文本编辑器啊！那作为一个程序猿，为什么不从自己设计一个文本编辑器的去看待vim辣么多的内容呢？</p>
+<h2 id="如何设计文本编辑器">如何设计文本编辑器</h2>
+<p>这里讨论的如何设计文本编辑器，为从宏观上分析，文本编辑器需要实现怎样的具体功能的角度出发。</p>
+<h3 id="gui与命令行">GUI与命令行</h3>
+<p>让我们从刚接触计算机时，用的最简陋的文本编辑器——<strong>记事本</strong> 开始分析：</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519203037698.png" alt="image-20210519203037698"></p>
+<p>作为一个普通的小白用户，关注的点只有两个：</p>
+<ul>
+<li>怎么编写文本？</li>
+<li>写好的文本，怎么保存？</li>
+<li>怎么退出？</li>
+</ul>
+<p>我们都知道，这几个需求的实现在图形界面上，可以由上图方框框出来的三部分组成：</p>
+<ul>
+<li>红色方框的编辑区</li>
+<li>蓝色方框的功能区中“文件”项下的保存键</li>
+<li>绿色方框的窗口控制键</li>
+</ul>
+<p>但记事本所处的环境是GUI图形界面，vim是在纯命令行界面作用的文本编辑器。它没有能清晰可视化的功能分区，只有一个近似与上图红色方框编辑区的黑框框。</p>
+<p>我们需要用也只能用这个黑框框去实现上述我们提到的所有功能。</p>
+<p>那么一个  <strong>可切换的双模式</strong> 结构想法就很自然而然的应运而生了。</p>
+<h3 id="核心功能">核心功能</h3>
+<h4 id="双模式切换">双模式切换</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2.png" alt="模式切换"></p>
+<p>我们可以设定刚进入编辑器时为 <strong>命令模式</strong>。这个模式只有三个功能：</p>
+<ul>
+<li>进入编辑模式</li>
+<li>保存文档</li>
+<li>退出文档</li>
+</ul>
+<p>编辑模式下只有两个功能：</p>
+<ul>
+<li>文本编辑</li>
+<li>退回命令模式</li>
+</ul>
+<p>这样编辑器最核心的功能——<strong>编辑文档</strong>，就实现了。</p>
+<h4 id="常见需求">常见需求</h4>
+<p>在实现了上述核心功能之后，我们就该来聊聊用户体验问题了。一个东西能用跟一个好用是两回事不是嘛。</p>
+<p>除了核心的编辑功能外，我们最常用的功能大概有以下几个：</p>
+<ul>
+<li>复制粘贴</li>
+<li>关键字检索</li>
+<li>关键字替换</li>
+<li>。。。。</li>
+</ul>
+<p>很显然，这些功能可以全丢到命令模式，编辑模式下就跟图形界面一样，乖乖的负责文本编写就好了。</p>
+<p>当然，还有个很重要的需求——减少双手离开主键盘区的频率，提高文本编辑速度！！！</p>
+<p>完成这个需求也很简单，能让我们离开主键盘区，移到键盘其他区域的无非就辣么几件事：</p>
+<ul>
+<li>Home/End键</li>
+<li>PageUp/PageDown键</li>
+<li>最重要的方向键</li>
+</ul>
+<p>把以上功能全丢到命令模式就好了。有了这些认识，学起vim来就很轻松啦~</p>
+<h2 id="vim入门">vim入门</h2>
+<p>ok，基于以上整理的思路，下面随便在网上找一份vim教程学习，我选的是菜鸟的教程。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/vim%E6%A8%A1%E5%BC%8F%E5%9B%BE.png" alt="vim模式图"></p>
+<p>首先是上面这图。我一看，不对劲，为啥两个模式能搞定的东西，vim得搞出3个模式出来？命令模式好理解，底线命令模式是啥玩意儿？瞅瞅资料先…</p>
+<p>吼，本菜鸡查完资料回来了~</p>
+<p>首先是输入模式和命令模式，这两哥们跟我们前面讨论的差不多，至于底线命令模式是干嘛用的，你们瞅瞅下面这图：</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519220940400.png" alt="image-20210519220940400"></p>
+<p>从上面的信息可以得出结论，底线命令模式这大哥的功能是：</p>
+<ul>
+<li>文档具体储存、退出方式的处理</li>
+<li>vim环境的变更</li>
+</ul>
+<p>而普通命令模式主要是文本处理的相关指令的集合。</p>
+<p>ok，大轮廓搞定了，我们看看具体细节。</p>
+<h3 id="核心功能">核心功能</h3>
+<h4 id="模式切换">模式切换</h4>
+<p>还是用图说话。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/vim%E6%A8%A1%E5%BC%8F%E5%9B%BE.png" alt="vim模式图"></p>
+<p>从前面可以知道，从简单使用角度，我们关注的重点更多的是在<strong>命令模式</strong>和<strong>输入模式</strong>。</p>
+<p>输入模式退回命令模式直接ESC即可，这个无需多说。</p>
+<p>而命令模式进入输入模式有三种基本方式：i，a，o</p>
+<h5 id="示例">示例</h5>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519225922738.png" alt="image-20210519225922738"></p>
+<ul>
+<li>i：在当前光标前插入（以 ‘.’ 为当前光标所处位置 ）</li>
+</ul>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519230029146.png" alt="image-20210519230029146"></p>
+<ul>
+<li>a：在当前光标后插入（以 ‘.’ 为当前光标所处位置 ）</li>
+</ul>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519230129163.png" alt="image-20210519230129163"></p>
+<ul>
+<li>o：新插入一行</li>
+</ul>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519230313194.png" alt="image-20210519230313194"></p>
+<p>进入编辑模式之后就可以愉快写东西了。</p>
+<p>然后写好的，想退出的话，从就在命令模式用 ’ : '进入底线模式，简单常用的命令有：</p>
+<ul>
+<li>w：保存</li>
+<li>q：退出</li>
+<li>wq：保存退出</li>
+</ul>
+<p>吼了，看到这里最基本的操作相信都木有问题了，还想要更多更好的用户体验只需要按照前面提供的思路去查文档即可~</p>
+]]></content>
+      <categories>
+        <category>经验总结</category>
+      </categories>
+      <tags>
+        <tag>工具学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【初入电子坑之stm32篇（七）】定时器与PWM</title>
+    <url>/2021/05/18/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E3%80%91%E5%9F%BA%E6%9C%AC%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E6%99%AE%E9%80%9A%E5%AE%9A%E6%97%B6%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<blockquote>
+<p>定时器，顾名思义是拿来定时的，但除了定时之外，我们还可以利用定时器的计数特性，演变出其他有意思的功能出来（诸如控制马达转速）。不过在这之前，我们还是先了解了解定时器的工作原理叭。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="本文概览">本文概览</h2>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210424160856026.png" alt="image-20210424160856026"></p>
+<h2 id="一-定时器基本概念">一、定时器基本概念</h2>
+<h3 id="1-1-计数宽度">1.1、计数宽度</h3>
+<p>这里指计数器的位数。如：CM3内核中Systick定时器的计数位有24位，即最大计数值为 2<sup>24</sup> -1= 16,777,215。我们就说Systick的计数宽度为24。</p>
+<h3 id="1-2-工作模式">1.2、工作模式</h3>
+<p>定时器是人设计，而设计是自由的。既然你规定了计数的数值范围，那么我们从0数到16,777,215，跟从16,777,215 数到 0 都是可以的不是嘛，所以这就引申出了工作模式的概念：</p>
+<ul>
+<li>向上计数：从0数到16,777,215</li>
+<li>向下计数：从16,777,215 数到 0</li>
+</ul>
+<p>这两种模式，从本质上来说没有任何区别。不过某些定时器可能没有给与我们开发者辣么自由的操作空间，限定了只可以向上计数or只可以向下计数。</p>
+<h3 id="1-3-计数周期">1.3、计数周期</h3>
+<p>既然我们规定了计数的范围，那么从1计数到2，从2计数到3之间的时间周期是多少？我们如何实现计数周期的不变？</p>
+<p>这个问题其实很简单。。。利用时钟啊！时钟的脉冲信号变化规律是很容易确定的。那么我们就可以直接使用时钟实现计数周期，即：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>C</mi><mi>N</mi><mi>T</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><msub><mi>f</mi><mrow><mi>C</mi><mi>l</mi><mi>k</mi><mi>S</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>c</mi><mi>e</mi></mrow></msub></mfrac><mspace width="2em"/></mrow><annotation encoding="application/x-tex">T_{CNT} =  \frac{1}{f_{ClkSource}}\qquad
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.20188em;vertical-align:-0.8804400000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:2em;"></span></span></span></span></span></p>
+<h3 id="1-4-计数时长">1.4、计数时长</h3>
+<p>啥？刚刚说完计数周期，你现在给我来个计数时长？啥玩意？</p>
+<p>哦，这哥们是拿来中断用的。</p>
+<p>我们一开始提到了计数宽度，它决定了我们可以取到的最大计数值。但它也只是决定了我们可以取到的最大计数值，实际计数值CNT(count的简写)是多少，这不还是由我们自己定的嘛。根据项目需求，你想取多少就多少。即：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>C</mi><mi>N</mi><mi>T</mi><mo>×</mo><msub><mi>T</mi><mrow><mi>C</mi><mi>N</mi><mi>T</mi></mrow></msub></mrow><annotation encoding="application/x-tex">t = CNT ×T_{CNT}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>当向上计数or向下计数达到了CNT次后，计数就会溢出触发一次定时器中断。这个中断有什么用？别急，后面我们我讨论到它。</p>
+<h3 id="1-5-重装载计数器">1.5、重装载计数器</h3>
+<p>刚刚我们已经说了当向上计数or向下计数达到了CNT次，就会触发一次定时器中断。那么中断结束之后，计数器怎么继续计时？很简单，设计一个专门控制检测计数状态的模块，当每次计数值达到了我们指定的CNT后，就重置计时器，让它重新计数就OK了。</p>
+<p>而这个重置操作，一般称为重装载计数器，我们可以通过操作相关寄存器去控制它。</p>
+<h3 id="1-6-定时器简易模型">1.6、定时器简易模型</h3>
+<p>根据以上信息，我们可以构筑出下图的定时器模型：</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%20(1).jpg" alt="定时器简易模型"></p>
+<h2 id="二-systick">二、Systick</h2>
+<h3 id="2-1-简介">2.1、简介</h3>
+<p>SysTick—系统定时器是属于 CM3 内核中的一个外设，内嵌在 NVIC 中。也常称为滴答定时器，因为它只要简单的计数功能。</p>
+<p>系统定时器是一个 24bit 的向下递减的计数器(PS：这里只能向下计数)，计数器每计数一次的时间为 1/SYSCLK。</p>
+<p>因为 SysTick 是属于 CM3 内核的外设，所以所有基于 CM3 内核的单片机都具有这个</p>
+<p>系统定时器，使得软件在 CM3 单片机中可以很容易的移植。系统定时器一般用于操作系统，用于产生时基，维持操作系统的心跳。</p>
+<p>（以上为本人从野火的资料中，截取修改而来。）</p>
+<h3 id="2-2-systick的应用与配置流程">2.2、Systick的应用与配置流程</h3>
+<h4 id="2-2-1-systick的寄存器组">2.2.1、Systick的寄存器组</h4>
+<p>对于Systick而言，有4个寄存器控制它，分别是：</p>
+<ul>
+<li>CTRL  ：SysTick 控制及状态寄存器</li>
+<li>LOAD ：SysTick 重装载数值寄存器</li>
+<li>VAL    ：SysTick 当前数值寄存器</li>
+<li>CALIB ：SysTick 校准数值寄存器</li>
+</ul>
+<p>有了上一节的内容做铺垫，对于这几个寄存器的出现应该不难理解。而且，如果我们需要直接操作寄存器的话，一般来说只需要操作前3个寄存器即可。当然，我们现在一般都直接用固件库操作啦。</p>
+<p>而对于Systick的应用，我们一般都直接用于实现延时函数，做到精确延时。</p>
+<h4 id="2-2-1-延时函数实现原理">2.2.1、延时函数实现原理</h4>
+<p>从前面的介绍我们知道，当计数器的值到了我们指定的CNT后，会产生一次中断。</p>
+<p>我们可以定义一个变量Delaytime。每次中断的时候都对Delaytime–处理。在延时函数中，我们只需要传入我们想要延时的时长time给Delaytime，判断Delaytime是否为0即可。</p>
+<h4 id="2-2-2-配置">2.2.2、配置</h4>
+<p>具体操作上，我们只需要调用固件库提供的库函数Systick_Config()即可。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210424150701067.png" alt="image-20210424150701067"></p>
+<p>这个函数只需要我们传入计数器的值，大大的简化了操作步骤，结合前面的简易模型看看：</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%20(1).jpg" alt="定时器简易模型"></p>
+<p>那么一般传入参数是多少呢？以stm32f10x系列为例，系统时钟一般为72Mhz，因为单片机执行指令的速度是微秒级的，所以我们一般设定一次中断时间为1ms，即一般传参为72000。</p>
+<h3 id="2-3-代码示例">2.3、代码示例</h3>
+<p>只讲原理不讲应用示例都是耍流氓。。。</p>
+<p>这里我使用野火的指南者实现1s的LED闪烁为举例。</p>
+<p>完整工程代码：<a href="https://github.com/yifeianyi/Study-Record">My_Github</a></p>
+<h4 id="2-3-1-主函数">2.3.1、主函数</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stm32f10x_it.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;led.h&quot;</span></span></span><br><span class="line">u8 state;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SysTick_Config(<span class="number">72000</span>);</span><br><span class="line">	Led_Init();</span><br><span class="line">	Led_Control(Led_All,OFF);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">        Led_Control(Led_All,state);</span><br><span class="line">		Delay_ms(<span class="number">1000</span>);</span><br><span class="line">		state ^=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-2-中断服务函数">2.3.2、中断服务函数</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">u32 Delaytime;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delay_ms</span><span class="params">(u32 time)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Delaytime = time;</span><br><span class="line">	<span class="keyword">while</span>(Delaytime);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SysTick_Handler</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Delaytime--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<p>《零死角玩转STM32—F103指南者》</p>
+<p>《CM3权威指南CnR2》</p>
+]]></content>
+      <categories>
+        <category>电子</category>
+      </categories>
+      <tags>
+        <tag>stm32</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【初入电子坑之stm32篇（六）】定时器基础与Systick</title>
     <url>/2021/04/24/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E3%80%91%E5%AE%9A%E6%97%B6%E5%99%A8%E5%9F%BA%E7%A1%80%E4%B8%8ESystick/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
@@ -214,7 +424,7 @@
     <url>/2021/01/21/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
-<p>通信是嵌入式的重要组成部分，本人简单试水过后发现此坑略深，以目前应用为主的策略来看，不宜陷得太深。所以这系列笔记文章主要围绕“这是什么？”“它的大致原理是什么？”展开讨论。基本上会忽略绝大多数诸如“为什么需要它？/它是怎么顺理成章的推出来的？”的这类问题。</p>
+<p>通信是嵌入式的重要组成部分，本人简单试水过后发现此坑略深，以目前应用为主的策略来看，不宜陷得太深。所以这系列笔记文章主要围绕“这是什么？”“它的大致原理是什么？”展开讨论。基本上会忽略绝大多数诸如“为什么需要它？/它是怎么顺理成章的推出来的？”的这类问题。（因本人才疏学浅，若有叙述不当之处，恳请各位大佬指正。）</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="目录">目录</h2>

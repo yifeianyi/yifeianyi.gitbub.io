@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    【初入电子坑之通信入门篇（一）】通信基础概念 |  阿逸的个站
+    以设计者的角度学习vim |  阿逸的个站
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -43,7 +43,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-嵌入式相关/stm32/【初入电子坑之通信入门篇（一）】通信基础知识"
+  id="post-工具学习/以设计者的角度学习vim"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -54,18 +54,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  【初入电子坑之通信入门篇（一）】通信基础概念
+  以设计者的角度学习vim
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2021/01/21/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
-  <time datetime="2021-01-21T10:02:54.000Z" itemprop="datePublished">2021-01-21</time>
+      <a href="/2021/05/19/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/%E4%BB%A5%E8%AE%BE%E8%AE%A1%E8%80%85%E7%9A%84%E8%A7%92%E5%BA%A6%E5%AD%A6%E4%B9%A0vim/" class="article-date">
+  <time datetime="2021-05-19T11:44:26.000Z" itemprop="datePublished">2021-05-19</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%B5%E5%AD%90/">电子</a>
+    <a class="article-category-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">经验总结</a>
   </div>
   
 <div class="word_count">
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.4k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">8 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -99,132 +99,119 @@
        
   <h2 id="前言">前言</h2>
 <blockquote>
-<p>通信是嵌入式的重要组成部分，本人简单试水过后发现此坑略深，以目前应用为主的策略来看，不宜陷得太深。所以这系列笔记文章主要围绕“这是什么？”“它的大致原理是什么？”展开讨论。基本上会忽略绝大多数诸如“为什么需要它？/它是怎么顺理成章的推出来的？”的这类问题。（因本人才疏学浅，若有叙述不当之处，恳请各位大佬指正。）</p>
+<p>vim这款文本编辑器很强大，但由于它的模式多样、指令繁多，容易让初学者感到入门，畏惧不前。而由于本人近期学习安排中也需要用到vim（避无可避的程度），无奈之下只能试着硬上了，在这个过程中无意想通了正确的学习姿势，以下是个人的思考笔记。</p>
 </blockquote>
-<a id="more"></a>
-<h2 id="目录">目录</h2>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210427232632309.png" alt="image-20210427232632309"></p>
-<h2 id="一-通信本质">一、通信本质</h2>
-<p>通信通信，说白的就是信息互通。人跟人间的信息互通、机器跟机器间的信息互通、机器跟人间的信息互通。</p>
-<p>而想要做到互通，主要有两个问题需要解决，“<strong>信息该如何表示？</strong>”和“<strong>信息该如何传输？</strong>”两个核心问题。</p>
-<p>我们知道信息交互中，最原始、朴素的表示是0和1。其中，信息传输主要指01串在传输介质上传输的过程。这个过程具体上跟诸如无线电、光纤、电缆如何操作实现有关，不在本文讨论范围。所以本文主要讨论的是“信息该如何表示？”这一问题。</p>
-<p>那么：</p>
+<h2 id="本文大纲">本文大纲</h2>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519200921571.png" alt="image-20210519200921571"></p>
+<h2 id="理清问题">理清问题</h2>
+<p>通过的思考，我发现vim之所以难学，有这么几个原因：</p>
+<ol>
+<li>模式多。</li>
+<li>各模式的命令不少。</li>
+<li>网上搜到的教程几乎都是指令的堆砌，对初学者不太友好。</li>
+</ol>
+<p>基于以上原因，在没有一个清晰的学习思路指引下，很容易会陷入死记命令的泥潭中。而走出这个泥潭的的常见办法是——用大量实践堆砌熟练度，说白的就是熟能生巧。</p>
+<p>而我是个很懒的人。。。我想偷懒，以最少的练习量、最少的时间，尽可能的提高使用vim的使用效率。于是乎，我问了自己这么个问题：</p>
 <ul>
-<li><strong>在电子世界中如何表示0和1？</strong></li>
-<li><strong>信息的发送方和接收方如何解析？</strong></li>
-<li><strong>如何用0和1的组合表示我们所要传达的信息？</strong></li>
+<li><strong>vim是什么？vim是一个文本编辑器啊。</strong></li>
 </ul>
-<p>就是值得讨论的问题了。</p>
-<h2 id="二-信息表示">二、信息表示</h2>
-<h3 id="2-1-01信号表示">2.1、01信号表示</h3>
-<p>首先，在电子世界中0和1的表示，目前大致有两种方式：</p>
+<p>是啊，vim是一个文本编辑器啊！那作为一个程序猿，为什么不从自己设计一个文本编辑器的去看待vim辣么多的内容呢？</p>
+<h2 id="如何设计文本编辑器">如何设计文本编辑器</h2>
+<p>这里讨论的如何设计文本编辑器，为从宏观上分析，文本编辑器需要实现怎样的具体功能的角度出发。</p>
+<h3 id="gui与命令行">GUI与命令行</h3>
+<p>让我们从刚接触计算机时，用的最简陋的文本编辑器——<strong>记事本</strong> 开始分析：</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519203037698.png" alt="image-20210519203037698"></p>
+<p>作为一个普通的小白用户，关注的点只有两个：</p>
 <ul>
-<li>电平信号</li>
-<li>差分信号</li>
+<li>怎么编写文本？</li>
+<li>写好的文本，怎么保存？</li>
+<li>怎么退出？</li>
 </ul>
-<h4 id="2-1-1-电平信号">2.1.1、电平信号</h4>
-<p>电平信号，简单来说就是根据一根线上的不同电压区间划分成高电平和低电平（如：大于3.3v为高电平，低1.5v为低电平等），通过人为定义高电平为0或1来传输信息。</p>
-<p>而又因为几乎不可能做到不同设备间电压完全一致，所以为了保证收发双方电压的一致性，电平信号传输通常需要再加一根GND线作共地用。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/14EFD7F24643DDF542714F615EDC85A9.png" alt="img"></p>
-<h4 id="2-1-2-差分信号">2.1.2、差分信号</h4>
-<p>差分信号这哥们可以说是电平信号的弟弟。前人发现，在长距离信息传输时，传输线会变成不可忽略的等效电阻，从而造成明显的压差，致使信息丢失、失真等现象。而且电平信号只有一根数据线，容易受到电磁干扰等等。</p>
-<p>因以上原因，差分信号线就粉嫩登场。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/ECCF8208F5537612CDDCCC2E9DF202E7.png" alt="img"></p>
-<p>既然你一根信号线容易受电磁干扰、长距离传输有明显压差，那么我用两根信号线表示，根据两根信号线同一时刻的压差区间定义0和1不就可以增强抗干扰性和增长了传输距离嘛。这就是差分信号的思想。</p>
-<p>但差分信号也不是没有缺点的。</p>
-<p>它的问题在于线材的花销是电平信号的两倍。当我们同时传输n路信号时，电平信号只需要n+1根线（n根信号线，1根共线线），而差分需要2n根线。所以电平信号和差分信号本身并无优劣之分，主要看使用场景进行选择。</p>
-<h3 id="2-2-信号解析">2.2、信号解析</h3>
-<p>信号解析的操作过程而言，其实就是信号解码的过程。发送方通过对01串进行编码发送给接收方，而接收方通过之前约定的编码规则逆向解析。</p>
-<p>这个发送和接收的过程中会产生两个问题：</p>
+<p>我们都知道，这几个需求的实现在图形界面上，可以由上图方框框出来的三部分组成：</p>
 <ul>
-<li>接收方怎么知道发送方什么时候发送了信息？</li>
-<li>如果发送了信息，又发送了多少信息？</li>
+<li>红色方框的编辑区</li>
+<li>蓝色方框的功能区中“文件”项下的保存键</li>
+<li>绿色方框的窗口控制键</li>
 </ul>
-<p>由以上两个问题可以引申出两种不同的通信方式：</p>
+<p>但记事本所处的环境是GUI图形界面，vim是在纯命令行界面作用的文本编辑器。它没有能清晰可视化的功能分区，只有一个近似与上图红色方框编辑区的黑框框。</p>
+<p>我们需要用也只能用这个黑框框去实现上述我们提到的所有功能。</p>
+<p>那么一个  <strong>可切换的双模式</strong> 结构想法就很自然而然的应运而生了。</p>
+<h3 id="核心功能">核心功能</h3>
+<h4 id="双模式切换">双模式切换</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2.png" alt="模式切换"></p>
+<p>我们可以设定刚进入编辑器时为 <strong>命令模式</strong>。这个模式只有三个功能：</p>
 <ul>
-<li>同步通信</li>
-<li>异步通信</li>
+<li>进入编辑模式</li>
+<li>保存文档</li>
+<li>退出文档</li>
 </ul>
-<h4 id="2-2-1-同步通信">2.2.1、同步通信</h4>
-<p>同步通信，在表现形式上就是在收发双方之间加了一条时钟线。通过结合时钟线SCL的电平状态和信号线SDA的电平状态组合出诸如：起始信号、终止信号、实际想要发送的0/1信号等。</p>
-<p>如单片机中最常用的I2C协议，它的起始和终止信号就是通过判断时钟线SCL在高电平时，信号线SDA的边沿跳变情况决定的。（关于I2C的具体内容，不了解的朋友可以自行搜索学习。）下图为同步通信示例，I2C协议的拓扑连接图。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F.png" alt="I2C常用连接方式"></p>
-<h4 id="2-2-2-异步通信">2.2.2、异步通信</h4>
-<p>异步通信跟同步通信的最大区别在于——异步通信没有时钟线，只有信号线和地线。</p>
-<p>既然没有的时钟线作为辅助，那么信号线SDA就需要传输包含更多的信息，以替代时钟线的作用。诸如：</p>
+<p>编辑模式下只有两个功能：</p>
 <ul>
-<li>我们接收方需要知道收到怎样的信号时表示一个数据的开始。</li>
-<li>怎样的信号表示一个信号的结束。</li>
-<li>怎样的信号表示需要传递的数据本身。</li>
+<li>文本编辑</li>
+<li>退回命令模式</li>
 </ul>
-<p>因此，异步通信传输的01串里，必然需要包含起始位、停止位，以及真正需要传输的数据的数据长度。</p>
-<p>不仅如此，我们还需要统一一下收发双方的传输速率，以便接收方能及时且准确的处理发送方发来的数据。</p>
-<p>这个传输速率，我们一般称为<strong>波特率</strong>。波特率指的是每秒钟传送的码元的个数。至于码元是啥。。。由于本人太菜，这个概念的实际内涵还没理解透彻。但在通信过程中，常常一个码元等于一个比特，所以在通信过程中，波特率在大多数情况下，可以理解为<strong>比特率</strong>。即每秒钟传送得到比特个数。</p>
-<h4 id="2-2-3-小结">2.2.3、小结</h4>
-<h5 id="同步通信：">同步通信：</h5>
-<p>​	<strong>优点：</strong><br>
-​		1、可以根据不同时钟线边沿的不同，判断信息的采集与否。<br>
-​		2、不用添加额外的状态位，增加了信息传输密度。</p>
-<p>​	<strong>缺点：</strong><br>
-​		1、需要时钟线协调。<br>
-​		2、占用发送端和接收端双方的资源（收发双方都需要，时刻关注时钟线的）。</p>
-<h5 id="异步通信：">异步通信：</h5>
-<p>​	<strong>优点：</strong><br>
-​		1、不需要额外的信号线，所占用线较少。<br>
-​		2、只占用接收端的资源（需要时刻关注数据线的电平变化情况，但发送方不用）。<br>
-​	<strong>缺点：</strong><br>
-​		1、需要状态位表示收发状态。<br>
-​		2、需要协定信息传输速率协同双方的信息处理。</p>
-<h5 id="比较结论：">比较结论：</h5>
+<p>这样编辑器最核心的功能——<strong>编辑文档</strong>，就实现了。</p>
+<h4 id="常见需求">常见需求</h4>
+<p>在实现了上述核心功能之后，我们就该来聊聊用户体验问题了。一个东西能用跟一个好用是两回事不是嘛。</p>
+<p>除了核心的编辑功能外，我们最常用的功能大概有以下几个：</p>
 <ul>
-<li>同步通信比异步传输效率更高，适合信息交互频繁的场合。</li>
-<li>异步通信，相对整体占用资源较少，适用信息交互相对较少的场合。</li>
+<li>复制粘贴</li>
+<li>关键字检索</li>
+<li>关键字替换</li>
+<li>。。。。</li>
 </ul>
-<h3 id="2-3-通信协议">2.3、通信协议</h3>
-<p>知道了0/1如何表示，也知道了收发双方对信号解析应该注意的事项。那么就还剩最后一个重要的问题了，即：<strong>如何用0和1的组合表示我们所要传达的信息？</strong></p>
-<p>换句话说，对于一大串01序列应该如何解读？</p>
-<p>这个问题就属于编码的范畴了，如何编码是通信协议规定的。不同的协议有不同的编码方式，这个在学习具体通信协议时会感受到。但它们无外乎遵从以下几点：</p>
+<p>很显然，这些功能可以全丢到命令模式，编辑模式下就跟图形界面一样，乖乖的负责文本编写就好了。</p>
+<p>当然，还有个很重要的需求——减少双手离开主键盘区的频率，提高文本编辑速度！！！</p>
+<p>完成这个需求也很简单，能让我们离开主键盘区，移到键盘其他区域的无非就辣么几件事：</p>
 <ul>
-<li>0/1表示</li>
-<li>信号解析</li>
-<li>编码方式</li>
-<li>传输方向</li>
+<li>Home/End键</li>
+<li>PageUp/PageDown键</li>
+<li>最重要的方向键</li>
 </ul>
-<p>传输方向前面没有提到，这里简单的介绍下。</p>
-<h4 id="2-3-1-传输方向">2.3.1、传输方向</h4>
-<p>通信的传输方向可以分为以下三种：</p>
+<p>把以上功能全丢到命令模式就好了。有了这些认识，学起vim来就很轻松啦~</p>
+<h2 id="vim入门">vim入门</h2>
+<p>ok，基于以上整理的思路，下面随便在网上找一份vim教程学习，我选的是菜鸟的教程。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/vim%E6%A8%A1%E5%BC%8F%E5%9B%BE.png" alt="vim模式图"></p>
+<p>首先是上面这图。我一看，不对劲，为啥两个模式能搞定的东西，vim得搞出3个模式出来？命令模式好理解，底线命令模式是啥玩意儿？瞅瞅资料先…</p>
+<p>吼，本菜鸡查完资料回来了~</p>
+<p>首先是输入模式和命令模式，这两哥们跟我们前面讨论的差不多，至于底线命令模式是干嘛用的，你们瞅瞅下面这图：</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519220940400.png" alt="image-20210519220940400"></p>
+<p>从上面的信息可以得出结论，底线命令模式这大哥的功能是：</p>
 <ul>
-<li>单工通信：任何时刻都只能单向传输信息。</li>
-<li>半双工通信：同一时刻只能单向传输信息，即在通信过程中可以改变传输方向。</li>
-<li>全双工通信：任何时刻都可以双向传输信息。</li>
+<li>文档具体储存、退出方式的处理</li>
+<li>vim环境的变更</li>
 </ul>
-<p>由以上定义其实可以看出，一般单工和半双工都是通过一根信号线实现的，而想要实现全双工，则需要两根信号线用两个端口接收。</p>
-<h4 id="2-3-2-常见通信协议">2.3.2、常见通信协议</h4>
-<p>有关通信协议的主要问题，个人觉得有上面的理解差不多够了。下面是简单介绍下载单片机中常用到的通信协议：</p>
+<p>而普通命令模式主要是文本处理的相关指令的集合。</p>
+<p>ok，大轮廓搞定了，我们看看具体细节。</p>
+<h3 id="核心功能">核心功能</h3>
+<h4 id="模式切换">模式切换</h4>
+<p>还是用图说话。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/vim%E6%A8%A1%E5%BC%8F%E5%9B%BE.png" alt="vim模式图"></p>
+<p>从前面可以知道，从简单使用角度，我们关注的重点更多的是在<strong>命令模式</strong>和<strong>输入模式</strong>。</p>
+<p>输入模式退回命令模式直接ESC即可，这个无需多说。</p>
+<p>而命令模式进入输入模式有三种基本方式：i，a，o</p>
+<h5 id="示例">示例</h5>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519225922738.png" alt="image-20210519225922738"></p>
 <ul>
-<li>串口协议：皆为异步全双工协议。
+<li>i：在当前光标前插入（以 ‘.’ 为当前光标所处位置 ）</li>
+</ul>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519230029146.png" alt="image-20210519230029146"></p>
 <ul>
-<li>RS-232：电平信号</li>
-<li>RS-485：差分信号</li>
+<li>a：在当前光标后插入（以 ‘.’ 为当前光标所处位置 ）</li>
 </ul>
-</li>
-<li>I2C总线协议：同步半双工协议（电平信号）</li>
-<li>SPI总线协议：同步全双工协议（电平信号）</li>
-<li>。。。。。。</li>
-</ul>
-<h2 id="三-缓存方式">三、缓存方式</h2>
-<p>在通信过程中，缓存机制是很有必要，至于为什么，请看下图：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%BC%93%E5%AD%98%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7.png" alt="缓存的必要性"></p>
-<p>接收端其实也是同样的道理，由此看出缓存机制的必要性。</p>
-<p>而常见的缓存机制有两种：</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519230129163.png" alt="image-20210519230129163"></p>
 <ul>
-<li>FIFO</li>
-<li>DMA</li>
+<li>o：新插入一行</li>
 </ul>
-<p>学过数据结构的朋友对FIFO应该都不陌生，first in first out,先进先出的队列结构。</p>
-<p>还是发送端为例，应用到上述过程中的话，就是cpu把要传的数据先丢给寄存器，由该寄存器一个bit一个bit的丢给发送端口，CPU就去干其他的活了。</p>
-<p>但寄存器的存储空间很有限，很多情况下还是要把需要发送数据拆分成多个段落分次传输，所以引申了一个原理类似，但比寄存器存储空间要大的缓存机制——DMA。</p>
-<p>更多关于DMA的讨论，我们后面再聊~</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519230313194.png" alt="image-20210519230313194"></p>
+<p>进入编辑模式之后就可以愉快写东西了。</p>
+<p>然后写好的，想退出的话，从就在命令模式用 ’ : '进入底线模式，简单常用的命令有：</p>
+<ul>
+<li>w：保存</li>
+<li>q：退出</li>
+<li>wq：保存退出</li>
+</ul>
+<p>吼了，看到这里最基本的操作相信都木有问题了，还想要更多更好的用户体验只需要按照前面提供的思路去查文档即可~</p>
  
       <!-- reward -->
       
@@ -289,12 +276,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lzyblog.site/2021/01/21/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lzyblog.site/2021/05/19/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/%E4%BB%A5%E8%AE%BE%E8%AE%A1%E8%80%85%E7%9A%84%E8%A7%92%E5%BA%A6%E5%AD%A6%E4%B9%A0vim/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1/" rel="tag">通信</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/" rel="tag">工具学习</a></li></ul>
 
     </footer>
   </div>
@@ -302,19 +289,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/04/20/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E7%B3%BB%E5%88%97%E6%80%BB%E7%BA%B2%E3%80%91%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            【初入电子坑系列总纲】自我总结与经验分享
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/01/19/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3%E4%B8%AD%E6%96%AD%E4%B8%8Estm32%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE/" class="article-nav-link">
+      <a href="/2021/05/18/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%83%EF%BC%89%E3%80%91%E5%9F%BA%E6%9C%AC%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E6%99%AE%E9%80%9A%E5%AE%9A%E6%97%B6%E5%99%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">【初入电子坑之stm32篇（五）】理解中断与stm32中断配置</div>
+        <div class="article-nav-title">【初入电子坑之stm32篇（七）】定时器与PWM</div>
       </a>
     
   </nav>
