@@ -228,20 +228,6 @@
   </url>
   
   <url>
-    <loc>https://lzyblog.site/tags/cisco/</loc>
-    <lastmod>2021-05-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzyblog.site/tags/%E9%93%BE%E8%A1%A8/</loc>
-    <lastmod>2021-05-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://lzyblog.site/tags/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-05-19</lastmod>
     <changefreq>daily</changefreq>
@@ -263,7 +249,14 @@
   </url>
   
   <url>
-    <loc>https://lzyblog.site/tags/%E6%B1%87%E7%BC%96/</loc>
+    <loc>https://lzyblog.site/tags/cisco/</loc>
+    <lastmod>2021-05-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzyblog.site/tags/%E9%93%BE%E8%A1%A8/</loc>
     <lastmod>2021-05-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -278,6 +271,13 @@
   
   <url>
     <loc>https://lzyblog.site/tags/%E9%80%9A%E4%BF%A1/</loc>
+    <lastmod>2021-05-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzyblog.site/tags/%E6%B1%87%E7%BC%96/</loc>
     <lastmod>2021-05-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -321,6 +321,13 @@
   </url>
   
   <url>
+    <loc>https://lzyblog.site/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2021-05-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lzyblog.site/categories/%E6%9D%82%E9%A1%B9/</loc>
     <lastmod>2021-05-19</lastmod>
     <changefreq>daily</changefreq>
@@ -342,21 +349,14 @@
   </url>
   
   <url>
-    <loc>https://lzyblog.site/categories/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2021-05-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzyblog.site/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-05-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://lzyblog.site/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2021-05-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzyblog.site/categories/%E7%94%B5%E5%AD%90/</loc>
     <lastmod>2021-05-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -370,7 +370,7 @@
   </url>
   
   <url>
-    <loc>https://lzyblog.site/categories/%E7%94%B5%E5%AD%90/</loc>
+    <loc>https://lzyblog.site/categories/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2021-05-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
