@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>【初入电子坑之stm32篇（六）】定时器基础与Systick</title>
-    <url>/2021/04/24/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E3%80%91%E5%AE%9A%E6%97%B6%E5%99%A8%E5%9F%BA%E7%A1%80%E4%B8%8ESystick/</url>
+    <url>/2021/04/24/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E3%80%91%E5%AE%9A%E6%97%B6%E5%99%A8%E5%9F%BA%E7%A1%80%E4%B8%8ESystick/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>定时器，顾名思义是拿来定时的，但除了定时之外，我们还可以利用定时器的计数特性，演变出其他有意思的功能出来（诸如控制马达转速）。不过在这之前，我们还是先了解了解定时器的工作原理叭。</p>
@@ -86,7 +86,7 @@
   </entry>
   <entry>
     <title>【初入电子坑系列总纲】自我总结与经验分享</title>
-    <url>/2021/04/20/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E7%B3%BB%E5%88%97%E6%80%BB%E7%BA%B2%E3%80%91%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/</url>
+    <url>/2021/04/20/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E7%B3%BB%E5%88%97%E6%80%BB%E7%BA%B2%E3%80%91%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/</url>
     <content><![CDATA[<blockquote>
 <p>此文是本人以电子小白的身份，从单片机开始入电子坑以来的自我反省与总结（踩得坑有点多）。也是【初入电子坑】系列个人笔记的索引。</p>
 </blockquote>
@@ -211,7 +211,7 @@
   </entry>
   <entry>
     <title>【初入电子坑之通信入门篇（一）】通信基础概念</title>
-    <url>/2021/01/21/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <url>/2021/01/21/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>通信是嵌入式的重要组成部分，本人简单试水过后发现此坑略深，以目前应用为主的策略来看，不宜陷得太深。所以这系列笔记文章主要围绕“这是什么？”“它的大致原理是什么？”展开讨论。基本上会忽略绝大多数诸如“为什么需要它？/它是怎么顺理成章的推出来的？”的这类问题。（因本人才疏学浅，若有叙述不当之处，恳请各位大佬指正。）</p>
@@ -350,7 +350,7 @@
   </entry>
   <entry>
     <title>【初入电子坑之stm32篇（五）】理解中断与stm32中断配置</title>
-    <url>/2021/01/19/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3%E4%B8%AD%E6%96%AD%E4%B8%8Estm32%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE/</url>
+    <url>/2021/01/19/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3%E4%B8%AD%E6%96%AD%E4%B8%8Estm32%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>按照个人习惯，本文将从“这是啥？”“为啥需要它？”“如何操作？”三个角度展开讨论分析。</p>
@@ -543,7 +543,7 @@
   </entry>
   <entry>
     <title>【初入电子坑之stm32篇（四）】理解时钟系统</title>
-    <url>/2021/01/17/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/</url>
+    <url>/2021/01/17/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>时钟系统是MCU必不可少的一部分。本文将针对以下问题展开讨论：</p>
@@ -739,7 +739,7 @@
   </entry>
   <entry>
     <title>【初入电子坑之stm32篇（三）】位带操作</title>
-    <url>/2021/01/16/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/</url>
+    <url>/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>由寄存器编程我们可以知道，很多时候我们需要修改的值的其实只有单独的某一位，那在stm32中怎么实现对单独一个位的操作呢？位带操作！</p>
@@ -790,7 +790,7 @@
   </entry>
   <entry>
     <title>【初入电子坑之stm32篇（二）】固件库编程</title>
-    <url>/2021/01/16/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%91%E5%9B%BA%E4%BB%B6%E5%BA%93%E7%BC%96%E7%A8%8B/</url>
+    <url>/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%91%E5%9B%BA%E4%BB%B6%E5%BA%93%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>在<a href="https://zhuanlan.zhihu.com/p/344913189">【初入电子坑之stm32篇（一）】初识stm32与寄存器编程</a>中可以看到，寄存器编程虽然消耗CPU性能少、速度快。但于我们开发应用来说，那就是刀耕火种中的刀耕火种。。。</p>
@@ -866,7 +866,7 @@
   </entry>
   <entry>
     <title>【初入电子坑之stm32篇（补充1）】新建固件库工程</title>
-    <url>/2021/01/11/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/</url>
+    <url>/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>新建基于固件库的工程，不理清构建流程的话，看上去还是有点繁琐的，在此记录一下。</p>
@@ -956,7 +956,7 @@
   </entry>
   <entry>
     <title>【初入电子坑之stm32篇（一）】初识stm32与寄存器编程</title>
-    <url>/2021/01/04/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E5%88%9D%E8%AF%86stm32%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/</url>
+    <url>/2021/01/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E5%88%9D%E8%AF%86stm32%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>一下为本人基于野火stm32F103EVT6开发板学习stm32的学习笔记。</p>
@@ -1123,7 +1123,7 @@
   </entry>
   <entry>
     <title>【查缺补漏计划(1)】链表习题整理</title>
-    <url>/2021/01/03/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/%E3%80%90%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%E8%AE%A1%E5%88%92(1)%E3%80%91%E9%93%BE%E8%A1%A8%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/</url>
+    <url>/2021/01/03/DSA/BaseAlgotirhm/%E3%80%90%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%E8%AE%A1%E5%88%92(1)%E3%80%91%E9%93%BE%E8%A1%A8%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>发现自己对用结构体实现的链表操作好像不太熟，就补补漏吧。</p>
@@ -1145,7 +1145,7 @@
   </entry>
   <entry>
     <title>汇编语言(一)基础知识与寄存器</title>
-    <url>/2020/12/19/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9B%B8%E5%85%B3/%E6%B1%87%E7%BC%96/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E4%B8%80)%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8/</url>
+    <url>/2020/12/19/Embedded/Assembly/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E4%B8%80)%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>这是一个记录本人学习汇编的笔记及思考的系列文章。</p>
@@ -1232,7 +1232,7 @@
   </entry>
   <entry>
     <title>第十一届蓝桥杯B组—E矩阵</title>
-    <url>/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFB%E7%BB%84%E2%80%94E%E7%9F%A9%E9%98%B5/</url>
+    <url>/2020/10/14/Solution/LanQiao/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFB%E7%BB%84%E2%80%94E%E7%9F%A9%E9%98%B5/</url>
     <content><![CDATA[<h3 id="问题描述">问题描述</h3>
 <blockquote>
 <p>把 1 ∼ 2020 放在 2 × 1010 的矩阵里。</p>
@@ -1313,7 +1313,7 @@ f[i][j-1]\quad \quad\quad\quad\quad\quad, i-1&lt;j<br>
   </entry>
   <entry>
     <title>蓝桥杯 整数拼接</title>
-    <url>/2020/10/14/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/</url>
+    <url>/2020/10/14/Solution/LanQiao/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/</url>
     <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/2070/">题目链接</a></p>
 <h3 id="问题描述">问题描述</h3>
 <p>给定一个长度为 n 的数组 A<sub>1</sub> , A<sub>2</sub> ,⋅⋅⋅, A<sub>n</sub> 。</p>
@@ -1376,7 +1376,7 @@ f[i][j-1]\quad \quad\quad\quad\quad\quad, i-1&lt;j<br>
   </entry>
   <entry>
     <title>贪心习题整理</title>
-    <url>/2020/10/12/%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/%E8%B4%AA%E5%BF%83%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/</url>
+    <url>/2020/10/12/DSA/BaseAlgotirhm/%E8%B4%AA%E5%BF%83%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>DP虽无固定套路，但起码还有点思维套路可言。我们可以通过积累一定的经典例题去推导出状态转移方程。</p>
@@ -1397,255 +1397,14 @@ f[i][j-1]\quad \quad\quad\quad\quad\quad, i-1&lt;j<br>
         <category>算法</category>
       </categories>
       <tags>
-        <tag>目录</tag>
         <tag>算法</tag>
         <tag>贪心</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Cisco-VLAN与单臂路由配置</title>
-    <url>/2020/10/09/%E6%9D%82/Cisco-VLAN%E4%B8%8E%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h3 id="简介">简介</h3>
-<blockquote>
-<p>我们都知道交换机共用一个广播域，当计算机A尝试获得计算机B的MAC地址，建立连接的时候必须先广播ARP请求。</p>
-<p>考虑这么一个情况：</p>
-<ul>
-<li>网络由多个交换机相连</li>
-<li>计算机A和计算机B连接在同一个交换机上</li>
-<li>计算机A发送ARP请求，尝试与计算机B建立连接</li>
-</ul>
-<p>对于以上叙述的情况，由于交换机有泛洪的特性，ARP请求除了向连接在同一交换机计算机B发送外，还会向其他接口发送ARP请求。</p>
-<p>显然，这么做会造成资源浪费。为了尽可能减少这种情况的影响，划分一个大的广播域的需求就应运而生了。</p>
-<p>而划分广播域用到的技术就是——VLAN(虚拟局域网)。</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="一-vlan配置">一、VLAN配置</h3>
-<p>VLAN的划分方法有很多种，其中最简单的莫过于基于端口划分。<s>(学校目前也只教了这种啊)</s></p>
-<p>因本人只想划水不挂科，所以以下讨论皆为基于端口划分的配置。</p>
-<p>基于端口划分的VLAN有两种模式：</p>
-<ul>
-<li>Access Link（访问链接）：端口仅允许一个VLAN的数据通过。</li>
-<li>Trunk Link（汇聚链接）：端口仅允许多个VLAN的数据通过。</li>
-</ul>
-<h4 id="例1：仅使用access链接">例1：仅使用access链接</h4>
-<h5 id="1-1-示例拓扑图">1.1、示例拓扑图</h5>
-<p><img src="%E7%A4%BA%E4%BE%8B%E6%8B%93%E6%89%91%E5%9B%BE.png" alt="示例拓扑图"></p>
-<h5 id="1-2-配vlan前">1.2、配VLAN前</h5>
-<img src="配置vlan前.png" alt="配置vlan前" style="zoom: 67%;" />
-<p>上图表明当前4台PC处于正常可ping通状态。</p>
-<h5 id="1-3-实验步骤">1.3、实验步骤</h5>
-<ul>
-<li>在创建VLAN</li>
-<li>分别进入各个接口</li>
-<li>配置接口的VLAN模式</li>
-<li>分配接口给已存在的VLAN</li>
-</ul>
-<h5 id="1-3-命令">1.3、命令</h5>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Switch(config)#vlan 10</span><br><span class="line">Switch(config-if)#exit</span><br><span class="line">Switch(config)#vlan 20</span><br><span class="line">Switch(config-if)#exit &#x2F;&#x2F;创建vlan 10 和 vlan 20</span><br><span class="line"></span><br><span class="line">Switch(config)#int f0&#x2F;1							&#x2F;&#x2F;进入fa0&#x2F;0端口</span><br><span class="line">Switch(config-if)#switchport mode access 		&#x2F;&#x2F;配置端口为access模式</span><br><span class="line">Switch(config-if)#switchport access vlan 10		&#x2F;&#x2F;把该端口分配给vlan 10</span><br><span class="line">&#x2F;*</span><br><span class="line">	同理配置其他3个端口</span><br><span class="line">*&#x2F;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="1-4-结果">1.4、结果</h5>
-<img src="配置vlan后(1).png" alt="配置vlan后(1)" style="zoom:50%;" />
-<img src="配置vlan后(2).png" alt="配置vlan后(2)" style="zoom: 50%;" />
-<h4 id="例2：使用trunk连接多台交换机">例2：使用trunk连接多台交换机</h4>
-<h5 id="2-1-示例拓扑">2.1、示例拓扑</h5>
-<img src="trunk示例.png" alt="trunk示例" style="zoom:67%;" />
-<h5 id="2-2-实验步骤">2.2、实验步骤</h5>
-<ul>
-<li>重复例题的步骤</li>
-<li>交换机连接方式设为trunk</li>
-</ul>
-<h5 id="2-3-命令">2.3、命令</h5>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Switch(config)#int f0&#x2F;24</span><br><span class="line">Switch(config-if)#swit mod trunk			&#x2F;&#x2F;设置成trunk模式</span><br><span class="line">Switch(config-if)#swit trunk allow vlan 10	&#x2F;&#x2F;允许vlan 10通过</span><br><span class="line">Switch(config-if)#swit trunk allow vlan add 20	&#x2F;&#x2F;添加允许vlan 20</span><br><span class="line">&#x2F;*</span><br><span class="line">	两台交换机都需要配置</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
-<h5 id="2-4-查看配置情况-用于排错">2.4、查看配置情况（用于排错）</h5>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Switch#show vlan brief	&#x2F;&#x2F;查看vlan情况，如下图1</span><br><span class="line">Switch#show running-config</span><br><span class="line">Switch#show startup-config</span><br><span class="line">&#x2F;*</span><br><span class="line">	show vlan brief 好像不能查看trunk模式的分配情况，</span><br><span class="line">	但我们可以直接查缓存和磁盘看各端口情况。</span><br><span class="line">	如下图2</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
-<img src="show-vlan-bri.png" alt="show-vlan-bri" style="zoom: 50%;" />
-<img src="show-缓存or磁盘.png" alt="show-缓存or磁盘" style="zoom:50%;" />
-<hr>
-<p>当用VLAN划分了不同的广播域后，即使是连接在同一交换机的不同vlan的主机也不可以直接进行通信了。这跟一台路由器连接两个不同网络是一个效果。所以想要让不同VLAN间进行通信，自然而然就要通过路由器啦！</p>
-<p>根据我们让两个不同网络互联的配置方式，我们可以得到下面这张拓扑图：</p>
-<p><img src="%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1%E5%BC%95%E4%BE%8B%E5%9B%BE.png" alt="单臂路由引例图"></p>
-<p>但有时可能网络预算不足或者网络比较小的时候，我们也可以用一根线完成这个操作，那就是使用单臂路由！</p>
-<p>简单来说，单臂路由就是通过把路由器的一个接口分成若干个子接口分别配置不同地址从而完成网络互联。</p>
-<p>有意思的是，据本人查到的相关资料显示，单臂路由是一种应急技术，但老师貌似很看重。具体原因未知，也许上课提过？Anyway，先搞搞应付完这波再说。</p>
-<h3 id="二-单臂路由配置">二、单臂路由配置</h3>
-<h4 id="2-1-示例拓扑">2.1、示例拓扑</h4>
-<img src="单臂路由拓扑.png" alt="单臂路由拓扑" style="zoom:67%;" />
-<p>因该拓扑为同网段不同vlan，子端口ip设置失败（如下图）：<img src="单臂路由拓扑失败图.png" alt="单臂路由拓扑失败图" style="zoom:50%;" /></p>
-<p>经询问得知，在cisco中处理这情况需要用到private vlan，HUAWEI中需要用到Mux-vlan。简单来说就是需要对vlan分层级，而学校木有教，抱着水过考试就行的心态，在此不做过多深入研究。所以此情况pass！！！</p>
-<img src="单臂路由拓扑简单图.png" alt="单臂路由拓扑简单图" style="zoom:67%;" />
-<p>以下配置以上图为准。</p>
-<h4 id="2-2-实验步骤">2.2、实验步骤</h4>
-<ul>
-<li>在交换机与连接路由器的端口处配置trunk</li>
-<li>进入路由器子端口</li>
-<li>配置trunk的封装协议 dot1Q</li>
-<li>添加子端口IP地址</li>
-<li>给各PC配上网关地址</li>
-</ul>
-<h4 id="2-3-命令">2.3、命令</h4>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;路由器端</span><br><span class="line">Router(config)#int g0&#x2F;0&#x2F;0.1						&#x2F;&#x2F;进入.1子端口</span><br><span class="line">Router(config-subif)#encapsulation dot1Q 10		&#x2F;&#x2F;设置封装协议为vlan 10的</span><br><span class="line">Router(config-subif)#ip address 192.168.1.254 255.255.255.0</span><br><span class="line">Router(config-subif)#no shutdown</span><br><span class="line">Router(config-subif)#exit</span><br><span class="line">&#x2F;&#x2F;下面同上</span><br><span class="line">Router(config)#int g0&#x2F;0&#x2F;0.2</span><br><span class="line">Router(config-subif)#encapsulation dot1Q 20		</span><br><span class="line">Router(config-subif)#ip address 192.168.2.253 255.255.255.0</span><br><span class="line">Router(config-subif)#no shutdown</span><br><span class="line">&#x2F;&#x2F;交换机端配置同上trunk例子，此处忽略</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="2-4-结果">2.4、结果</h4>
-<p><img src="%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1%E7%BB%93%E6%9E%9C.png" alt="单臂路由结果"></p>
-<h4 id="2-5-查看配置情况">2.5、查看配置情况</h4>
-<p>查看配置情况同上<strong>VLAN配置的2.4</strong>，在此不再叙述。</p>
-<p>关于单臂路由排错，一般只需看两处：</p>
-<ul>
-<li>三层设备：网关没有配</li>
-<li>二层设备：vlan分配出问题</li>
-</ul>
-<p><strong>（PS：同网段不同vlan不在上述描述情况讨论范围！！！）</strong></p>
-]]></content>
-      <categories>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>cisco</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Cisco-静态路由与动态路由协议RIP配置</title>
-    <url>/2020/10/09/%E6%9D%82/Cisco-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1RIP%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h3 id="简介">简介</h3>
-<blockquote>
-<p>我个人对“路由”的这个名字的理解是，“路由哪里来，路到哪里去”。</p>
-<p>所以控制报文传输的机器就叫路由器，选择传输路径的协议就叫路由协议。</p>
-<p>本文将记述其中最简单的静态路由、动态路由RIP的配置流程</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="略说原理">略说原理</h3>
-<p>每个路由器都自带一张路由表，这个路由表存储着指向特定地址的路径。</p>
-<p>这个路径的信息大概会包括：</p>
-<ul>
-<li>目的IP的网段(或称目的IP的网络号)</li>
-<li>前往目的IP地址的下一跳IP地址</li>
-</ul>
-<p>下一跳IP地址，即与本路由器直连的路由器的地址。所以，可以把路由表理解成路标，报文在传输过程中每到一个路由器都先看看“路标”，才能找到下一步怎么的方向。</p>
-<p>至于这个路由表具体是怎么构建的，那就是路由协议干的活。</p>
-<h3 id="静态路由">静态路由</h3>
-<p>静态路由很对得起它的名字，它是真的&quot;静态&quot;！！！</p>
-<p>我们只需要给每台路由器配上目的IP地址和下一跳的地址，即可完成一条路径在该路由器上的配置。</p>
-<p>而这种配置，在没有进行人为干预的情况下它是不会自动发生改变的。这就意味若一条路径上某个结点出点什么问题，整条路径直接报废。除了解决问题结点外，若要重新建一条新路径，这工作量无疑是巨大的。</p>
-<p>我们可以算一笔账：设一条路径上有n个结点（除去起始点和终点后），若一个节点出现故障，那么在不动原路径的情况下（假设原路径经过的结点数最少）创建一条新路径，就至少要重新配置n个结点。若出现故障的问题结点指向了m条不同的路径。那么这个配置的工作量在最坏情况下就要配置n*m个结点。</p>
-<p>以上说明，足以说明静态路由不适合现今这个网络结点多达数十亿的信息时代。但对于小型网络、路由学习入门来说，它也是不错的选择，原因就是因为——它很简单，且后面各种动态路由也是在此基础上进行设计优化的。</p>
-<h4 id="1-1-示例拓扑">1.1、示例拓扑</h4>
-<p><img src="%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E6%8B%93%E6%89%91.png" alt="静态路由拓扑"></p>
-<h4 id="1-2-实验步骤">1.2、实验步骤</h4>
-<ul>
-<li>给各机器配上IP地址</li>
-<li>在特权模式使用多次ip route 命令建立路由表</li>
-</ul>
-<h4 id="1-3-命令">1.3、命令</h4>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;ip地址配置过程省略</span><br><span class="line">Router1(config)#ip route 192.168.20.0 255.255.255.0 192.168.20.2</span><br><span class="line">&#x2F;&#x2F;配置目的网段(或称网络号)为192.168.20.0的路由</span><br><span class="line">Router1(config)#ip route 192.168.2.0 255.255.255.0 192.168.20.2</span><br><span class="line">&#x2F;&#x2F;配置目的网段为192.168.2.0的路由</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line">	其他路由配置以此类推。</span><br><span class="line">	格式：</span><br><span class="line">		Router1(config)#ip route 目的网段 掩码 下一跳地址</span><br><span class="line">	值得注意的是：</span><br><span class="line">		1、因为信息是一来一回的，所以对于同一条路径，要在两个方向分别配置一遍。</span><br><span class="line">		2、配置的是目的网段，不是准确IP地址！不是IP地址！！不是IP地址！！！</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
-<h4 id="1-4-结果">1.4、结果</h4>
-<p><img src="静态路由结果（1）.png" alt="静态路由结果（1）" style="zoom:50%;" /><img src="静态路由结果（2）.png" alt="静态路由结果（2）" style="zoom: 50%;" /></p>
-<p>由于路由表记录的只有目的网段和下一跳地址，中间经过的设备并不会被自动记录为目的地，所以只在一台机器上ping通所有机器并不代表整个网络中任意两台机器都能ping通。</p>
-<p>但由于信息交互式一来一回的，所以只需对称的在一半的机器上验证，能ping通所有机器，即可代表整个网络都处于两两联通的状态。</p>
-<h4 id="1-5-查看配置">1.5、查看配置</h4>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Router#show ip route	&#x2F;&#x2F;查看路由条目</span><br></pre></td></tr></table></figure>
-<img src="查看路由条目.png" alt="查看路由条目" style="zoom:67%;" />
-<p>绿色框框的信息表示：前往 192.168.10.0/24 的网段 下一跳地址为 192.168.20.1。</p>
-<h3 id="动态路由">动态路由</h3>
-<p>动态路由协议可以分为：</p>
-<ul>
-<li>内部网关协议</li>
-<li>外部网关协议</li>
-</ul>
-<p>这两大类协议具体有什么区别，在此不做过多叙述。</p>
-<p>我们下面先来讨论下内部网关协议中最简单的路由协议——RIP。</p>
-<p>在上面<strong>1.5、查看配置</strong>的路由条目图中，我们可以看到，路由器直连的网段是自动收录进路由表的。如下图：</p>
-<img src="本地路由条目.png" alt="本地路由条目" style="zoom:50%;" />
-<p>而RIP 就是利用了这点。既然每个路由器的路由表都自带了直连网段的信息，辣么两个路由器间互相学习下大家路由表中的信息不就可以自动生成一条条指向各个特定地址的路径了嘛！！！</p>
-<p>而且，只要定时互相交流信息、更新自身的路由表，就可以避免静态路由中一个结点发生故障，整条路径都GG的情况，非常人性化。</p>
-<p>有了以上认知，我们就可以愉快的进行相关的实验配置了。至于RIP协议更多详细的原理细节，这里不做过多叙述。</p>
-<h4 id="2-1-示例拓扑">2.1、示例拓扑</h4>
-<p>同<strong>1.1</strong>。</p>
-<h4 id="2-2-实验步骤">2.2、实验步骤</h4>
-<ul>
-<li>进入RIP协议配置模式</li>
-<li>换成RIP version2(默认是version 1)</li>
-<li>公告直连网段</li>
-</ul>
-<h4 id="2-3-命令">2.3、命令</h4>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Router(config)#route rip			&#x2F;&#x2F;进入rip配置模式</span><br><span class="line">Router(config-router)#version 2		&#x2F;&#x2F;设置为rip version 2</span><br><span class="line">Router(config-router)#network 192.168.10.0	&#x2F;&#x2F;公告直连的192.168.10.0网段</span><br><span class="line">Router(config-router)#network 192.168.20.0	&#x2F;&#x2F;公告直连的192.168.20.0网段</span><br><span class="line">&#x2F;*</span><br><span class="line">	补充说明：</span><br><span class="line">		rip现在有3个版本：</span><br><span class="line">			version 1 :仅支持IPv4有类地址</span><br><span class="line">			version 2 :支持IPv4无类地址</span><br><span class="line">			version 3 :支持IPv6无类地址</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
-<h4 id="2-4-结果与配置查看">2.4、结果与配置查看</h4>
-<p><img src="动态路由结果.png" alt="动态路由结果" style="zoom:50%;" /><img src="动态路由查看.png" alt="动态路由查看" style="zoom:50%;" /></p>
-]]></content>
-      <categories>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>cisco</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Cisco Telnet与SSH配置</title>
-    <url>/2020/10/09/%E6%9D%82/Cisco-Telnet%E4%B8%8ESSH%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h3 id="简介">简介</h3>
-<blockquote>
-<p>对于诸如像路由器、交换机、服务器这种东西，如果要亲身待在机器面前做相关配置未免过于不便。所以远程访问控制就成了刚需。</p>
-<p>而远程访问的常用协议有Telnet和SSH两个，它们的区别可以简单的理解为：</p>
-<p>Telnet在传输过程中直接以明文传输，简单粗暴。</p>
-<p>SSH考虑到安全性问题，传输经过加密，相对Telnet而言消耗多了一丢丢计算资源。</p>
-</blockquote>
-<a id="more"></a>
-<p>具体原理上在此不多展开，有以上认知就够了。不过简单查了一下资料，因为安全性问题，现在几乎所有场景都用SSH了，为啥还教Telnet，雾。</p>
-<p>好了牢骚发完，下面正式进入到配置环节。</p>
-<h3 id="telnet配置">Telnet配置</h3>
-<h4 id="一-路由器">一、路由器</h4>
-<h5 id="1-1-示例拓扑图">1.1、示例拓扑图</h5>
-<img src="Telnet路由器拓扑图.png" alt="Telnet路由器拓扑图" style="zoom:80%;" />
-<h5 id="1-2-实验步骤">1.2、实验步骤</h5>
-<ul>
-<li>设置连接数</li>
-<li>设置连接密码</li>
-<li>使设置生效</li>
-<li>设置权限等级（也可以不设）</li>
-<li>给路由器接口设置IP</li>
-<li>设置特权密码</li>
-</ul>
-<h5 id="1-3-命令">1.3、命令</h5>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Router(config)#line vty 0 4			&#x2F;&#x2F;设置允许远程登录，不需用户插Console线缆</span><br><span class="line">Router(config-line)#password 123	&#x2F;&#x2F;设置用户登录密码</span><br><span class="line">Router(config-line)#login			&#x2F;&#x2F;登录启动</span><br><span class="line">Router(config-line)#exit</span><br><span class="line">Router(config)#enable password 123	&#x2F;&#x2F;设置特权模式密码</span><br><span class="line">&#x2F;*</span><br><span class="line">	PS:</span><br><span class="line">		1)CISCO一般支持16个并行的远程虚拟终端，按照编号就是：0 - 15</span><br><span class="line">		2)line vty 0 4 ，表示允许0、1、2、3、4共个用户登录</span><br><span class="line">		2)特权密码一定要设，不设好像远程登不上特权模式，原因不明(主要也没深究的兴趣)</span><br><span class="line">		3)以上命令省略了IP配置</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
-<h5 id="1-4-结果">1.4、结果</h5>
-<img src="Telnet路由结果.png" alt="Telnet路由结果" style="zoom: 67%;" />
-<p><s>(别问为什么辣么多次连接失败…问就是理解错Telnet的作用，把IP地址配成不同网段的了。(逃 )</s></p>
-<h4 id="二-交换机">二、交换机</h4>
-<h5 id="2-1-示例拓扑图">2.1、示例拓扑图</h5>
-<h5 id="img-src-telnet交换机拓扑图-png-alt-telnet交换机拓扑图-style-zoom-80"><img src="Telnet交换机拓扑图.png" alt="Telnet交换机拓扑图" style="zoom:80%;" /></h5>
-<h5 id="2-2-实验步骤">2.2、实验步骤</h5>
-<ul>
-<li>设置连接数</li>
-<li>设置连接密码</li>
-<li>设置权限等级（也可以不设）</li>
-<li>使设置生效</li>
-<li>给交换机设置IP(这里是vlan)</li>
-<li>设置特权密码</li>
-</ul>
-<h5 id="2-2-命令">2.2、命令</h5>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Switch(config)#line vty 0 4 </span><br><span class="line">Switch(config-line)#password 123 </span><br><span class="line">Switch(config-line)#login </span><br><span class="line">Switch(config-line)#exit</span><br><span class="line">Switch(config)#int vlan 1</span><br><span class="line">Switch(config-if)#ip address 192.168.1.1 255.255.255.0 （设置vlan ip用于连接）</span><br><span class="line">Switch(config-if)#no shutdown （开启vlan 1）</span><br><span class="line">Switch(config-if)#exit</span><br><span class="line">Switch(config)#enable password 123 （设置用户特权密码）</span><br></pre></td></tr></table></figure>
-<h5 id="2-3-结果">2.3、结果</h5>
-<img src="Telnet交换机结果.png" alt="Telnet交换机结果" style="zoom:67%;" />
-<h3 id="ssh配置">SSH配置</h3>
-<h5 id="拓扑图">拓扑图</h5>
-<p>同上</p>
-<h5 id="步骤">步骤</h5>
-<p>相较于Telnet，多了一下三步：</p>
-<ul>
-<li>创建域名</li>
-<li>生成RSA密钥对</li>
-<li>设置登录方式为SSH（因默认为Telnet）</li>
-</ul>
-<h5 id="命令">命令</h5>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">config# ip domain-name xxx		&#x2F;&#x2F;起域名为xxx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>cisco</tag>
+        <tag>目录</tag>
       </tags>
   </entry>
   <entry>
     <title>蓝桥杯 分巧克力</title>
-    <url>/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E5%88%86%E5%B7%A7%E5%85%8B%E5%8A%9B/</url>
+    <url>/2020/10/08/Solution/LanQiao/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E5%88%86%E5%B7%A7%E5%85%8B%E5%8A%9B/</url>
     <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/1229/">题目链接</a></p>
 <h4 id="问题描述">问题描述</h4>
 <p>儿童节那天有 K 位小朋友到小明家做客。</p>
@@ -1690,7 +1449,7 @@ else \quad R=mid-1
   </entry>
   <entry>
     <title>蓝桥杯 k倍区间</title>
-    <url>/2020/10/08/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E8%93%9D%E6%A1%A5%E6%9D%AF-k%E5%80%8D%E5%8C%BA%E9%97%B4/</url>
+    <url>/2020/10/08/Solution/LanQiao/%E8%93%9D%E6%A1%A5%E6%9D%AF-k%E5%80%8D%E5%8C%BA%E9%97%B4/</url>
     <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/1232/">题目链接</a></p>
 <h3 id="问题描述">问题描述</h3>
 <p>给定一个长度为 N的数列，A<sub>1</sub>,A<sub>2</sub>,…A<sub>N</sub>，如果其中一段连续的子序列 A<sub>i</sub>,A<sub>i+1</sub>,…A<sub>j</sub>之和是 K的倍数，我们就称这个区间 【i,j】 是 K倍区间。</p>
@@ -1735,7 +1494,7 @@ else \quad R=mid-1
   </entry>
   <entry>
     <title>CSAPP之信息的表示和处理</title>
-    <url>/2020/10/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/CSAPP%E4%B9%8B%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <url>/2020/10/08/ComputerBase/Organization/CSAPP%E4%B9%8B%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
 <p>这章很有意思，它深入浅出的讲述了信息在计算机中的表示方式。</p>
@@ -1882,7 +1641,7 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
   </entry>
   <entry>
     <title>日期、时间问题整理</title>
-    <url>/2020/10/06/%E9%A2%98%E8%A7%A3/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%97%A5%E6%9C%9F%E3%80%81%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/</url>
+    <url>/2020/10/06/Solution/LanQiao/%E6%97%A5%E6%9C%9F%E3%80%81%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h2 id="引言">引言</h2>
 <blockquote>
 <p>日期、时间类的问题，在蓝桥杯中出现的概率貌似还挺高的。</p>
@@ -1920,39 +1679,6 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
       <tags>
         <tag>算法</tag>
         <tag>蓝桥杯</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据结构与算法【目录】</title>
-    <url>/2020/10/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E3%80%90%E7%9B%AE%E5%BD%95%E3%80%91/</url>
-    <content><![CDATA[<h2 id="前言">前言</h2>
-<blockquote>
-<p>数构与算法这块硬骨头一直没有认真梳理过。</p>
-<p>虽然有不少东西在脑子，但总感觉知识过于散乱。</p>
-<p>这也许就是就是我菜的原因吧。</p>
-<p>以下先列出目录列表，坑慢慢填。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="思维导图">思维导图</h2>
-<p><img src="%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.png" alt="check"></p>
-<p>此图大半内容已掌握，小半暂时仅处于了解状态，还有其他一些没有提及的相关内容后在后续学习记录过程中补充完善。争取过年前整理完以上所有内容。</p>
-<h2 id="目录">目录</h2>
-<ul>
-<li><a href="#">基础算法</a>【填坑ing】</li>
-<li><a href="#">数据结构</a>【填坑ing】</li>
-<li><a href="#">动态规划</a>【填坑ing】</li>
-<li><a href="#">搜索</a>【填坑ing】</li>
-<li><a href="#">高级数据结构</a>【此坑未开】</li>
-<li><a href="#">数学</a>【此坑未开】</li>
-</ul>
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>整理</category>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>目录</tag>
       </tags>
   </entry>
   <entry>
