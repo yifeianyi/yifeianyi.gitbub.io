@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">3k</span>
+            <span class="post-count">3.1k</span>
         </span>
     </span>
 
@@ -97,7 +97,8 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+  <h2 id="前言">前言</h2>
+<blockquote>
 <p>时钟系统是MCU必不可少的一部分。本文将针对以下问题展开讨论：</p>
 <ul>
 <li>什么是时钟？</li>
@@ -108,28 +109,32 @@
 <p>当然，由于本人学识不足，且时钟略复杂，所以这里只能说是对时钟有一个感性的初步理解，如有错误，还望不吝指正。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<h2 id="目录">目录</h2>
+<ul>
 <li>一、时钟简介</li>
 <li>二、stm32时钟树</li>
 <li>三、关于时钟的一些思考</li>
 <li>四、时钟配置分析</li>
 <li>五、总结</li>
 </ul>
-<h2 id="一、时钟简介"><a href="#一、时钟简介" class="headerlink" title="一、时钟简介"></a>一、时钟简介</h2><p>首先我们得搞清楚几个概念：</p>
+<h2 id="一-时钟简介">一、时钟简介</h2>
+<p>首先我们得搞清楚几个概念：</p>
 <ul>
 <li>时钟：单片机的心脏，所有外设的运作都需要时钟供能。</li>
 <li>时钟周期：又称为振荡周期，可以简单理解为传输一个 0 or 1 所需要的时间。</li>
 <li>指令周期：执行一条指令（如：MOV A，#34H）所需的时间。对于不同类型的指令，指令周期长度可能会不同。</li>
-<li>机器周期：执行一个动作的时间周期。如：执行一个指令需要 “取指令并驿码”、”执行操作数”两个动作。</li>
+<li>机器周期：执行一个动作的时间周期。如：执行一个指令需要 “取指令并驿码”、&quot;执行操作数&quot;两个动作。</li>
 </ul>
 <p>以上三个周期的关系图如下：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%90%86%E8%A7%A3%E6%97%B6%E9%92%9F.png" alt="理解时钟" style="zoom:80%;" /></p>
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%90%86%E8%A7%A3%E6%97%B6%E9%92%9F.png" alt="理解时钟" style="zoom:80%;" />
 <p>（其中蓝色部分包括了四个机器周期）</p>
 <p>而因为时钟信号也是电信号的一种，所以它还兼具了供能的作用，且因电平变化的时间间隔一定，我们甚至可以用时钟来计时。</p>
 <p>（PS：经老师纠正，时钟“供能”的说法是错的，时钟并不起供能作用。不过个人认为，从初学者角度来看，这样感性理解问题也不大，只要记得这种说法是不对的即可。）</p>
-<h2 id="二、stm32时钟树"><a href="#二、stm32时钟树" class="headerlink" title="二、stm32时钟树"></a>二、stm32时钟树</h2><p>有了以上的感观认识后，我们先来看看stm32f10x的时钟树：</p>
+<h2 id="二-stm32时钟树">二、stm32时钟树</h2>
+<p>有了以上的感观认识后，我们先来看看stm32f10x的时钟树：</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/stm32%E6%97%B6%E9%92%9F%E6%A0%91.png" alt="stm32时钟树"></p>
-<h3 id="2-1、stm32f10x时钟源"><a href="#2-1、stm32f10x时钟源" class="headerlink" title="2.1、stm32f10x时钟源"></a>2.1、stm32f10x时钟源</h3><p>上图蓝色部分标出了stm32的5个时钟源，分别是：</p>
+<h3 id="2-1-stm32f10x时钟源">2.1、stm32f10x时钟源</h3>
+<p>上图蓝色部分标出了stm32的5个时钟源，分别是：</p>
 <ul>
 <li>HSI：高速内部时钟（High speed internal），由内部RC振荡器产生，频率为8MHz。</li>
 <li>HSE：高速外部时钟（High speed external），可外接4-16MHz的晶振作为时钟源。</li>
@@ -139,7 +144,8 @@
 </ul>
 <p>这里把PLL也列为时钟源是参考了诸如野火资料的说法，个人觉得实际的时钟源只能算4个，因为PLL本身只起倍频作用，本身并不能产生时钟频率。当然，这些都是人为定义的东西，不影响使用和对该知识点的理解。</p>
 <p>（PS：RC振荡器产生的时钟精度相对较低。）</p>
-<h3 id="2-2、系统时钟"><a href="#2-2、系统时钟" class="headerlink" title="2.2、系统时钟"></a>2.2、系统时钟</h3><p>知道有哪些时钟源后，我们可以发现时钟树是我们熟悉的AHB、APB1、APB2总线。</p>
+<h3 id="2-2-系统时钟">2.2、系统时钟</h3>
+<p>知道有哪些时钟源后，我们可以发现时钟树是我们熟悉的AHB、APB1、APB2总线。</p>
 <p>时钟源与这些外设之间都通过红色部分的<strong>系统时钟SYSCLK</strong>连接在一起，由此观之这个<strong>系统时钟SYSCLK</strong>很重要！！！</p>
 <p>既然它辣么重要，我们就先对它分析一波啦！</p>
 <p>可以看到，系统时钟有三个输入源：</p>
@@ -154,27 +160,31 @@
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%97%B6%E9%92%9F%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F.png" alt="时钟安全系统"></p>
 <p>可以看到，这东西简单来说就是个报警器。。。帮你检测HSE有没有出问题，有的话就先切到内部时钟源，然后给出相关提示信息。</p>
 <p>分析到这里，我们对stm32的时钟树就可以有个相对清晰的认知了。</p>
-<p>下面补充一下没有提到的点<del>（主要是我没想到其他相对较散的知识点怎么用逻辑串起来）</del>：</p>
+<p>下面补充一下没有提到的点~~（主要是我没想到其他相对较散的知识点怎么用逻辑串起来）~~：</p>
 <ul>
 <li>低速内外部时钟应用</li>
 <li>MCO时钟输出：用于示波器观察时钟信号，调试所用。</li>
 </ul>
-<h2 id="三、关于时钟的一些思考"><a href="#三、关于时钟的一些思考" class="headerlink" title="三、关于时钟的一些思考"></a>三、关于时钟的一些思考</h2><h3 id="3-1、时钟频率"><a href="#3-1、时钟频率" class="headerlink" title="3.1、时钟频率"></a>3.1、时钟频率</h3><p>从2.1和2.2的讨论中，我们可以发现，系统时钟正常工作的时钟频率是72MHz。但实际输入的系统时钟频率最高到可以到128MHz，最低8MHz，这意味着我们可以不遵循数据手册的规定，做点”违规操作”。</p>
-<p>“违规操作”会怎样？由于目前只会点灯，而且LED这哥们对时钟没啥要求。。。基本上改变频率也就是亮灭快慢不同的事，看不出啥，于是我又去现查了下资料：<del>（本菜鸡最近在补数电了 TAT ）</del></p>
+<h2 id="三-关于时钟的一些思考">三、关于时钟的一些思考</h2>
+<h3 id="3-1-时钟频率">3.1、时钟频率</h3>
+<p>从2.1和2.2的讨论中，我们可以发现，系统时钟正常工作的时钟频率是72MHz。但实际输入的系统时钟频率最高到可以到128MHz，最低8MHz，这意味着我们可以不遵循数据手册的规定，做点&quot;违规操作&quot;。</p>
+<p>“违规操作”会怎样？由于目前只会点灯，而且LED这哥们对时钟没啥要求。。。基本上改变频率也就是亮灭快慢不同的事，看不出啥，于是我又去现查了下资料：<s>（本菜鸡最近在补数电了 TAT ）</s></p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/29685396/answer/145507426">时钟频率是个什么概念？？ - 虞己某的回答 - 知乎 </a></p>
 <p>从这个回答中，我们大概可出一下结论：</p>
 <ul>
 <li>频率低了，不能满足设备的频率要求的话，可能无法启动设备。</li>
 <li>频率高了，系统稳定性会受影响。具体表现是进行通信的时候，外设可能无法接受到准确的信号。</li>
 </ul>
-<h3 id="3-2、多个时钟源"><a href="#3-2、多个时钟源" class="headerlink" title="3.2、多个时钟源"></a>3.2、多个时钟源</h3><p>刚了解时钟树的时候，我第一反应是——为什么有那么多时钟源？</p>
+<h3 id="3-2-多个时钟源">3.2、多个时钟源</h3>
+<p>刚了解时钟树的时候，我第一反应是——为什么有那么多时钟源？</p>
 <p>既然外设都是受系统时钟管理，那么只用一个时钟不是就够了嘛？</p>
 <p>基于以上问题，翻阅学习了相关资料，得出了两个最显而易见的结论：</p>
 <ul>
 <li>多个时钟可以在单个时钟源发生故障时，起到救急的作用。</li>
 <li>一个外设有多个时钟源，可以根据需要选择相应频率的时钟源。</li>
 </ul>
-<h2 id="四、时钟配置分析"><a href="#四、时钟配置分析" class="headerlink" title="四、时钟配置分析"></a>四、时钟配置分析</h2><p>stm32的时钟树理解后，就是时钟配置问题了。</p>
+<h2 id="四-时钟配置分析">四、时钟配置分析</h2>
+<p>stm32的时钟树理解后，就是时钟配置问题了。</p>
 <p>实际上，当我们创建工程导入启动文件的时候，在main函数开始调用前，启动文件就已经调用了SystemInit函数对系统时钟进行初始化了。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6&amp;%E6%97%B6%E9%92%9F.png" alt="启动文件&amp;时钟"></p>
 <p>那为什么还需要做配置分析？直接拿来用不就好了嘛？</p>
@@ -184,16 +194,19 @@
 <p>如果项目对时钟有这5种频率外的需求还是得自己动手。基于以上原因，对时钟配置的分析就是刚需了。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/stm32%E6%97%B6%E9%92%9F%E6%A0%91.png" alt="stm32时钟树"></p>
 <p>那么，先让我们对着时钟树的图再梳理一遍系统时钟的来龙去脉。</p>
-<h4 id="输入源："><a href="#输入源：" class="headerlink" title="输入源："></a>输入源：</h4><ul>
+<h4 id="输入源：">输入源：</h4>
+<ul>
 <li>HSI直接输出，频率只有8MHz。</li>
 <li>HSE直接输出，范围4-16MHz，一般为8MHz。</li>
-<li>PLL：锁相环倍频输出，倍频范围是2-16倍。且PLL自身有两个输入源：<ul>
+<li>PLL：锁相环倍频输出，倍频范围是2-16倍。且PLL自身有两个输入源：
+<ul>
 <li>HSI 二分频输出至PLL，这种方式的系统时钟最高可至64MHz。</li>
 <li>HSE直接输出至PLL。</li>
 </ul>
 </li>
 </ul>
-<h4 id="输出源："><a href="#输出源：" class="headerlink" title="输出源："></a>输出源：</h4><ul>
+<h4 id="输出源：">输出源：</h4>
+<ul>
 <li>直接输出。</li>
 <li>输出至AHB总线，经预分频器可做 1~512 分频。</li>
 <li>AHB总线预分频后，经低速外设总线APB1和高速总线APB2。</li>
@@ -206,8 +219,8 @@
 <li>选择AHB预分频。</li>
 </ol>
 <p>为什么不是照着图从左到右的顺序配置？</p>
-<p>答：如果AHB先开启，而APB1、APB2未设置的话会出现紊乱。<del>（看完源码后推测的）</del></p>
-<p>下面以库函数 <strong>SetSysClockTo72()</strong>为示例，搭配数据手册学习配置过程，先把源码贴上：</p>
+<p>答：如果AHB先开启，而APB1、APB2未设置的话会出现紊乱。<s>（看完源码后推测的）</s></p>
+<p>下面以库函数 **SetSysClockTo72()**为示例，搭配数据手册学习配置过程，先把源码贴上：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetSysClockTo72</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __IO <span class="keyword">uint32_t</span> StartUpCounter = <span class="number">0</span>, HSEStatus = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/</span>    </span><br><span class="line">  <span class="comment">/* Enable HSE */</span>    </span><br><span class="line">  RCC-&gt;CR |= ((<span class="keyword">uint32_t</span>)RCC_CR_HSEON);</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* Wait till HSE is ready and if Time out is reached exit */</span></span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = RCC-&gt;CR &amp; RCC_CR_HSERDY;</span><br><span class="line">    StartUpCounter++;  </span><br><span class="line">  &#125; <span class="keyword">while</span>((HSEStatus == <span class="number">0</span>) &amp;&amp; (StartUpCounter != HSE_STARTUP_TIMEOUT));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ((RCC-&gt;CR &amp; RCC_CR_HSERDY) != RESET)</span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = (<span class="keyword">uint32_t</span>)<span class="number">0x01</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = (<span class="keyword">uint32_t</span>)<span class="number">0x00</span>;</span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (HSEStatus == (<span class="keyword">uint32_t</span>)<span class="number">0x01</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">/* Enable Prefetch Buffer */</span></span><br><span class="line">    FLASH-&gt;ACR |= FLASH_ACR_PRFTBE;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Flash 2 wait state */</span></span><br><span class="line">    FLASH-&gt;ACR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~FLASH_ACR_LATENCY);</span><br><span class="line">    FLASH-&gt;ACR |= (<span class="keyword">uint32_t</span>)FLASH_ACR_LATENCY_2;    </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* HCLK = SYSCLK */</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_HPRE_DIV1;</span><br><span class="line">      </span><br><span class="line">    <span class="comment">/* PCLK2 = HCLK */</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE2_DIV1;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* PCLK1 = HCLK */</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE1_DIV2;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> STM32F10X_CL</span></span><br><span class="line">    <span class="comment">/* Configure PLLs ------------------------------------------------------*/</span></span><br><span class="line">    <span class="comment">/* PLL2 configuration: PLL2CLK = (HSE / 5) * 8 = 40 MHz */</span></span><br><span class="line">    <span class="comment">/* PREDIV1 configuration: PREDIV1CLK = PLL2 / 5 = 8 MHz */</span></span><br><span class="line">        </span><br><span class="line">    RCC-&gt;CFGR2 &amp;= (<span class="keyword">uint32_t</span>)~(RCC_CFGR2_PREDIV2 | RCC_CFGR2_PLL2MUL |</span><br><span class="line">                              RCC_CFGR2_PREDIV1 | RCC_CFGR2_PREDIV1SRC);</span><br><span class="line">    RCC-&gt;CFGR2 |= (<span class="keyword">uint32_t</span>)(RCC_CFGR2_PREDIV2_DIV5 | RCC_CFGR2_PLL2MUL8 |</span><br><span class="line">                             RCC_CFGR2_PREDIV1SRC_PLL2 | RCC_CFGR2_PREDIV1_DIV5);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* Enable PLL2 */</span></span><br><span class="line">    RCC-&gt;CR |= RCC_CR_PLL2ON;</span><br><span class="line">    <span class="comment">/* Wait till PLL2 is ready */</span></span><br><span class="line">    <span class="keyword">while</span>((RCC-&gt;CR &amp; RCC_CR_PLL2RDY) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">    <span class="comment">/* PLL configuration: PLLCLK = PREDIV1 * 9 = 72 MHz */</span> </span><br><span class="line">    RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)~(RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLSRC | RCC_CFGR_PLLMULL);</span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)(RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLSRC_PREDIV1 | </span><br><span class="line">                            RCC_CFGR_PLLMULL9); </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>    </span></span><br><span class="line">    <span class="comment">/*  PLL configuration: PLLCLK = HSE * 9 = 72 MHz */</span></span><br><span class="line">    RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE |</span><br><span class="line">                                        RCC_CFGR_PLLMULL));</span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL9);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* STM32F10X_CL */</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Enable PLL */</span></span><br><span class="line">    RCC-&gt;CR |= RCC_CR_PLLON;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait till PLL is ready */</span></span><br><span class="line">    <span class="keyword">while</span>((RCC-&gt;CR &amp; RCC_CR_PLLRDY) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Select PLL as system clock source */</span></span><br><span class="line">    RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~(RCC_CFGR_SW));</span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_SW_PLL;    </span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait till PLL is used as system clock source */</span></span><br><span class="line">    <span class="keyword">while</span> ((RCC-&gt;CFGR &amp; (<span class="keyword">uint32_t</span>)RCC_CFGR_SWS) != (<span class="keyword">uint32_t</span>)<span class="number">0x08</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123; <span class="comment">/* If HSE fails to start-up, the application will have wrong clock </span></span><br><span class="line"><span class="comment">         configuration. User can add here some code to deal with this error */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>第一眼看上去很长，寄存器也很多，但是米有关系。先把出现的寄存器记下来：</p>
 <ul>
@@ -221,37 +234,51 @@
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/RCC_CFGR.png" alt="RCC_CFGR"></p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/FLASH_ACR.png" alt="FLASH_ACR"></p>
 <p>结合以上认识，下面我们来一段一段分析源码：</p>
-<h3 id="1、开始HSE时钟"><a href="#1、开始HSE时钟" class="headerlink" title="1、开始HSE时钟"></a>1、开始HSE时钟</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/</span>    </span><br><span class="line">  <span class="comment">/* Enable HSE */</span>    </span><br><span class="line">  RCC-&gt;CR |= ((<span class="keyword">uint32_t</span>)RCC_CR_HSEON);<span class="comment">//HSEON -&gt; HSE_ON</span></span><br></pre></td></tr></table></figure>
-<h3 id="2、等待HSE就绪"><a href="#2、等待HSE就绪" class="headerlink" title="2、等待HSE就绪"></a>2、等待HSE就绪</h3><p>如果在一定时间内等不到就退出作异常处理。</p>
+<h3 id="1-开始hse时钟">1、开始HSE时钟</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/</span>    </span><br><span class="line">  <span class="comment">/* Enable HSE */</span>    </span><br><span class="line">  RCC-&gt;CR |= ((<span class="keyword">uint32_t</span>)RCC_CR_HSEON);<span class="comment">//HSEON -&gt; HSE_ON</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-等待hse就绪">2、等待HSE就绪</h3>
+<p>如果在一定时间内等不到就退出作异常处理。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/* Wait till HSE is ready and if Time out is reached exit */</span></span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = RCC-&gt;CR &amp; RCC_CR_HSERDY;<span class="comment">//HSERDY -&gt; HSE_Ready</span></span><br><span class="line">    StartUpCounter++;  </span><br><span class="line">  &#125; <span class="keyword">while</span>((HSEStatus == <span class="number">0</span>) &amp;&amp; (StartUpCounter != HSE_STARTUP_TIMEOUT));</span><br><span class="line"><span class="comment">/** HSE如果就绪，HSEStatus = 1 **/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** 如果HSE_Ready = RESET，即:HSE没有准备就绪 **/</span></span><br><span class="line">  <span class="keyword">if</span> ((RCC-&gt;CR &amp; RCC_CR_HSERDY) != RESET)</span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = (<span class="keyword">uint32_t</span>)<span class="number">0x01</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = (<span class="keyword">uint32_t</span>)<span class="number">0x00</span>;</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
-<h3 id="3、HSE状态正常就继续，异常就立刻处理"><a href="#3、HSE状态正常就继续，异常就立刻处理" class="headerlink" title="3、HSE状态正常就继续，异常就立刻处理"></a>3、HSE状态正常就继续，异常就立刻处理</h3><p>状态异常的话，经条件语句跳转到下图的模块处理异常。</p>
+<h3 id="3-hse状态正常就继续-异常就立刻处理">3、HSE状态正常就继续，异常就立刻处理</h3>
+<p>状态异常的话，经条件语句跳转到下图的模块处理异常。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/HSE%E7%8A%B6%E6%80%81%E5%88%A4%E6%96%AD.png" alt="HSE状态判断"></p>
-<h4 id="3-1、HSE状态正常情况分析"><a href="#3-1、HSE状态正常情况分析" class="headerlink" title="3.1、HSE状态正常情况分析"></a>3.1、HSE状态正常情况分析</h4><h5 id="3-1-1、等待机器取指令"><a href="#3-1-1、等待机器取指令" class="headerlink" title="3.1.1、等待机器取指令"></a>3.1.1、等待机器取指令</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Enable Prefetch Buffer */</span></span><br><span class="line">FLASH-&gt;ACR |= FLASH_ACR_PRFTBE;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Flash 2 wait state */</span></span><br><span class="line">FLASH-&gt;ACR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~FLASH_ACR_LATENCY);</span><br><span class="line">FLASH-&gt;ACR |= (<span class="keyword">uint32_t</span>)FLASH_ACR_LATENCY_2;</span><br></pre></td></tr></table></figure>
-<h5 id="3-1-2、设置AHB、AP1、AP2的预分频因子"><a href="#3-1-2、设置AHB、AP1、AP2的预分频因子" class="headerlink" title="3.1.2、设置AHB、AP1、AP2的预分频因子"></a>3.1.2、设置AHB、AP1、AP2的预分频因子</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* HCLK = SYSCLK */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_HPRE_DIV1;</span><br><span class="line">  </span><br><span class="line"><span class="comment">/* PCLK2 = HCLK */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE2_DIV1;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* PCLK1 = HCLK */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE1_DIV2;</span><br></pre></td></tr></table></figure>
-<h5 id="3-1-3、选择PLL的时钟源"><a href="#3-1-3、选择PLL的时钟源" class="headerlink" title="3.1.3、选择PLL的时钟源"></a>3.1.3、选择PLL的时钟源</h5><p>源码里这段其实还有二三十行代码，不过那是互联型芯片的配置代码，这里f103是基础型，所以先暂时略过不看。</p>
+<h4 id="3-1-hse状态正常情况分析">3.1、HSE状态正常情况分析</h4>
+<h5 id="3-1-1-等待机器取指令">3.1.1、等待机器取指令</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Enable Prefetch Buffer */</span></span><br><span class="line">FLASH-&gt;ACR |= FLASH_ACR_PRFTBE;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Flash 2 wait state */</span></span><br><span class="line">FLASH-&gt;ACR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~FLASH_ACR_LATENCY);</span><br><span class="line">FLASH-&gt;ACR |= (<span class="keyword">uint32_t</span>)FLASH_ACR_LATENCY_2;</span><br></pre></td></tr></table></figure>
+<h5 id="3-1-2-设置ahb-ap1-ap2的预分频因子">3.1.2、设置AHB、AP1、AP2的预分频因子</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* HCLK = SYSCLK */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_HPRE_DIV1;</span><br><span class="line">  </span><br><span class="line"><span class="comment">/* PCLK2 = HCLK */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE2_DIV1;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* PCLK1 = HCLK */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE1_DIV2;</span><br></pre></td></tr></table></figure>
+<h5 id="3-1-3-选择pll的时钟源">3.1.3、选择PLL的时钟源</h5>
+<p>源码里这段其实还有二三十行代码，不过那是互联型芯片的配置代码，这里f103是基础型，所以先暂时略过不看。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">/*  PLL configuration: PLLCLK = HSE * 9 = 72 MHz */</span></span><br><span class="line">   RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE |</span><br><span class="line">                                       RCC_CFGR_PLLMULL));</span><br><span class="line"></span><br><span class="line"><span class="comment">/*		HSE 与上 PLLMULL9 做到 72MHz的系统时钟输出		*/</span></span><br><span class="line">   RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL9);</span><br></pre></td></tr></table></figure>
-<h5 id="3-1-4、开启PLL时钟并等待就绪"><a href="#3-1-4、开启PLL时钟并等待就绪" class="headerlink" title="3.1.4、开启PLL时钟并等待就绪"></a>3.1.4、开启PLL时钟并等待就绪</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Enable PLL */</span></span><br><span class="line">    RCC-&gt;CR |= RCC_CR_PLLON;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait till PLL is ready */</span></span><br><span class="line">    <span class="keyword">while</span>((RCC-&gt;CR &amp; RCC_CR_PLLRDY) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3-1-5、选择PLL作为系统时钟源"><a href="#3-1-5、选择PLL作为系统时钟源" class="headerlink" title="3.1.5、选择PLL作为系统时钟源"></a>3.1.5、选择PLL作为系统时钟源</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Select PLL as system clock source */</span></span><br><span class="line">   RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~(RCC_CFGR_SW));</span><br><span class="line">   RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_SW_PLL;    </span><br><span class="line"></span><br><span class="line">   <span class="comment">/* Wait till PLL is used as system clock source */</span></span><br><span class="line">   <span class="keyword">while</span> ((RCC-&gt;CFGR &amp; (<span class="keyword">uint32_t</span>)RCC_CFGR_SWS) != (<span class="keyword">uint32_t</span>)<span class="number">0x08</span>)</span><br><span class="line">   &#123;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-1-4-开启pll时钟并等待就绪">3.1.4、开启PLL时钟并等待就绪</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Enable PLL */</span></span><br><span class="line">    RCC-&gt;CR |= RCC_CR_PLLON;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait till PLL is ready */</span></span><br><span class="line">    <span class="keyword">while</span>((RCC-&gt;CR &amp; RCC_CR_PLLRDY) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-1-5-选择pll作为系统时钟源">3.1.5、选择PLL作为系统时钟源</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Select PLL as system clock source */</span></span><br><span class="line">   RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~(RCC_CFGR_SW));</span><br><span class="line">   RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_SW_PLL;    </span><br><span class="line"></span><br><span class="line">   <span class="comment">/* Wait till PLL is used as system clock source */</span></span><br><span class="line">   <span class="keyword">while</span> ((RCC-&gt;CFGR &amp; (<span class="keyword">uint32_t</span>)RCC_CFGR_SWS) != (<span class="keyword">uint32_t</span>)<span class="number">0x08</span>)</span><br><span class="line">   &#123;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>以上。</p>
-<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><h3 id="5-1、配置时钟的流程"><a href="#5-1、配置时钟的流程" class="headerlink" title="5.1、配置时钟的流程"></a>5.1、配置时钟的流程</h3><ul>
+<h2 id="五-总结">五、总结</h2>
+<h3 id="5-1-配置时钟的流程">5.1、配置时钟的流程</h3>
+<ul>
 <li>开启时钟并等待就绪</li>
 <li>若时钟开启异常就退出（可做相关异常处理）</li>
 <li>开启正常，先配置相关总线的预分频因子</li>
 <li>最后选择系统时钟，让外设得到能源供应</li>
 </ul>
-<h3 id="5-2、学习一款MCU的时钟流程"><a href="#5-2、学习一款MCU的时钟流程" class="headerlink" title="5.2、学习一款MCU的时钟流程"></a>5.2、学习一款MCU的时钟流程</h3><ul>
+<h3 id="5-2-学习一款mcu的时钟流程">5.2、学习一款MCU的时钟流程</h3>
+<ul>
 <li>看时钟树——分析时钟源的来龙去脉</li>
-<li>查数据手册，找到以下问题的答案：<ul>
+<li>查数据手册，找到以下问题的答案：
+<ul>
 <li>时钟源怎么开启？</li>
 <li>相关外设的时钟怎么控制？</li>
 <li>系统时钟源怎么选择？</li>
 </ul>
 </li>
 </ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/29685396/answer/145507426">时钟频率是个什么概念？？ - 虞己某的回答 - 知乎 </a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/97987044">【心得篇】指令周期、机器周期和时钟周期</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77053601">初涉STM32之浅谈时钟使能问题 —- 理解</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77053601">初涉STM32之浅谈时钟使能问题 — 理解</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/250022175">一篇文章，彻底搞懂单片机时钟架构！</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bulebin/article/details/73433677">STM32时钟树分析</a></li>
 </ul>

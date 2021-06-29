@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">936</span>
+            <span class="post-count">937</span>
         </span>
     </span>
 
@@ -97,12 +97,14 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+  <h2 id="前言">前言</h2>
+<blockquote>
 <p>在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344913189">【初入电子坑之stm32篇（一）】初识stm32与寄存器编程</a>中可以看到，寄存器编程虽然消耗CPU性能少、速度快。但于我们开发应用来说，那就是刀耕火种中的刀耕火种。。。</p>
 <p>芯片厂家也考虑到了这点，所以一般会提供一些基本的固件库供开发人员使用。stm32的爸爸ST公司自然也不例外。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="CMSIS标准"><a href="#CMSIS标准" class="headerlink" title="CMSIS标准"></a>CMSIS标准</h2><p>一种内核架构通常会被多家芯片厂家采用，而芯片厂家对于芯片内部的外设布置是有差异的，这就很容易导致软件在同内核，不同外设的芯片上移植困难。</p>
+<h2 id="cmsis标准">CMSIS标准</h2>
+<p>一种内核架构通常会被多家芯片厂家采用，而芯片厂家对于芯片内部的外设布置是有差异的，这就很容易导致软件在同内核，不同外设的芯片上移植困难。</p>
 <p>为了解决这个问题，设计架构的公司和使用架构的芯片厂商间就会制定一个标准，让软件可以适配同内核不同外设的芯片的情况。</p>
 <p>而CMSIS标准(Cortex MicroController Software Interface Standard) 就是 ARM 与芯片厂商建立的一种标准实例。</p>
 <p>CMSIS标准其实是一个软件抽象层。</p>
@@ -113,7 +115,8 @@
 <li>内核函数层：内核寄存器的名字、地址定义。由ARM公司提供。</li>
 <li>设备外设层：片上核外外设的地址和中断定义。有芯片生产商负责。</li>
 </ul>
-<h2 id="初识stm32固件库"><a href="#初识stm32固件库" class="headerlink" title="初识stm32固件库"></a>初识stm32固件库</h2><p>了解了CMSIS标准后，我们就可以很愉快的去stm32提供的官方固件库找我们要的东西了。</p>
+<h2 id="初识stm32固件库">初识stm32固件库</h2>
+<p>了解了CMSIS标准后，我们就可以很愉快的去stm32提供的官方固件库找我们要的东西了。</p>
 <p>打开固件库文件夹我们可以看到有以下两个文件夹：</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%88%9D%E8%AF%86%E5%9B%BA%E4%BB%B6%E5%BA%93.png" alt="初识固件库"></p>
 <p>从文件名就可以盲猜，一个是CMSIS标准相关的配置文件夹，一个是相对具体型号的芯片外设配置文件夹。</p>
@@ -122,17 +125,20 @@
 <p>点进CMSIS可以发现，不出所料，就是内核的配置相关配置的源文件、stm3210x的时钟配置文件还有启动文件。</p>
 <p>我们用的时候把它们复制到我们自己的工程里即可。</p>
 <p>然后去隔壁 STM32F10x_StdPeriph_Driver 文件夹瞄瞄，这个就很简单粗暴了，一个inc（include）、一个src（source）。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6.png" alt="外设文件" style="zoom:50%;" /></p>
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6.png" alt="外设文件" style="zoom:50%;" />
 <p>随便点进去就会发现ST官方按照不同的外设模块，stm32f10x_xxx.c的方式给分门别类的放好了。（见下图）</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%91%BD%E5%90%8D.png" alt="固件库命名"></p>
 <p>既然东西齐活了，下面就可以先愉快的建个固件库工程模板，然后正式开启固件库编程之旅了~~~</p>
 <p>（创建固件库工程方法，请移步以下链接：</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/367054113">【初入电子坑之stm32篇（补充1）】新建固件库工程</a></p>
-<h2 id="stm32固件库编程"><a href="#stm32固件库编程" class="headerlink" title="stm32固件库编程"></a>stm32固件库编程</h2><p>下面结合实例叙述固件库的编程方式。</p>
-<h3 id="实例：按键控制LED"><a href="#实例：按键控制LED" class="headerlink" title="实例：按键控制LED"></a>实例：按键控制LED</h3><p>首先，让我们回忆一下，点灯的流程：</p>
+<h2 id="stm32固件库编程">stm32固件库编程</h2>
+<p>下面结合实例叙述固件库的编程方式。</p>
+<h3 id="实例：按键控制led">实例：按键控制LED</h3>
+<p>首先，让我们回忆一下，点灯的流程：</p>
 <ul>
 <li>开始GPIO口时钟使能</li>
-<li>初始化GPIO<ul>
+<li>初始化GPIO
+<ul>
 <li>选择引脚IO口引脚</li>
 <li>并选择需要的IO模式</li>
 </ul>
@@ -144,10 +150,11 @@
 <li>判断读取开关对应IO口的值（IDR寄存器里）</li>
 <li>根据判断情况做相应的动作</li>
 </ul>
-<h3 id="库函数运用"><a href="#库函数运用" class="headerlink" title="库函数运用"></a>库函数运用</h3><p>上述流程动作，固件库全都是给我们安排得妥妥，直接调用相关函数就可以了。</p>
+<h3 id="库函数运用">库函数运用</h3>
+<p>上述流程动作，固件库全都是给我们安排得妥妥，直接调用相关函数就可以了。</p>
 <p>具体的相关函数都在对应外设的头文件最下面，如我们即将使用的GPIO:</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/gpio%E5%A4%B4%E6%96%87%E4%BB%B6.png" alt="gpio头文件" style="zoom:80%;" /></p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%85%B7%E4%BD%93%E5%87%BD%E6%95%B0%E6%BC%94%E7%A4%BA.png" alt="具体函数演示" style="zoom:80%;" /></p>
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/gpio%E5%A4%B4%E6%96%87%E4%BB%B6.png" alt="gpio头文件" style="zoom:80%;" />
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%85%B7%E4%BD%93%E5%87%BD%E6%95%B0%E6%BC%94%E7%A4%BA.png" alt="具体函数演示" style="zoom:80%;" />
 <p>从上面两图可以看到：</p>
 <ul>
 <li>想要什么基本操作？去对应外设的库头文件找啊！</li>
