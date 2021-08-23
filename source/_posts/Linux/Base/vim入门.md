@@ -2,7 +2,7 @@
 title: vim入门
 mathjax: true
 date: 2021-05-19 19:44:26
-tags: vim
+tags: 工具
 categories: [Linux,基础操作]
 ---
 
