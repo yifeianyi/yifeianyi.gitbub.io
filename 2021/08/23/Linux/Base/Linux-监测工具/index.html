@@ -97,15 +97,20 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%AF%BC%E5%9B%BE_1.png" alt="监测工具导图"></p>
+  <h2 id="概要">概要</h2>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%AF%BC%E5%9B%BE_1.png" alt="监测工具导图"></p>
 <a id="more"></a>
-<h2 id="NetHogs"><a href="#NetHogs" class="headerlink" title="NetHogs"></a>NetHogs</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>一个开源的命令行工具（类似于Linux的top命令），用来按进程或程序<strong>实时统计</strong>网络带宽使用率。</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<h2 id="nethogs">NetHogs</h2>
+<h3 id="作用">作用</h3>
+<p>一个开源的命令行工具（类似于Linux的top命令），用来按进程或程序<strong>实时统计</strong>网络带宽使用率。</p>
+<h3 id="使用">使用</h3>
+<ul>
 <li>默认情况</li>
 <li>交互式命令</li>
 <li>命令行参数</li>
 </ul>
-<h4 id="默认情况"><a href="#默认情况" class="headerlink" title="默认情况"></a>默认情况</h4><p>在命令行中输入nethogs即可进入该界面。</p>
+<h4 id="默认情况">默认情况</h4>
+<p>在命令行中输入nethogs即可进入该界面。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/NetHogsUI.png" alt="NetHogs界面"></p>
 <p>从第一栏中可以看到，每列的内容分别是：</p>
 <ul>
@@ -115,23 +120,30 @@
 <li>Dev：如果进程属于某个设备，如：网卡eth0则会显示出来，否则不显示</li>
 <li>Sent、Received：发送、接受的流量的速率</li>
 </ul>
-<h4 id="交互式命令"><a href="#交互式命令" class="headerlink" title="交互式命令"></a>交互式命令</h4><ul>
+<h4 id="交互式命令">交互式命令</h4>
+<ul>
 <li>m: 按 m键，切换单位或显示占用速度；切换顺序是（KB/sec，KB，B，MB）</li>
 <li>r : 按 r 键，按接收流量排序</li>
 <li>s : 按 s 键 ，按发送流量排序</li>
 <li>q : 按 q 键退出</li>
 </ul>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/NetHogsTest_1.png" alt="NetHogsTest_1"></p>
-<h4 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h4><p> -h :显示可用命令的用法</p>
-<p> -V :打印版本信息</p>
-<p> -d :延迟刷新率(延迟刷新时间)，单位是秒，默认为每秒刷新一次</p>
-<p> -v :选择视图模式</p>
-<p> -p :混合模式下嗅探（不推荐）</p>
-<p> -t :跟踪模式</p>
-<h2 id="htop"><a href="#htop" class="headerlink" title="htop"></a>htop</h2><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p><strong>交互式</strong>进程管理器</p>
-<h3 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h3><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI.png" alt="htopUI"></p>
-<h4 id="上半区"><a href="#上半区" class="headerlink" title="上半区"></a>上半区</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI_1.png" alt="htopUI_1"></p>
-<h4 id="下半区"><a href="#下半区" class="headerlink" title="下半区"></a>下半区</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI_2.png" alt="htopUI_2"></p>
+<h4 id="命令行参数">命令行参数</h4>
+<p>-h :显示可用命令的用法</p>
+<p>-V :打印版本信息</p>
+<p>-d :延迟刷新率(延迟刷新时间)，单位是秒，默认为每秒刷新一次</p>
+<p>-v :选择视图模式</p>
+<p>-p :混合模式下嗅探（不推荐）</p>
+<p>-t :跟踪模式</p>
+<h2 id="htop">htop</h2>
+<h3 id="作用">作用</h3>
+<p><strong>交互式</strong>进程管理器</p>
+<h3 id="界面">界面</h3>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI.png" alt="htopUI"></p>
+<h4 id="上半区">上半区</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI_1.png" alt="htopUI_1"></p>
+<h4 id="下半区">下半区</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI_2.png" alt="htopUI_2"></p>
 <ul>
 <li>PRI：进程的优先级</li>
 <li>NI：进程的优先级别值，默认的为0，可以进行调整</li>
@@ -144,53 +156,63 @@
 <li>TIME+：该进程启动后占用的总的CPU时间</li>
 <li>COMMAND：进程启动的启动命令名称</li>
 </ul>
-<h4 id="功能栏"><a href="#功能栏" class="headerlink" title="功能栏"></a>功能栏</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI_3.png" alt="image-20210821212336575"></p>
+<h4 id="功能栏">功能栏</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/htopUI_3.png" alt="image-20210821212336575"></p>
 <p>根据需求，用到时再探索</p>
-<h2 id="nmon"><a href="#nmon" class="headerlink" title="nmon"></a>nmon</h2><h3 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a>作用</h3><p>它能在系统运行过程中实时地捕捉系统资源的使用情况，记录的信息比较全面，</p>
+<h2 id="nmon">nmon</h2>
+<h3 id="作用">作用</h3>
+<p>它能在系统运行过程中实时地捕捉系统资源的使用情况，记录的信息比较全面，</p>
 <p>并且能输出结果到文件中，然后通过nmon_analyzer工具产生数据文件与图形化结果。</p>
-<h3 id="界面-1"><a href="#界面-1" class="headerlink" title="界面"></a>界面</h3><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/nmonUI.png" alt="nmonUI"></p>
+<h3 id="界面">界面</h3>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/nmonUI.png" alt="nmonUI"></p>
 <p>通过初始界面显示的命令，如下图般的界面（使用了 C、c、n 三个指令）：</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/nmonUItest_1.png" alt="nmonUItest_1"></p>
-<p>可以看到，各项指标数据都很详细，具体使用时可以用 </p>
+<p>可以看到，各项指标数据都很详细，具体使用时可以用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmon -h</span><br></pre></td></tr></table></figure>
 <p>查看更多操作方式。</p>
-<h2 id="dstat"><a href="#dstat" class="headerlink" title="dstat"></a>dstat</h2><h3 id="作用-3"><a href="#作用-3" class="headerlink" title="作用"></a>作用</h3><p>多功能系统资源统计生成工具（ versatile tool for generating system resource statistics），可以实时地看到所有系统资源。</p>
-<h3 id="界面-2"><a href="#界面-2" class="headerlink" title="界面"></a>界面</h3><p>默认显示内容：</p>
+<h2 id="dstat">dstat</h2>
+<h3 id="作用">作用</h3>
+<p>多功能系统资源统计生成工具（ versatile tool for generating system resource statistics），可以实时地看到所有系统资源。</p>
+<h3 id="界面">界面</h3>
+<p>默认显示内容：</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/dstatUI.png" alt="dstatUI"></p>
 <p>从蓝色虚线看，分成了以下几个部分：</p>
 <ul>
-<li>—total-cpu-usage—：CPU使用率<ul>
+<li>–total-cpu-usage–：CPU使用率</li>
 <li>usr：用户空间的程序所占百分比；</li>
 <li>sys：系统空间程序所占百分比；</li>
 <li>idel：空闲百分比；</li>
 <li>wai：等待磁盘I/O所消耗的百分比；</li>
 <li>hiq：硬中断次数；</li>
 <li>siq：软中断次数；</li>
-</ul>
-</li>
-<li>-dsk/total-：磁盘统计<ul>
+<li>-dsk/total-：磁盘统计
+<ul>
 <li>read：读总数</li>
 <li>writ：写总数</li>
 </ul>
 </li>
-<li>-net/total- ：网络统计<ul>
+<li>-net/total- ：网络统计
+<ul>
 <li>recv：网络收包总数</li>
 <li>send：网络发包总数</li>
 </ul>
 </li>
-<li>—paging—： 内存分页统计<ul>
+<li>–paging–： 内存分页统计
+<ul>
 <li>in： pagein（换入）</li>
 <li>out：page out（换出）</li>
 </ul>
 </li>
-<li>—system—：系统信息<ul>
+<li>–system–：系统信息
+<ul>
 <li>int：中断次数</li>
 <li>csw：上下文切换</li>
 </ul>
 </li>
 </ul>
-<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><ul>
-<li>监控CPU\MEN： dstat —top-mem —top-io —top-cpu</li>
+<h3 id="常用指令">常用指令</h3>
+<ul>
+<li>监控CPU\MEN： dstat --top-mem --top-io --top-cpu</li>
 <li>常用常规监控：dstat -cmsdnl -D sda1 -N lo,ens33 100 5</li>
 </ul>
  

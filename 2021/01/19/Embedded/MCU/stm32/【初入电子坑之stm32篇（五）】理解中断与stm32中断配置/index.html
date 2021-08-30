@@ -97,23 +97,28 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+  <h2 id="前言">前言</h2>
+<blockquote>
 <p>按照个人习惯，本文将从“这是啥？”“为啥需要它？”“如何操作？”三个角度展开讨论分析。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<h2 id="目录">目录</h2>
+<ul>
 <li>中断简介</li>
 <li>中断理解</li>
-<li>stm32中的中断设置<ul>
+<li>stm32中的中断设置
+<ul>
 <li>NVIC</li>
 <li>stm32中断配置</li>
 </ul>
 </li>
 <li>总结</li>
 </ul>
-<h2 id="中断简介"><a href="#中断简介" class="headerlink" title="中断简介"></a>中断简介</h2><p>中断，即机器运行过程中出现某些意外情况，需机器停止正在运行的程序并转入处理新情况的程序，处理完毕后又返回原被暂停的程序继续运行。</p>
+<h2 id="中断简介">中断简介</h2>
+<p>中断，即机器运行过程中出现某些意外情况，需机器停止正在运行的程序并转入处理新情况的程序，处理完毕后又返回原被暂停的程序继续运行。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E4%B8%AD%E6%96%AD%E7%AE%80%E4%BB%8B.jpg" alt=""></p>
-<h2 id="理解中断"><a href="#理解中断" class="headerlink" title="理解中断"></a>理解中断</h2><p>想象一下这么一个场景：</p>
+<h2 id="理解中断">理解中断</h2>
+<p>想象一下这么一个场景：</p>
 <p>你在认真的敲代码，你妈喊你出房间去客厅恰饭，并且以不出来就拔网线为威胁。这时候你能怎么办？只能乖乖保存好文档，然后去恰饭，恰完再回来打开之前的文件继续敲咯。</p>
 <p>我们分析一下上述的场景：</p>
 <ul>
@@ -138,13 +143,15 @@
 <p>对于 CPU来说也一样。当中断事件很少的时候，不需要分门别类的整理，直接比较判断优先级就可以了。</p>
 <p>而对于中断事件较多的复杂系统，对于事件的分组和优先级设置也就成了刚需。</p>
 <p>下面我们以stm32f10x的中断系统为例，展开学习。</p>
-<h2 id="stm32中的中断设置"><a href="#stm32中的中断设置" class="headerlink" title="stm32中的中断设置"></a>stm32中的中断设置</h2><p>我们知道，stm32用的是cortex-M3内核。</p>
+<h2 id="stm32中的中断设置">stm32中的中断设置</h2>
+<p>我们知道，stm32用的是cortex-M3内核。</p>
 <p>而CM3内核支持256个中断，256级可编程设置（即优先级设置），其中：</p>
 <ul>
 <li>内核中断16个</li>
 <li>外设中断240个</li>
 </ul>
-<p>但stm32并没有把CM3内核的设置全部用上。<br>它仅有84个中断，16级可编程设置，其中：</p>
+<p>但stm32并没有把CM3内核的设置全部用上。<br>
+它仅有84个中断，16级可编程设置，其中：</p>
 <ul>
 <li>内核中断16个</li>
 <li>外设中断68个</li>
@@ -155,7 +162,8 @@
 <li>外设中断44个</li>
 </ul>
 <p>小结下以上的数据，可以发现，实际中断事件的多少取决于芯片的定位。高端的，即外设多的，芯片中断必然多，反之必然少。</p>
-<h3 id="NVIC"><a href="#NVIC" class="headerlink" title="NVIC"></a>NVIC</h3><p>而要处理那么多的中断事件，CM3内核给出的解决方案是——用NVIC (Nested Vectored Interrupt Controller)嵌套向量中断控制器控制。</p>
+<h3 id="nvic">NVIC</h3>
+<p>而要处理那么多的中断事件，CM3内核给出的解决方案是——用NVIC (Nested Vectored Interrupt Controller)嵌套向量中断控制器控制。</p>
 <p>NVIC首先定义了一段地址区域（一般从0地址开始）用于存放中断事件服务函数的地址。定义的这段地址就称为<strong>中断向量表</strong>。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E4%B8%AD%E6%96%AD%E5%90%91%E8%A1%A8%E8%A1%A81.png" alt="中断向表表1"></p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A82.png" alt="中断向量表2"></p>
@@ -172,47 +180,52 @@
 <li>IP：Interrupt Priority Register，中断优先级寄存器</li>
 </ul>
 <p>在这里面，中断优先级寄存器是需要我们着重研究的。有意思的是，固件库命名的时候对于该寄存器的简写直接只用IP，而不是IPR，害我一度怀疑这两是不是同一个东西。直到我去查了手册才验明了“真身”。</p>
-<h4 id="IPR中断优先级寄存器"><a href="#IPR中断优先级寄存器" class="headerlink" title="IPR中断优先级寄存器"></a>IPR中断优先级寄存器</h4><p>原CM3设计中，NVIC_IPRx用于配置外部中断的优先级。IPR宽度为8bit，理论上可以配置的优先级为0~255，数值越小优先级越高。但和大多数CM3芯片都会精简设计一样，stm32也做了相关的精简设计，只使用高4bit。也就是说，实际上stm32允许配置的优先级只有16个</p>
+<h4 id="ipr中断优先级寄存器">IPR中断优先级寄存器</h4>
+<p>原CM3设计中，NVIC_IPRx用于配置外部中断的优先级。IPR宽度为8bit，理论上可以配置的优先级为0~255，数值越小优先级越高。但和大多数CM3芯片都会精简设计一样，stm32也做了相关的精简设计，只使用高4bit。也就是说，实际上stm32允许配置的优先级只有16个</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/IPR%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%93%E6%9E%84.png" alt=""></p>
-<h4 id="抢占优先级与子优先级"><a href="#抢占优先级与子优先级" class="headerlink" title="抢占优先级与子优先级"></a>抢占优先级与子优先级</h4><p>CM3把优先级划分成了抢占优先级和子优先级（又叫响应优先级）。即，对于同一个中断事件，他有抢占优先级和子优先级两个优先级。</p>
-<h5 id="为什么要这么设置？"><a href="#为什么要这么设置？" class="headerlink" title="为什么要这么设置？"></a>为什么要这么设置？</h5><p>因为如果只是简单的只有一种优先级的话，太过粗线条了。像CM3内核设置最多有256级，即使是stm32也有16级，级数太多，没有主次不方便使用和管理。</p>
+<h4 id="抢占优先级与子优先级">抢占优先级与子优先级</h4>
+<p>CM3把优先级划分成了抢占优先级和子优先级（又叫响应优先级）。即，对于同一个中断事件，他有抢占优先级和子优先级两个优先级。</p>
+<h5 id="为什么要这么设置？">为什么要这么设置？</h5>
+<p>因为如果只是简单的只有一种优先级的话，太过粗线条了。像CM3内核设置最多有256级，即使是stm32也有16级，级数太多，没有主次不方便使用和管理。</p>
 <p>类比到我们平时生活中的状态，就像社会上有256个人，每个人都不同级别一样，估计你会眼花缭乱。而解决这个问题的方法就是那就是把这256级中断归类分层，层级内再分子级的分层管理形式，达到压缩层级的效果。 如先分统治阶层、奴隶主、奴隶等，同一阶层再区分小级别。</p>
 <p>对应于中断分组就是，把256级优先级根据本工程的需求，先规定了中断层数(即：抢占优先级)和每层有多少小级别个数。</p>
 <p>这样抢占优先级和子优先级的概念引进我们就完全可以理解了。</p>
-<h5 id="抢占优先级-与-子优先级-比较"><a href="#抢占优先级-与-子优先级-比较" class="headerlink" title="抢占优先级 与 子优先级 比较"></a>抢占优先级 与 子优先级 比较</h5><p>只有当抢占优先级相同的时候，子优先级才会发挥作用。若子优先级也相同，就去比较两个外设的硬件中断编号，即该中断在中断向量表中的位置，同样是编号越小，优先级越高原则。</p>
+<h5 id="抢占优先级-与-子优先级-比较">抢占优先级 与 子优先级 比较</h5>
+<p>只有当抢占优先级相同的时候，子优先级才会发挥作用。若子优先级也相同，就去比较两个外设的硬件中断编号，即该中断在中断向量表中的位置，同样是编号越小，优先级越高原则。</p>
 <p>值得注意的是 抢占优先级 与 子优先级 还有些许差别：</p>
 <ul>
 <li>抢占优先级：无关中断产生的先后，只比较优先级的高低。优先级高的中断信号即使比中断优先级低的中断信号后到，也可以直接中断优先级低的事件<strong>直接抢占系统资源</strong>。</li>
-<li>子优先级：当两个中断信号有相同的抢占优先级，分两种情况考虑：<ul>
+<li>子优先级：当两个中断信号有相同的抢占优先级，分两种情况考虑：
+<ul>
 <li>两个信号同时到达，子优先级高的中断先响应。</li>
 <li>子优先级低的中断事件正在发生，子优先级高的中断信号刚到时，需要等到当前中断完成后，在执行玩到的中断信号。</li>
 </ul>
 </li>
 </ul>
-<h4 id="中断分组"><a href="#中断分组" class="headerlink" title="中断分组"></a>中断分组</h4><p>从前面的讨论中我们可以知道，为了中断更加可控，CM3内核做了两种优先级的分层机制。</p>
+<h4 id="中断分组">中断分组</h4>
+<p>从前面的讨论中我们可以知道，为了中断更加可控，CM3内核做了两种优先级的分层机制。</p>
 <p>但是对于不同的需求，我们对于阶层和小阶级的数量要求也是不同的。以身份证为例，在发放身份证之前，我们要总体考虑全国要分多少个区域，然后确定地区需要设置几位数才够。熟悉计算机网络的朋友可以发现，这里其实和子网划分是一个道理。</p>
 <p>到这里，我们也可以看到，在一个工程中，我们一般只会设置一次，且每次只设置一个分组。还是拿身份证举例，你不可能前一秒还说身份证前3位表示A省，下一秒就说前4位表示B省吧？编码格式统一是一切的基础。</p>
 <p>所以，我们平时在设置分组时，若不是非常特殊的需求</p>
-<font color=red>**一个工程只设置一次分组!!!**</font>
-
-<font color=red>**一个工程只设置一次分组!!!**</font>
-
-<font color=red>**一个工程只设置一次分组!!!**</font>
-
+<p><font color=red><strong>一个工程只设置一次分组!!!</strong></font></p>
+<p><font color=red><strong>一个工程只设置一次分组!!!</strong></font></p>
+<p><font color=red><strong>一个工程只设置一次分组!!!</strong></font></p>
 <p>重要的事情说三遍。。。</p>
 <p>这个分组管理的设置由内核外设SCB_AIRCR（应用程序中断及复位控制寄存器）的prigroup[10:8]控制。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/SCB_AIRCR.png" alt="SCB_AIRCR"></p>
 <p>因为它通过3个bit控制，所以理论上可以分成8组（0~7组），其中每组可设置的抢占优先级和子优先级的位数是不同的。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/CM3%E4%B8%AD%E6%96%AD%E5%88%86%E7%BB%84%E5%AE%8C%E6%95%B4%E5%9B%BE.png" alt="CM3中断分组完整图"></p>
-<p> 如上图，可以看到它随着组号的增大，抢占优先级可设置的位越少，子优先级越多。</p>
+<p>如上图，可以看到它随着组号的增大，抢占优先级可设置的位越少，子优先级越多。</p>
 <p>上面这种分组是针对IPR里8bits都用上的情况设计的。而我们知道，stm32的NVIC是CM3的NVIC的子集，只用了IPR的高4bits，所以分组自然而然就少了。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/stm32%E4%B8%AD%E6%96%AD%E5%88%86%E7%BB%84%E5%AE%8C%E6%95%B4%E5%9B%BE.png" alt="stm32中断分组完整图"></p>
 <p>有了以上的原理性认知，我们终于进入到轻松愉快的编程配置环节~~~</p>
-<h4 id="配置要点"><a href="#配置要点" class="headerlink" title="配置要点"></a>配置要点</h4><p>根据前面叙述的内容，辅以一些额外资料（诸如各种官方文档），我们可以得出以下配置流程：</p>
+<h4 id="配置要点">配置要点</h4>
+<p>根据前面叙述的内容，辅以一些额外资料（诸如各种官方文档），我们可以得出以下配置流程：</p>
 <ul>
 <li>使能某个的中断</li>
 <li>中断分组</li>
-<li>初始化NVIC_InitTypeDef 结构体<ul>
+<li>初始化NVIC_InitTypeDef 结构体
+<ul>
 <li>设置中断源</li>
 <li>设置抢占优先级和子优先级</li>
 <li>配置中断使能/失能</li>
@@ -224,8 +237,10 @@
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210316182454196.png" alt="image-20210316182454196"></p>
 <p>它跟NVIC_Type结构体的区别在于，NVIC_Type只是寄存器组的映射，而NVIC_InitTypeDef是固件库抽象提炼出来帮助我们简化配置流程用的。</p>
 <p>下面，我们用一个实例体会下上述过程。</p>
-<h3 id="EXTI"><a href="#EXTI" class="headerlink" title="EXTI"></a>EXTI</h3><p>EXTI（External interrupt/event controller）—外部中断/事件控制器，用于管理了控制器的 20个中断/事件线（互联型才有20根，其他类型只有19根）。</p>
-<h4 id="NVIC与EXTI的关系"><a href="#NVIC与EXTI的关系" class="headerlink" title="NVIC与EXTI的关系"></a>NVIC与EXTI的关系</h4><p>我们先来理一理这东西跟NVIC的关系：</p>
+<h3 id="exti">EXTI</h3>
+<p>EXTI（External interrupt/event controller）—外部中断/事件控制器，用于管理了控制器的 20个中断/事件线（互联型才有20根，其他类型只有19根）。</p>
+<h4 id="nvic与exti的关系">NVIC与EXTI的关系</h4>
+<p>我们先来理一理这东西跟NVIC的关系：</p>
 <ol>
 <li>NVIC是CM3内核的东西，它用于整个芯片的中断控制。而EXTI是ST公司设计用于控制外设的。它不是内核里面的东西。</li>
 <li>EXTI通过魔改引出NVIC中的20根中断信号线，对外设事件的控制能力进一步加强了。</li>
@@ -237,7 +252,8 @@
 <li>中断事件</li>
 </ul>
 <p>比如一老师在教室里给学生们上课。课堂上的学生可能做出各种行为动作，比方做笔记、打哈气、翻书包、讲小话等，我们把这些行为统称为<strong>事件</strong>，其中有些行为老师往往只是视而不见，继续他的上课；而有些行为可能导致老师的上课中止，比方讲小话，并对学生的相关行为予以警告、批评或纠正等，然后继续上课。我们把老师因为学生的某些行为而中止授课，并产生后续动作，之后接着上课的这个过程理解为<strong>中断或中断响应</strong>。我们把可能导致老师上课中断的学生行为理解为<strong>中断事件</strong>。</p>
-<h4 id="EXTI框图理解"><a href="#EXTI框图理解" class="headerlink" title="EXTI框图理解"></a>EXTI框图理解</h4><p>下面，我们结合EXTI的框图理解上述概念。</p>
+<h4 id="exti框图理解">EXTI框图理解</h4>
+<p>下面，我们结合EXTI的框图理解上述概念。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/EXTI%E6%A1%86%E5%9B%BE1.png" alt="EXTI框图1"></p>
 <p>首先，我们先对整个框图有个大概的认知：</p>
 <ul>
@@ -246,7 +262,8 @@
 <li>黄色部分：两个输出端。用于事件信号的输出，中断信号去NVIC，非中断信号用于其他外设（如:DMA，DMA相关内容，在后续文章会详细说明）。</li>
 </ul>
 <p>EXTI 可分为两大部分功能，一个是产生中断，另一个是产生事件，这两个功能从硬件上就有所不同。</p>
-<h5 id="信号产生过程"><a href="#信号产生过程" class="headerlink" title="信号产生过程"></a>信号产生过程</h5><p>下面我们来分析下这两者的产生过程。</p>
+<h5 id="信号产生过程">信号产生过程</h5>
+<p>下面我们来分析下这两者的产生过程。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210316182718811.png" alt="image-20210316182718811"></p>
 <p>如上图，信号首先会经过<strong>边沿检测电路</strong>，这个检测电路会通过查看 <strong>上边沿触发</strong> 和<strong>下边沿触发</strong> 寄存器的值，去判断信号到底在哪个边沿采集。（所谓上边沿和下边沿，即电平从低-&gt;高  or 从高-&gt;低 变化时的那条竖直的边）</p>
 <p>经过边沿检测电路之后，就来到上图中3的位置。这里是个或门连接着输入信号和软件中断事件寄存器。也就是说，除了信号触发中断，我们还可以控制相关的寄存器从而产生中断事件。</p>
@@ -255,11 +272,13 @@
 <p>首先中断请求信号会先进入 <strong>请求挂起寄存器</strong> 。这个寄存器的存在意义在于，如果中断发生时，正在处理同级或高优先级中断，则中断不能立即得到响应，此时中断被悬起。悬挂意味着等待而不是舍去，当优先级高的或者同等级先发生的中断完成后，被挂起的中断才会执行。</p>
 <p>落实到stm32这里，可以看到在标号4的位置，是一个与门，所以，中断请教什么时候推送到NVIC控制器执行，就是<strong>中断屏蔽寄存器</strong>应该控制的事了。</p>
 <p>同理，对于事件发生来说，事件是否生成，就是事件屏蔽寄存器的事了。不同点在于，事件的产生没有优先级的概念，所有无需挂起寄存器这么个东西。</p>
-<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><hr>
+<h4 id="代码示例">代码示例</h4>
+<hr>
 <p>未完待续~</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="http://www.openedv.com/forum.php?mod=viewthread&amp;tid=275496&amp;page=1&amp;authorid=105694">关于STM32中断优先级分组的科普，初学者常见问题解答</a></p>
+<h2 id="参考资料">参考资料</h2>
+<p><a target="_blank" rel="noopener" href="http://www.openedv.com/forum.php?mod=viewthread&amp;tid=275496&amp;page=1&amp;authorid=105694">关于STM32中断优先级分组的科普，初学者常见问题解答</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanyjin/article/details/53359883?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control">STM32的“外部中断”和“事件”区别和理解</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45590473/article/details/108039950?utm_term=stm32中断挂起&amp;utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-2-108039950&amp;spm=3001.4430">浅谈中断挂起与中断标志的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45590473/article/details/108039950?utm_term=stm32%E4%B8%AD%E6%96%AD%E6%8C%82%E8%B5%B7&amp;utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-2-108039950&amp;spm=3001.4430">浅谈中断挂起与中断标志的区别</a></p>
  
       <!-- reward -->
       
