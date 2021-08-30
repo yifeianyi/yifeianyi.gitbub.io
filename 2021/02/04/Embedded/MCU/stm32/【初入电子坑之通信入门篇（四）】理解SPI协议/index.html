@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    【初入电子坑之stm32篇（补充1）】新建固件库工程 |  阿逸的个站
+    【初入电子坑之通信入门篇（四）】理解SPI协议 |  阿逸的个站
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -43,7 +43,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Embedded/MCU/stm32/【初入电子坑之stm32篇（补充1）】新建固件库工程"
+  id="post-Embedded/MCU/stm32/【初入电子坑之通信入门篇（四）】理解SPI协议"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -54,18 +54,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  【初入电子坑之stm32篇（补充1）】新建固件库工程
+  【初入电子坑之通信入门篇（四）】理解SPI协议
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/" class="article-date">
-  <time datetime="2021-01-11T07:29:12.000Z" itemprop="datePublished">2021-01-11</time>
+      <a href="/2021/02/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3SPI%E5%8D%8F%E8%AE%AE/" class="article-date">
+  <time datetime="2021-02-04T08:10:15.000Z" itemprop="datePublished">2021-02-04</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a> / <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/MCU/">MCU</a>
+    <a class="article-category-link" href="/categories/%E7%94%B5%E5%AD%90/">电子</a>
   </div>
   
 <div class="word_count">
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">832</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -97,73 +97,54 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>新建基于固件库的工程，不理清构建流程的话，看上去还是有点繁琐的，在此记录一下。</p>
+  <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>SPI 协议(Serial Peripheral Interface)，即串行外设接口，是一种高速串行全双工的通信总线。它被广泛地使用在 ADC、LCD 等设备与 MCU 间，要求通讯速率较高的场合。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>为了做到心中有数，我们先要搞清楚为什么这么干。</p>
-<p>首先，我们知道，所谓的固件库编程，就是ST公司为了提高广大开发者的开发效率从而提供给大家的一套驱动程序。</p>
-<p>我们在工程中想要使用这套程序自然就要先从官方提供的资料中把我们需要的源码copy到自己的工程中去。而又因为这些源码文件有点多，所以为了后面的维护考虑，我们要对这些文件进行分类。</p>
-<p>上面虽然啰嗦了很多，但是说白了，新建固件库工程的过程——就是库文件导入和文件管理的过程。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>在明白了上述原理之后，经过参考正点原子和野火的工程构建方式。得出以下个人觉得比较舒服的工程管理方式(仅供参考)：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052812.png" alt="工程文件管理"></p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/SPI%E5%8D%8F%E8%AE%AE%E6%A1%86%E5%9B%BE.png" alt="SPI协议框图"></p>
+<p>上面是SPI的物理连接图。主要可以分为四部分：</p>
 <ul>
-<li>Readme：    工程整体性说明文档</li>
-<li>Libraries：   工程所需的官方启动文件、固件库文件等</li>
-<li>Output：      工程输出的如：hex之类的文件</li>
-<li>Project：       keil自动生成文件</li>
-<li>User：           自己写的相关工程源码</li>
+<li>SCK：由主机产生，协议不设上面，频率上限主要看设备。</li>
+<li>MISO：master input slave output</li>
+<li>MOSI：master output slave input</li>
+<li>SS：也称为NSS、CS，片选信号线。用于选择从机，一条片选线对应一个从机。</li>
 </ul>
-<p>对应的在IDE中，我们可以对源文件进行分组：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052837.png" alt="IDE源文件组管理" style="zoom:67%;" /></p>
-<p>需要注意的是，这里的源文件管理和整个工程的文件管理并不完全一致！！！</p>
-<p>IDE的源文件分组，在添加源文件时，文件路径需要精确到源文件所在的当前文件夹。</p>
-<p>举个栗子：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052853.png" alt="举例1"></p>
-<p>Libraries中包含这两个文件夹 CMSIS 和 STM32F10x_StdPeriph_Driver。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052954.png" alt="举例2" style="zoom:67%;" /><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309053005.png" alt="举例3" style="zoom:50%;" /></p>
-<p>而源文件在 CMSIS 和 STM32F10x_StdPeriph_Driver/src中，所以我们需要添加的是这两个文件。</p>
-<p>到这里，工程建立算是初步创建完成了。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
-<li><p>根据自己喜欢的方式，合理对工程文件进行分类。</p>
-</li>
-<li><p>工程文件夹与IDE源文件分组并不完全一致。</p>
-</li>
-</ul>
-<h2 id="重点！！！"><a href="#重点！！！" class="headerlink" title="重点！！！"></a>重点！！！</h2><h3 id="1、路径设置"><a href="#1、路径设置" class="headerlink" title="1、路径设置"></a>1、路径设置</h3><p>上面的示例，只是人为的文件管理方式，IDE是不知道的。换句话说，如果这个时候你想直接调用库，IDE都不知道去哪找头文件。</p>
-<p>所以，文件怎么归类管理都可以，但分类完后得告诉IDE这些文件在哪。</p>
-<p>对于KeilL来说，打开option找到C/C++选项，找到Include Paths，然后所有工程.h文件所在文件夹路径加上去即可。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9.png" alt="路径选择" style="zoom:67%;" /><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A92.png" alt="路径选择2" style="zoom:67%;" /></p>
-<p>你以为这样就完了？还没呢！！！</p>
-<h3 id="2、conf条件编译"><a href="#2、conf条件编译" class="headerlink" title="2、conf条件编译"></a>2、conf条件编译</h3><p>在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344916337">【初入电子坑之stm32篇（二）】固件库编程</a> 中，我们已经讨论过了诸如 “stm32f10x_conf.h” 这样缝合怪文件，它把所有外设的头文件都包在里面了，极大的简化了我们的代码。但它在官方提供源码中是这样的：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%BC%9D%E5%90%88%E6%80%AA.png" alt="缝合怪"></p>
-<p>调用它需要我们定义一个名为 <strong>USE_STDPERIPH_DRIVER</strong> 的宏。</p>
-<p>所以想要用它，有三种选择：</p>
+<p>拓扑结构上比I2C稍微复杂一丢丢，但十分好理解。</p>
+<h2 id="协议层"><a href="#协议层" class="headerlink" title="协议层"></a>协议层</h2><p>I2C协议只有两根总线，所有信息传输更是只能通过那一根数据总线进行，所以规定了3种传输方式。</p>
+<p>而SPI协议有四根线，可操作空间大，自然不比像I2C一样限定多种模式。在传输模式上比较自由，没有固定的传输模式，只需学习原子操作即可。（PS：传输模式其实是有的，不过具体到每个外设的传输模式都不同，还需要具体情况具体分析。）</p>
+<h3 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h3><h4 id="1）起始和停止信号"><a href="#1）起始和停止信号" class="headerlink" title="1）起始和停止信号"></a>1）起始和停止信号</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%89%87%E9%80%89%E7%BA%BF.png" alt="片选线"></p>
+<p>非常简单易看。以连接主机和从机的NSS线状态为准：</p>
 <ul>
-<li>找个位置，老老实实把这个宏定义了</li>
-<li>直接把条件编译的语句注释掉</li>
-<li>使用Keil软件的宏定义模板</li>
+<li>高——&gt;低：起始信号</li>
+<li>低——&gt;高：停止信号</li>
 </ul>
-<p>这里简单说下keil的宏定义模板。因为只要在这个模板上写好了，以后其它工程只要还需要类似的配置，我们就不需要重新找地方做宏定义or注释条件编译了。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF.png" alt="宏定义模板"></p>
-<p>如上图，还是在option中找到C/C++选项，然后在Define中写入即可。若要进行多个宏定义，中间用逗号隔开。</p>
-<h3 id="3、启动文件选择宏定义"><a href="#3、启动文件选择宏定义" class="headerlink" title="3、启动文件选择宏定义"></a>3、启动文件选择宏定义</h3><p>最后，是关于启动文件选择的问题。</p>
-<p>我们知道stm32因为flash的容量大小，不同分成了很多个不同的启动文件。而固件库为了适配不同型号的芯片，做了如下操作：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E5%AE%8F%E5%AE%9A%E4%B9%89.png" alt="启动文件宏定义"></p>
-<p>条边编译+注释。我们需要用时只要解除对应的宏定义项的注释即可。但每次操作库文件容易存在容易出错、调试不便等问题。所以官方也做了相关的tip——使用软件的宏定义模板。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF.png" alt="宏定义模板"></p>
-<p>如上图。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>创建工程遵从以下步骤：</p>
-<ol>
-<li>合理对应工程文件夹分类</li>
-<li>在IDE中，进一步进行详细的源文件分组</li>
-<li>头文件路径设置</li>
-<li>如果是第一次做此型号的32芯片配置，可能还需要配置<ol>
-<li>固件库配置集合的宏定义</li>
-<li>启动文件选择的宏定义</li>
-</ol>
-</li>
-</ol>
+<h4 id="2）数据有效性"><a href="#2）数据有效性" class="headerlink" title="2）数据有效性"></a>2）数据有效性</h4><p>由于SPI线多，财大气粗，所以相对而言比较随心所欲，没有固定的表示0/1电平的形式。</p>
+<p>但究其通信本质，数据信号线的状态无非就三种：</p>
+<ul>
+<li>空闲没东西发</li>
+<li>数据有效</li>
+<li>数据无效：01切换的时间</li>
+</ul>
+<p>所以SPI定义了两个概念：</p>
+<ul>
+<li>CPOL：clock pole，时钟极性。</li>
+<li>CPHA：clock phase，时钟相位。</li>
+</ul>
+<h5 id="CPOL时钟极性"><a href="#CPOL时钟极性" class="headerlink" title="CPOL时钟极性"></a>CPOL时钟极性</h5><p>定义了时钟线空闲状态时的电平情况。</p>
+<ul>
+<li>CPOL=0：低电平空闲</li>
+<li>CPOL=1：高电平空闲</li>
+</ul>
+<h5 id="CPHA时钟相位"><a href="#CPHA时钟相位" class="headerlink" title="CPHA时钟相位"></a>CPHA时钟相位</h5><p>SPI的0/1信号 由边沿触发时表示。我们知道，边沿有两不同的状态——上下边沿。而一个时钟周期有两个边沿（上下边沿）。所以要精确的进行数据表示的话，我们必须留出一个边沿来作为电平切换用，即数据无效区。说白的就是一个时钟周期只能传输1位数据。</p>
+<p>而CPHA就是定义了具体数据线MOSI和MISO在哪个边沿表示的数据有效。</p>
+<ul>
+<li>CPHA=0：奇数边沿采样</li>
+<li>CPHA=1：偶数边沿采样</li>
+</ul>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="时序图"></p>
+<p>这个边沿的计数从SS片选线的起始信号开始后，SCK的第一个边沿开始计算。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，对于SPI协议的主干内容就结束了。。。没错，结束了。。。官方文档其余的内容，更多的是关于寄存器和相关参数的内容，协议本身的核心内容就辣么点。</p>
+<p>跟I2C相比，SPI协议本身连应答确认机制都没有，十分的简单的粗暴。。。好处是，相对于无标准状态下，各路厂家自由放飞导致的不同厂家间接口不兼容，SPI提供了一个相对普适的基础通信框架。既统一了标准，又给足了厂家们根据自身产品需求对该框架魔改的空间。</p>
  
       <!-- reward -->
       
@@ -228,12 +209,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lzyblog.site/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lzyblog.site/2021/02/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3SPI%E5%8D%8F%E8%AE%AE/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/" rel="tag">stm32</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1/" rel="tag">通信</a></li></ul>
 
     </footer>
   </div>
@@ -241,19 +222,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%91%E5%9B%BA%E4%BB%B6%E5%BA%93%E7%BC%96%E7%A8%8B/" class="article-nav-link">
+      <a href="/2021/04/20/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E7%B3%BB%E5%88%97%E6%80%BB%E7%BA%B2%E3%80%91%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93%E4%B8%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            【初入电子坑之stm32篇（二）】固件库编程
+            【初入电子坑系列总纲】自我总结与经验分享
           
         </div>
       </a>
     
     
-      <a href="/2021/01/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E5%88%9D%E8%AF%86stm32%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/" class="article-nav-link">
+      <a href="/2021/02/02/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91I2C%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">【初入电子坑之stm32篇（一）】初识stm32与寄存器编程</div>
+        <div class="article-nav-title">【初入电子坑之通信入门篇（三）】I2C协议理解</div>
       </a>
     
   </nav>

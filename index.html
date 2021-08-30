@@ -132,8 +132,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="概要">概要</h2>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%AF%BC%E5%9B%BE_1.png" alt="监测工具导图"></p> 
+  <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%AF%BC%E5%9B%BE_1.png" alt="监测工具导图"></p> 
       <a class="article-more-link" href="/2021/08/23/Linux/Base/Linux-%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7/"
         >阅读更多...</a
       >
@@ -189,8 +188,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言">前言</h2>
-<blockquote>
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>vim这款文本编辑器很强大，但由于它的模式多样、指令繁多，容易让初学者感到入门，畏惧不前。而由于本人近期学习安排中也需要用到vim（避无可避的程度），无奈之下只能试着硬上了，在这个过程中无意想通了正确的学习姿势，以下是个人的思考笔记。</p>
 </blockquote> 
       <a class="article-more-link" href="/2021/05/19/Linux/Base/vim%E5%85%A5%E9%97%A8/"
@@ -248,8 +246,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言">前言</h2>
-<blockquote>
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>定时器，顾名思义是拿来定时的，但除了定时之外，我们还可以利用定时器的计数特性，演变出其他有意思的功能出来（诸如控制马达转速）。不过在这之前，我们还是先了解了解定时器的工作原理叭。</p>
 </blockquote> 
       <a class="article-more-link" href="/2021/04/24/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E5%85%AD%EF%BC%89%E3%80%91%E5%AE%9A%E6%97%B6%E5%99%A8%E5%9F%BA%E7%A1%80%E4%B8%8ESystick/"
@@ -335,6 +332,122 @@
 
     
     <article
+  id="post-Embedded/MCU/stm32/【初入电子坑之通信入门篇（四）】理解SPI协议"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3SPI%E5%8D%8F%E8%AE%AE/"
+    >【初入电子坑之通信入门篇（四）】理解SPI协议</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/02/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3SPI%E5%8D%8F%E8%AE%AE/" class="article-date">
+  <time datetime="2021-02-04T08:10:15.000Z" itemprop="datePublished">2021-02-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%B5%E5%AD%90/">电子</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>SPI 协议(Serial Peripheral Interface)，即串行外设接口，是一种高速串行全双工的通信总线。它被广泛地使用在 ADC、LCD 等设备与 MCU 间，要求通讯速率较高的场合。</p>
+</blockquote> 
+      <a class="article-more-link" href="/2021/02/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3SPI%E5%8D%8F%E8%AE%AE/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1/" rel="tag">通信</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-Embedded/MCU/stm32/【初入电子坑之通信入门篇（三）】I2C协议理解"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/02/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91I2C%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"
+    >【初入电子坑之通信入门篇（三）】I2C协议理解</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/02/02/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91I2C%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/" class="article-date">
+  <time datetime="2021-02-02T07:27:29.000Z" itemprop="datePublished">2021-02-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>I2C 通讯协议(Inter－Integrated Circuit)，是一种比较简单的同步串行协议。因其所需引脚少、硬件实现简单、扩展性强，现在广泛用于系统内多个集成电路（IC）间的通讯。</p>
+</blockquote> 
+      <a class="article-more-link" href="/2021/02/02/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91I2C%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1/" rel="tag">通信</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-Embedded/MCU/stm32/【初入电子坑之通信入门篇（一）】通信基础知识"
   class="article article-type-post"
   itemscope
@@ -365,8 +478,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言">前言</h2>
-<blockquote>
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>通信是嵌入式的重要组成部分，本人简单试水过后发现此坑略深，以目前应用为主的策略来看，不宜陷得太深。所以这系列笔记文章主要围绕“这是什么？”“它的大致原理是什么？”展开讨论。基本上会忽略绝大多数诸如“为什么需要它？/它是怎么顺理成章的推出来的？”的这类问题。（因本人才疏学浅，若有叙述不当之处，恳请各位大佬指正。）</p>
 </blockquote> 
       <a class="article-more-link" href="/2021/01/21/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"
@@ -424,8 +536,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言">前言</h2>
-<blockquote>
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>按照个人习惯，本文将从“这是啥？”“为啥需要它？”“如何操作？”三个角度展开讨论分析。</p>
 </blockquote> 
       <a class="article-more-link" href="/2021/01/19/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%94%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3%E4%B8%AD%E6%96%AD%E4%B8%8Estm32%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE/"
@@ -483,8 +594,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言">前言</h2>
-<blockquote>
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>时钟系统是MCU必不可少的一部分。本文将针对以下问题展开讨论：</p>
 <ul>
 <li>什么是时钟？</li>
@@ -549,130 +659,10 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言">前言</h2>
-<blockquote>
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>由寄存器编程我们可以知道，很多时候我们需要修改的值的其实只有单独的某一位，那在stm32中怎么实现对单独一个位的操作呢？位带操作！</p>
 </blockquote> 
       <a class="article-more-link" href="/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/" rel="tag">stm32</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-Embedded/MCU/stm32/【初入电子坑之stm32篇（二）】固件库编程"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%91%E5%9B%BA%E4%BB%B6%E5%BA%93%E7%BC%96%E7%A8%8B/"
-    >【初入电子坑之stm32篇（二）】固件库编程</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%91%E5%9B%BA%E4%BB%B6%E5%BA%93%E7%BC%96%E7%A8%8B/" class="article-date">
-  <time datetime="2021-01-16T04:37:17.000Z" itemprop="datePublished">2021-01-16</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a> / <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/MCU/">MCU</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="前言">前言</h2>
-<blockquote>
-<p>在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344913189">【初入电子坑之stm32篇（一）】初识stm32与寄存器编程</a>中可以看到，寄存器编程虽然消耗CPU性能少、速度快。但于我们开发应用来说，那就是刀耕火种中的刀耕火种。。。</p>
-<p>芯片厂家也考虑到了这点，所以一般会提供一些基本的固件库供开发人员使用。stm32的爸爸ST公司自然也不例外。</p>
-</blockquote> 
-      <a class="article-more-link" href="/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%91%E5%9B%BA%E4%BB%B6%E5%BA%93%E7%BC%96%E7%A8%8B/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/" rel="tag">stm32</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-Embedded/MCU/stm32/【初入电子坑之stm32篇（补充1）】新建固件库工程"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/"
-    >【初入电子坑之stm32篇（补充1）】新建固件库工程</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/" class="article-date">
-  <time datetime="2021-01-11T07:29:12.000Z" itemprop="datePublished">2021-01-11</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a> / <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/MCU/">MCU</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="前言">前言</h2>
-<blockquote>
-<p>新建基于固件库的工程，不理清构建流程的话，看上去还是有点繁琐的，在此记录一下。</p>
-</blockquote> 
-      <a class="article-more-link" href="/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/"
         >阅读更多...</a
       >
        

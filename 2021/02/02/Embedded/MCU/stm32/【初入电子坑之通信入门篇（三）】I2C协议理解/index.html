@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    【初入电子坑之stm32篇（补充1）】新建固件库工程 |  阿逸的个站
+    【初入电子坑之通信入门篇（三）】I2C协议理解 |  阿逸的个站
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -43,7 +43,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Embedded/MCU/stm32/【初入电子坑之stm32篇（补充1）】新建固件库工程"
+  id="post-Embedded/MCU/stm32/【初入电子坑之通信入门篇（三）】I2C协议理解"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -54,18 +54,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  【初入电子坑之stm32篇（补充1）】新建固件库工程
+  【初入电子坑之通信入门篇（三）】I2C协议理解
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/" class="article-date">
-  <time datetime="2021-01-11T07:29:12.000Z" itemprop="datePublished">2021-01-11</time>
+      <a href="/2021/02/02/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91I2C%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/" class="article-date">
+  <time datetime="2021-02-02T07:27:29.000Z" itemprop="datePublished">2021-02-02</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a> / <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/MCU/">MCU</a>
+    <a class="article-category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
   </div>
   
 <div class="word_count">
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1.7k</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -97,73 +97,147 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>新建基于固件库的工程，不理清构建流程的话，看上去还是有点繁琐的，在此记录一下。</p>
+  <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>I2C 通讯协议(Inter－Integrated Circuit)，是一种比较简单的同步串行协议。因其所需引脚少、硬件实现简单、扩展性强，现在广泛用于系统内多个集成电路（IC）间的通讯。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>为了做到心中有数，我们先要搞清楚为什么这么干。</p>
-<p>首先，我们知道，所谓的固件库编程，就是ST公司为了提高广大开发者的开发效率从而提供给大家的一套驱动程序。</p>
-<p>我们在工程中想要使用这套程序自然就要先从官方提供的资料中把我们需要的源码copy到自己的工程中去。而又因为这些源码文件有点多，所以为了后面的维护考虑，我们要对这些文件进行分类。</p>
-<p>上面虽然啰嗦了很多，但是说白了，新建固件库工程的过程——就是库文件导入和文件管理的过程。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>在明白了上述原理之后，经过参考正点原子和野火的工程构建方式。得出以下个人觉得比较舒服的工程管理方式(仅供参考)：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052812.png" alt="工程文件管理"></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>物理层</li>
+<li>协议层<ul>
+<li>传输过程</li>
+<li>原子操作</li>
+</ul>
+</li>
+</ul>
+<p>按照学习通讯协议的套路，以下分别讨论I2C的物理层和协议层。</p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F.png" alt="I2C常用连接方式"></p>
+<p>上图中我们可以看到：</p>
 <ul>
-<li>Readme：    工程整体性说明文档</li>
-<li>Libraries：   工程所需的官方启动文件、固件库文件等</li>
-<li>Output：      工程输出的如：hex之类的文件</li>
-<li>Project：       keil自动生成文件</li>
-<li>User：           自己写的相关工程源码</li>
+<li>它只有一条数据线</li>
+<li>总线上连接着多个从机（甚至是多个主机）</li>
 </ul>
-<p>对应的在IDE中，我们可以对源文件进行分组：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052837.png" alt="IDE源文件组管理" style="zoom:67%;" /></p>
-<p>需要注意的是，这里的源文件管理和整个工程的文件管理并不完全一致！！！</p>
-<p>IDE的源文件分组，在添加源文件时，文件路径需要精确到源文件所在的当前文件夹。</p>
-<p>举个栗子：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052853.png" alt="举例1"></p>
-<p>Libraries中包含这两个文件夹 CMSIS 和 STM32F10x_StdPeriph_Driver。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309052954.png" alt="举例2" style="zoom:67%;" /><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309053005.png" alt="举例3" style="zoom:50%;" /></p>
-<p>而源文件在 CMSIS 和 STM32F10x_StdPeriph_Driver/src中，所以我们需要添加的是这两个文件。</p>
-<p>到这里，工程建立算是初步创建完成了。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
-<li><p>根据自己喜欢的方式，合理对工程文件进行分类。</p>
-</li>
-<li><p>工程文件夹与IDE源文件分组并不完全一致。</p>
-</li>
-</ul>
-<h2 id="重点！！！"><a href="#重点！！！" class="headerlink" title="重点！！！"></a>重点！！！</h2><h3 id="1、路径设置"><a href="#1、路径设置" class="headerlink" title="1、路径设置"></a>1、路径设置</h3><p>上面的示例，只是人为的文件管理方式，IDE是不知道的。换句话说，如果这个时候你想直接调用库，IDE都不知道去哪找头文件。</p>
-<p>所以，文件怎么归类管理都可以，但分类完后得告诉IDE这些文件在哪。</p>
-<p>对于KeilL来说，打开option找到C/C++选项，找到Include Paths，然后所有工程.h文件所在文件夹路径加上去即可。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9.png" alt="路径选择" style="zoom:67%;" /><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A92.png" alt="路径选择2" style="zoom:67%;" /></p>
-<p>你以为这样就完了？还没呢！！！</p>
-<h3 id="2、conf条件编译"><a href="#2、conf条件编译" class="headerlink" title="2、conf条件编译"></a>2、conf条件编译</h3><p>在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344916337">【初入电子坑之stm32篇（二）】固件库编程</a> 中，我们已经讨论过了诸如 “stm32f10x_conf.h” 这样缝合怪文件，它把所有外设的头文件都包在里面了，极大的简化了我们的代码。但它在官方提供源码中是这样的：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%BC%9D%E5%90%88%E6%80%AA.png" alt="缝合怪"></p>
-<p>调用它需要我们定义一个名为 <strong>USE_STDPERIPH_DRIVER</strong> 的宏。</p>
-<p>所以想要用它，有三种选择：</p>
+<p>那么以掌握的简单通信知识经验来看，我们可以得出以下初步结论：</p>
 <ul>
-<li>找个位置，老老实实把这个宏定义了</li>
-<li>直接把条件编译的语句注释掉</li>
-<li>使用Keil软件的宏定义模板</li>
-</ul>
-<p>这里简单说下keil的宏定义模板。因为只要在这个模板上写好了，以后其它工程只要还需要类似的配置，我们就不需要重新找地方做宏定义or注释条件编译了。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF.png" alt="宏定义模板"></p>
-<p>如上图，还是在option中找到C/C++选项，然后在Define中写入即可。若要进行多个宏定义，中间用逗号隔开。</p>
-<h3 id="3、启动文件选择宏定义"><a href="#3、启动文件选择宏定义" class="headerlink" title="3、启动文件选择宏定义"></a>3、启动文件选择宏定义</h3><p>最后，是关于启动文件选择的问题。</p>
-<p>我们知道stm32因为flash的容量大小，不同分成了很多个不同的启动文件。而固件库为了适配不同型号的芯片，做了如下操作：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E5%AE%8F%E5%AE%9A%E4%B9%89.png" alt="启动文件宏定义"></p>
-<p>条边编译+注释。我们需要用时只要解除对应的宏定义项的注释即可。但每次操作库文件容易存在容易出错、调试不便等问题。所以官方也做了相关的tip——使用软件的宏定义模板。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF.png" alt="宏定义模板"></p>
-<p>如上图。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>创建工程遵从以下步骤：</p>
-<ol>
-<li>合理对应工程文件夹分类</li>
-<li>在IDE中，进一步进行详细的源文件分组</li>
-<li>头文件路径设置</li>
-<li>如果是第一次做此型号的32芯片配置，可能还需要配置<ol>
-<li>固件库配置集合的宏定义</li>
-<li>启动文件选择的宏定义</li>
-</ol>
+<li>如果主机和从机间可以交互，那么这必然是一个半双工的协议</li>
+<li><p>一条数据线连接着多个设备，可能存在多个设备访问总线产生数据冲突问题</p>
 </li>
+<li><p>每个设备必然有一个独立地址</p>
+</li>
+</ul>
+<p>带着以上的初步认识去看协议具体内容，我们可以很快的接受并记住I2C的物理层特性。</p>
+<h3 id="物理层特性"><a href="#物理层特性" class="headerlink" title="物理层特性"></a>物理层特性</h3><ol>
+<li>它是一个支持设备的总线。可连接多个 I2C 通讯设备，支持多个通讯主机、从机。</li>
+<li>每个连接到总线的设备都有一个独立的地址。</li>
+<li>总线通过上拉电阻接到电源。当 I2C 设备空闲时，会输出高阻态，而当所有设备都空<br> 闲，都输出高阻态时，由上拉电阻把总线拉成高电平</li>
+<li>多个主机同时使用总线时，为了防止数据冲突，会利用仲裁方式决定由哪个设备占用总线。</li>
+<li>具有三种传输模式：标准模式传输速率为 <strong>100kbit/s</strong> ，快速模式为 <strong>400kbit/s</strong> ，高速模式下可达 <strong>3.4Mbit/s</strong>。</li>
+<li>连接到相同总线的 IC 数量受到总线的最大电容 400pF 限制 。</li>
 </ol>
+<h2 id="协议层"><a href="#协议层" class="headerlink" title="协议层"></a>协议层</h2><p>协议层定义了：</p>
+<ul>
+<li>起始和停止信号</li>
+<li>数据有效性</li>
+<li>响应</li>
+<li>仲裁</li>
+<li>时钟同步和广播地址</li>
+</ul>
+<p>说白的就是定义了在传输过程中01串的意义。</p>
+<h3 id="传输过程"><a href="#传输过程" class="headerlink" title="传输过程"></a>传输过程</h3><p>我把起始和停止信号、响应信号等基本最基础的操作，称为原子操作。</p>
+<p>在讨论原子操作具体如何实现前，让我们先对I2C的传输过程有个整体认识。</p>
+<p>大致上，I2C的传输过程有这么三种情况：写、读、读写混合</p>
+<h4 id="写过程"><a href="#写过程" class="headerlink" title="写过程"></a>写过程</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E5%86%99%E8%BF%87%E7%A8%8B.png" alt="I2C写过程"></p>
+<p>由上图可知，整个写过程由以下部分组成：</p>
+<ul>
+<li>发送起始信号</li>
+<li>从机地址</li>
+<li>传输模式——写模式</li>
+<li>应答信号（表示从机接收到信号stanby了）</li>
+<li>主机发送n字节数据</li>
+<li>应答or非应答信号</li>
+<li>若是非应答or主机不想收，则主机发送停止信号</li>
+</ul>
+<p>这是个很严谨的过程，每发送一个具体都需要等待对方的应答，只有确定接收端收到之后，才会继续发送数据。在最大程度上保证了数据传输的可靠性。</p>
+<p>值得注意的是，这里的从机地址协议规定了可以选7位或10位，不过绝大多数情况下都是使用7位地址。</p>
+<h4 id="读过程"><a href="#读过程" class="headerlink" title="读过程"></a>读过程</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E8%AF%BB%E8%BF%87%E7%A8%8B.png" alt="I2C读过程"></p>
+<p>整个读过程由以下部分组成：</p>
+<ul>
+<li>发送起始信号</li>
+<li>从机地址</li>
+<li>传输模式——读模式</li>
+<li>应答信号（表示从机接收到信号stanby了）</li>
+<li>主机发送n字节数据（单次发送8位）</li>
+<li>应答or非应答信号</li>
+<li>若是非应答则，主机发送停止信号</li>
+</ul>
+<h4 id="读写混合模式"><a href="#读写混合模式" class="headerlink" title="读写混合模式"></a>读写混合模式</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E8%AF%BB%E5%86%99%E6%B7%B7%E5%90%88%E8%BF%87%E7%A8%8B.png" alt="I2C读写混合过程"></p>
+<p>读写混合过程相较于单独读、写模式来说，复杂了一丢丢。</p>
+<p>它一次通讯有两次操作过程：</p>
+<ul>
+<li>第一次告诉目标从机的要读写的地址</li>
+<li>第二次对目标读写地址进行实际操作</li>
+</ul>
+<p>具体过程有以下部分：</p>
+<ul>
+<li>起始信号</li>
+<li>从机地址</li>
+<li>传输模式——读模式</li>
+<li>应答信号（表示从机接收到信号stanby了）</li>
+<li>主机发送需要读取的目标地址</li>
+<li>应答信号</li>
+<li>二次起始信号</li>
+<li>选择同样的从机</li>
+<li>修改输出模式——写模式</li>
+<li>应答信号</li>
+<li>发送or读取n字节数据</li>
+<li>应答信号</li>
+<li>终止信号</li>
+</ul>
+<p>据本人初步学习分析，之所以有三种模式，应该是对应于三种不同个需求：</p>
+<ul>
+<li>只需要输出的，应该是诸如显示器一类</li>
+<li>只需要读取的，应该是传感器的数据</li>
+<li>像读写混合这样先定位准确的位置，再读写数据的，应该只能是存储器了</li>
+</ul>
+<h3 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h3><p>以上传输过程相对来说，还比较宏观。下面我们看看I2C在是如何实现以上种种信号的。</p>
+<p>以下实现皆为协议具体设计，是人为定位的，虽有一定内在设计逻辑在里面，但只需记住定义即可。</p>
+<h4 id="起始和停止信号"><a href="#起始和停止信号" class="headerlink" title="起始和停止信号"></a>起始和停止信号</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E8%B5%B7%E5%A7%8B%E5%92%8C%E5%81%9C%E6%AD%A2%E4%BF%A1%E5%8F%B7%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="起始和停止信号时序图"></p>
+<p>同时满足以下条件时，便是起始信号：</p>
+<ul>
+<li>SCL高电平</li>
+<li>SDA由高电平转低电平时，注意，是电平转换时！！！</li>
+</ul>
+<p>同时满足以下条件时，便是终止信号：</p>
+<ul>
+<li>SCL高电平</li>
+<li>SDA由低电平转高电平</li>
+</ul>
+<h4 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h4><p>也叫数据有效性，它具体定义了01数据的电平表示。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%95%B0%E6%8D%AE%E6%9C%89%E6%95%88%E6%80%A7.png" alt="数据有效性"></p>
+<p>1的表示：</p>
+<ul>
+<li>SCL高电平</li>
+<li>且SDA为高电平</li>
+</ul>
+<p>0的表示：</p>
+<ul>
+<li>SCL高电平</li>
+<li>且SDA为低电平</li>
+</ul>
+<p>而当SCL为低电平时，SDA没有任何意义，这时候就是01表示切换的时机。</p>
+<p>由以上定义可以看出，I2C一个时钟周期只能传输1位数据。</p>
+<p>小结上面几点就是：<strong>SCL为高电平时，数据有效。</strong></p>
+<h4 id="地址及数据方向"><a href="#地址及数据方向" class="headerlink" title="地址及数据方向"></a>地址及数据方向</h4><p>协议定义了地址为7位 or 10位，这个自己选，一般选7位。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%9C%B0%E5%9D%80%E5%8F%8A%E6%96%B9%E5%90%91.png" alt="地址及方向"></p>
+<p>原因很简单，单字节就是8位。地址位7位+方向位恰好是一个字节。</p>
+<p>所以对应的也引申出了两种需要注意的地址叫法：</p>
+<ul>
+<li>最高的7位数据——从机地址</li>
+<li>整个8位数据——写地址/读地址</li>
+</ul>
+<h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><p>接收端每次接受完一个字节信号后，都要向发送端发送一个应答（ACK）或者不应答（NACK）信号。</p>
+<p>协议规定了这个信号在传输一个字节数据后的第9个时钟周期产生。</p>
+<p>这时，若SDA为低电平，则表示应答信号，反之为非应答信号。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>有了以上对I2C协议的理解后。会发现，说白的xxx通讯协议，就是控制电平按照协议标准的方式在总线上变化。只要能实现协议规定的特征电平，就能实现该协议。所以无论是软件还是硬件都可以实现这个协议通信。区别在于，软件实现会消耗CPU资源，而硬件通信可以减少CPU的负担。</p>
  
       <!-- reward -->
       
@@ -228,12 +302,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lzyblog.site/2021/01/11/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E8%A1%A5%E5%85%851%EF%BC%89%E3%80%91%E6%96%B0%E5%BB%BA%E5%9B%BA%E4%BB%B6%E5%BA%93%E5%B7%A5%E7%A8%8B/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lzyblog.site/2021/02/02/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%91I2C%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/" rel="tag">stm32</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1/" rel="tag">通信</a></li></ul>
 
     </footer>
   </div>
@@ -241,19 +315,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/01/16/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%91%E5%9B%BA%E4%BB%B6%E5%BA%93%E7%BC%96%E7%A8%8B/" class="article-nav-link">
+      <a href="/2021/02/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%91%E7%90%86%E8%A7%A3SPI%E5%8D%8F%E8%AE%AE/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            【初入电子坑之stm32篇（二）】固件库编程
+            【初入电子坑之通信入门篇（四）】理解SPI协议
           
         </div>
       </a>
     
     
-      <a href="/2021/01/04/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8Bstm32%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E5%88%9D%E8%AF%86stm32%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/" class="article-nav-link">
+      <a href="/2021/01/21/Embedded/MCU/stm32/%E3%80%90%E5%88%9D%E5%85%A5%E7%94%B5%E5%AD%90%E5%9D%91%E4%B9%8B%E9%80%9A%E4%BF%A1%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%91%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">【初入电子坑之stm32篇（一）】初识stm32与寄存器编程</div>
+        <div class="article-nav-title">【初入电子坑之通信入门篇（一）】通信基础概念</div>
       </a>
     
   </nav>
