@@ -97,19 +97,23 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+  <h2 id="前言">前言</h2>
+<blockquote>
 <p>由寄存器编程我们可以知道，很多时候我们需要修改的值的其实只有单独的某一位，那在stm32中怎么实现对单独一个位的操作呢？位带操作！</p>
 </blockquote>
 <a id="more"></a>
-<h3 id="问题讨论范围"><a href="#问题讨论范围" class="headerlink" title="问题讨论范围"></a>问题讨论范围</h3><ul>
+<h3 id="问题讨论范围">问题讨论范围</h3>
+<ul>
 <li>什么是位带操作？</li>
 <li>位带操作有什么意义？</li>
 <li>怎么进行位带操作？</li>
 </ul>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="位带操作"><a href="#位带操作" class="headerlink" title="位带操作"></a>位带操作</h3><p>位带操作(也叫位段操作)，可以理解为允许进行位操作的地带。</p>
+<h2 id="正文">正文</h2>
+<h3 id="位带操作">位带操作</h3>
+<p>位带操作(也叫位段操作)，可以理解为允许进行位操作的地带。</p>
 <p>由于底层电路设计的原因，stm32单片机单次可操作的存储单元是4Byte，所以想要进行位操作的话从逻辑上是行不通的。但是ST公司考虑到了这种用户需求，在内存地址映射表中专门留出了一块地址。这块地址就被称为了<strong>位带别名区</strong>。</p>
 <p><strong>位带别名区</strong> 的作用很简单，它其实就是在内存映射表的基础上做了二次映射。</p>
-<p> 既然你stm32单次操作最少只能控制4个Byte，那么我们把1Bit当4Byte使用，其中只有最低位的1个Bit操作有效不就可以了嘛。</p>
+<p>既然你stm32单次操作最少只能控制4个Byte，那么我们把1Bit当4Byte使用，其中只有最低位的1个Bit操作有效不就可以了嘛。</p>
 <p>但不是所有内存地址都支持位带操作的，所以支持位带操作的内存地址也就被称为了<strong>位带区</strong>。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E4%BD%8D%E5%B8%A6%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="位带示意图"></p>
 <p>上图就是支持位带操作的区域示意图，蓝色和紫色的箭头指向就是位带区上的每一位进行二次映射后的内存地址区域。</p>
@@ -117,7 +121,8 @@
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%86%85%E5%AD%98%E8%B5%B7%E5%A7%8B%E4%BD%8D%E7%BD%AE.png" alt="内存起始位置"></p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%86%85%E5%AD%98%E6%9C%AB%E4%BD%8D%E7%BD%AE.png" alt="内存末位置"></p>
 <p>可以看到所有片上外设的地址都包含在内了。所以我们操作外设的时候都可以进行位带操作。</p>
-<h3 id="位带操作的意义"><a href="#位带操作的意义" class="headerlink" title="位带操作的意义"></a>位带操作的意义</h3><p>一开始看位带操作的时候，有种鸡肋的感觉。</p>
+<h3 id="位带操作的意义">位带操作的意义</h3>
+<p>一开始看位带操作的时候，有种鸡肋的感觉。</p>
 <p>原因有二：</p>
 <ul>
 <li>腾出远多于实际需要操作的外设、SRAM内存，只为了可以单独操作极少部分内存的一个bit，这值得吗？</li>
