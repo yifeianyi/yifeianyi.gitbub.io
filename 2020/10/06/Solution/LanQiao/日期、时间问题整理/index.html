@@ -102,7 +102,7 @@
 <p>这类问题如果自身码力不够且之前没接触过的话，有一定的翻车概率。</p>
 <p>为避免自己在该问题上翻车，特此整理一下。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="日期问题"><a href="#日期问题" class="headerlink" title="日期问题"></a>日期问题</h2><p>对于日期问题，无论它怎么考，有个点肯定是少不了的，那就是判断闰年。虽然这判断的完成难度是语法课级别的，但由于条件容易忘记<del>（也许这只是我菜的问题）</del>所以我觉得这里还是有必要记录下，以防到时忘记翻车。</p>
 <h4 id="闰年判断"><a href="#闰年判断" class="headerlink" title="闰年判断"></a>闰年判断</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span> <span class="params">(<span class="keyword">int</span> year)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(year%<span class="number">4</span> == <span class="number">0</span> &amp;&amp; year%<span class="number">100</span> || year%<span class="number">400</span>==<span class="number">0</span> )<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>除了闰年判断外，这个东西有玩头的莫过于给两个日期，然后问你在这两个日期间有多少符合题目给定的约束条件的、这两个日期间有多少天之类。如果是简单循环模拟的话，其实也不是辣么好写，可能存在一些边界情况。</p>

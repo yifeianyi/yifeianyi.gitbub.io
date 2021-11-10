@@ -6,7 +6,7 @@
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>离散化概念简单，但在具体落实过程发现，初学时实现细节上还有点小问题，且网上大都是很抽象化的理解总结，没有具体代码实例辅以讲解。所以，在这里还是记录一下自己的一些心得。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>离散化是程序设计中一个常用的技巧，<strong>它可以有效的降低时间复杂度</strong>。其基本思想就是在众多可能的情况中，只考虑需要用的值。离散化可以改进一个低效的算法，甚至实现根本不可能实现的算法。要掌握这个思想，必须从大量的题目中理解此方法的特点。例如，在建造线段树空间不够的情况下，可以考虑离散化。</p>
 <p>上面是在网上找到我觉得比较好的一种关于离散化的解释。</p>
 <p>但如果只看这段文字的话，对于离散化的概念理解上还是有点抽象。现在，让我们来看一道具体实例来体会一下：</p>
@@ -67,7 +67,7 @@
     <title>Linux 监控工具</title>
     <url>/2021/08/23/Linux/Base/Linux-%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7/</url>
     <content><![CDATA[<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Linux/%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%AF%BC%E5%9B%BE_1.png" alt="监测工具导图"></p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="NetHogs"><a href="#NetHogs" class="headerlink" title="NetHogs"></a>NetHogs</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>一个开源的命令行工具（类似于Linux的top命令），用来按进程或程序<strong>实时统计</strong>网络带宽使用率。</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
 <li>默认情况</li>
@@ -177,7 +177,7 @@
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>vim这款文本编辑器很强大，但由于它的模式多样、指令繁多，容易让初学者感到入门，畏惧不前。而由于本人近期学习安排中也需要用到vim（避无可避的程度），无奈之下只能试着硬上了，在这个过程中无意想通了正确的学习姿势，以下是个人的思考笔记。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="本文大纲"><a href="#本文大纲" class="headerlink" title="本文大纲"></a>本文大纲</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210519200921571.png" alt="image-20210519200921571"></p>
 <h2 id="理清问题"><a href="#理清问题" class="headerlink" title="理清问题"></a>理清问题</h2><p>通过的思考，我发现vim之所以难学，有这么几个原因：</p>
 <ol>
@@ -293,7 +293,7 @@
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>定时器，顾名思义是拿来定时的，但除了定时之外，我们还可以利用定时器的计数特性，演变出其他有意思的功能出来（诸如控制马达转速）。不过在这之前，我们还是先了解了解定时器的工作原理叭。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="本文概览"><a href="#本文概览" class="headerlink" title="本文概览"></a>本文概览</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210424160856026.png" alt="image-20210424160856026"></p>
 <h2 id="一、定时器基本概念"><a href="#一、定时器基本概念" class="headerlink" title="一、定时器基本概念"></a>一、定时器基本概念</h2><h3 id="1-1、计数宽度"><a href="#1-1、计数宽度" class="headerlink" title="1.1、计数宽度"></a>1.1、计数宽度</h3><p>这里指计数器的位数。如：CM3内核中Systick定时器的计数位有24位，即最大计数值为 2<sup>24</sup> -1= 16,777,215。我们就说Systick的计数宽度为24。</p>
 <h3 id="1-2、工作模式"><a href="#1-2、工作模式" class="headerlink" title="1.2、工作模式"></a>1.2、工作模式</h3><p>定时器是人设计，而设计是自由的。既然你规定了计数的数值范围，那么我们从0数到16,777,215，跟从16,777,215 数到 0 都是可以的不是嘛，所以这就引申出了工作模式的概念：</p>
@@ -357,7 +357,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<blockquote>
 <p>此文是本人以电子小白的身份，从单片机开始入电子坑以来的自我反省与总结（踩得坑有点多）。也是【初入电子坑】系列个人笔记的索引。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="本文主要内容"><a href="#本文主要内容" class="headerlink" title="本文主要内容"></a>本文主要内容</h2><ul>
 <li>导言</li>
 <li><p>学单片机的原因</p>
@@ -439,7 +439,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>SPI 协议(Serial Peripheral Interface)，即串行外设接口，是一种高速串行全双工的通信总线。它被广泛地使用在 ADC、LCD 等设备与 MCU 间，要求通讯速率较高的场合。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/SPI%E5%8D%8F%E8%AE%AE%E6%A1%86%E5%9B%BE.png" alt="SPI协议框图"></p>
 <p>上面是SPI的物理连接图。主要可以分为四部分：</p>
 <ul>
@@ -498,7 +498,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>I2C 通讯协议(Inter－Integrated Circuit)，是一种比较简单的同步串行协议。因其所需引脚少、硬件实现简单、扩展性强，现在广泛用于系统内多个集成电路（IC）间的通讯。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>物理层</li>
 <li>协议层<ul>
@@ -650,7 +650,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>通信是嵌入式的重要组成部分，本人简单试水过后发现此坑略深，以目前应用为主的策略来看，不宜陷得太深。所以这系列笔记文章主要围绕“这是什么？”“它的大致原理是什么？”展开讨论。基本上会忽略绝大多数诸如“为什么需要它？/它是怎么顺理成章的推出来的？”的这类问题。（因本人才疏学浅，若有叙述不当之处，恳请各位大佬指正。）</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210427232632309.png" alt="image-20210427232632309"></p>
 <h2 id="一、通信本质"><a href="#一、通信本质" class="headerlink" title="一、通信本质"></a>一、通信本质</h2><p>通信通信，说白的就是信息互通。人跟人间的信息互通、机器跟机器间的信息互通、机器跟人间的信息互通。</p>
 <p>而想要做到互通，主要有两个问题需要解决，“<strong>信息该如何表示？</strong>”和“<strong>信息该如何传输？</strong>”两个核心问题。</p>
@@ -762,7 +762,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<h2 id="理解中断与stm32中断配置-lt-center-gt"><a href="#理解中断与stm32中断配置-lt-center-gt" class="headerlink" title="理解中断与stm32中断配置&lt;/center &gt;"></a><center>理解中断与stm32中断配置&lt;/center &gt;</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>按照个人习惯，本文将从“这是啥？”“为啥需要它？”“如何操作？”三个角度展开讨论分析。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>中断简介</li>
 <li>中断理解</li>
@@ -944,7 +944,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
 </ul>
 <p>当然，由于本人学识不足，且时钟略复杂，所以这里只能说是对时钟有一个感性的初步理解，如有错误，还望不吝指正。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>一、时钟简介</li>
 <li>二、stm32时钟树</li>
@@ -1107,7 +1107,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>由寄存器编程我们可以知道，很多时候我们需要修改的值的其实只有单独的某一位，那在stm32中怎么实现对单独一个位的操作呢？位带操作！</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="问题讨论范围"><a href="#问题讨论范围" class="headerlink" title="问题讨论范围"></a>问题讨论范围</h3><ul>
 <li>什么是位带操作？</li>
 <li>位带操作有什么意义？</li>
@@ -1155,7 +1155,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
 <p>在<a href="https://zhuanlan.zhihu.com/p/344913189">【初入电子坑之stm32篇（一）】初识stm32与寄存器编程</a>中可以看到，寄存器编程虽然消耗CPU性能少、速度快。但于我们开发应用来说，那就是刀耕火种中的刀耕火种。。。</p>
 <p>芯片厂家也考虑到了这点，所以一般会提供一些基本的固件库供开发人员使用。stm32的爸爸ST公司自然也不例外。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="CMSIS标准"><a href="#CMSIS标准" class="headerlink" title="CMSIS标准"></a>CMSIS标准</h2><p>一种内核架构通常会被多家芯片厂家采用，而芯片厂家对于芯片内部的外设布置是有差异的，这就很容易导致软件在同内核，不同外设的芯片上移植困难。</p>
 <p>为了解决这个问题，设计架构的公司和使用架构的芯片厂商间就会制定一个标准，让软件可以适配同内核不同外设的芯片的情况。</p>
 <p>而CMSIS标准(Cortex MicroController Software Interface Standard) 就是 ARM 与芯片厂商建立的一种标准实例。</p>
@@ -1224,7 +1224,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>新建基于固件库的工程，不理清构建流程的话，看上去还是有点繁琐的，在此记录一下。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>为了做到心中有数，我们先要搞清楚为什么这么干。</p>
 <p>首先，我们知道，所谓的固件库编程，就是ST公司为了提高广大开发者的开发效率从而提供给大家的一套驱动程序。</p>
 <p>我们在工程中想要使用这套程序自然就要先从官方提供的资料中把我们需要的源码copy到自己的工程中去。而又因为这些源码文件有点多，所以为了后面的维护考虑，我们要对这些文件进行分类。</p>
@@ -1303,7 +1303,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>以下为本人基于野火stm32F103EVT6开发板学习stm32的学习笔记。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="导图概览"><a href="#导图概览" class="headerlink" title="导图概览"></a>导图概览</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%88%9D%E8%AF%86stm32%E6%A6%82%E8%A7%88.png" alt="初识stm32概览"></p>
 <h2 id="初识32"><a href="#初识32" class="headerlink" title="初识32"></a>初识32</h2><h3 id="1、下载方式"><a href="#1、下载方式" class="headerlink" title="1、下载方式"></a>1、下载方式</h3><p>把单片机耍起来，除了要写程序外，当然还得把程序下载到单片机的上啦！而单片机一般有以下两种下载程序方式：</p>
 <ul>
@@ -1444,7 +1444,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
 <p>本文为王爽的《汇编语言》第1-3章笔记。</p>
 <p>按照我的个人习惯，我会尽量把每个知识点的前后逻辑关系、相关的学习感悟都捋丝滑，尽力做到水到渠成。但若想系统学习汇编语言，个人觉得还是有必要自己去刷一遍王爽的《编译语言》。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="本文导图"><a href="#本文导图" class="headerlink" title="本文导图"></a>本文导图</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051909.png" alt="汇编语言"></p>
 <h2 id="时刻铭记"><a href="#时刻铭记" class="headerlink" title="时刻铭记"></a>时刻铭记</h2><p>学习汇编的主要目的，是通过用汇编语言进行编程而深入地理解计算机底层的基本工作机理。</p>
 <h2 id="1、基础知识"><a href="#1、基础知识" class="headerlink" title="1、基础知识"></a>1、基础知识</h2><p>基础知识部分主要介绍了什么是汇编？CPU对内存的处理方式等。</p>
@@ -1517,7 +1517,7 @@ t = CNT ×T_{CNT}</script><p>当向上计数or向下计数达到了CNT次后，�
     <url>/2020/11/05/Solution/NiuKe/%E7%89%9B%E5%AE%A2%20%E6%95%B0%E5%AD%A6%E8%80%83%E8%AF%95/</url>
     <content><![CDATA[<p>原题链接：<a href="https://ac.nowcoder.com/acm/problem/15553">https://ac.nowcoder.com/acm/problem/15553</a></p>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>今天qwb要参加一个数学考试，这套试卷一共有n道题，每道题qwb能获得的分数为ai，qwb并不打算把这些题全做完，<br> 他想选总共2k道题来做，并且期望他能获得的分数尽可能的大，他准备选2个不连续的长度为k的区间,<br> 即[L,L+1,L+2,….,L+k-1]，[R,R+1,R+2,…,R+k-1]（R &gt;= L+k）。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一行一个整数T（T&lt;&#x3D;10）,代表有T组数据</span><br><span class="line">接下来一行两个整数n,k,(1&lt;&#x3D;n&lt;&#x3D;200,000),(1&lt;&#x3D;k,2k &lt;&#x3D; n)</span><br><span class="line">接下来一行n个整数a1,a2,...,an，（-100,000&lt;&#x3D;ai&lt;&#x3D;100,000）</span><br></pre></td></tr></table></figure>
 <h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输出一个整数，qwb能获得的最大分数</span><br></pre></td></tr></table></figure>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>首先预判下该题的时间复杂度。n&lt;=200,000,极限数据下n<sup>2</sup>会TLE，所以可推断出时间复杂度至多为<strong>nlogn</strong>量级。再看题划重点——选2个不连续的长度为k的区间，即：“求两个固定长度的最大区间和”，那么很自然想到用前缀和。</p>
@@ -1549,7 +1549,7 @@ ans=max\left\{ans,Ma+a[i+k]-a[i]\right\}</script><p>这个算法的时间复杂�
 <script type="math/tex; mode=display">
 a'_i=(\sum_{j=1}^{n}a_j)-a_i</script><p> 现在有 m 次询问，每次给定 x,t ，表示询问经过 t 次再编号后第 x 个人的编号。</p>
 <p> 由于答案可能很大，所以对 10<sup>9</sup>+7 取模。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一行 2 个数 n,m ，表示人数和询问次数；</span><br><span class="line"></span><br><span class="line">接下来一行 n 个数，表示 ai；</span><br><span class="line"></span><br><span class="line">接下来 m 行，每行 2 个数 x,t ，描述一次询问。</span><br></pre></td></tr></table></figure>
 <h2 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a>输出描述:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">m 行，第 i 行 1 个数表示第 i 次询问的答案对 10^9+7 取模的结果。</span><br></pre></td></tr></table></figure>
 <h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4 3</span><br><span class="line">1 2 3 4</span><br><span class="line">1 0</span><br><span class="line">2 2</span><br><span class="line">4 1</span><br></pre></td></tr></table></figure>
@@ -1616,7 +1616,7 @@ an[t]+D[x] & & t为偶数
 <p>但是若数据量级达到百万千万级别以上，频繁的进行区间修改的话，<strong>O(n)</strong>复杂度还是太慢了。</p>
 <p>而对于一组不会发生增删节点的离线数据来说，差分数组是区间修改的最优选择。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>差分，其实可以看成前缀和的一种逆运算。即：</p>
 <script type="math/tex; mode=display">
 b[i]=a[i]-a[i-1]</script><p>其中<strong>a[i]</strong>为原数组<strong>(你也可以把它看成前缀和数组)</strong>，<strong>b[i]</strong>为差分数组。</p>
@@ -1699,7 +1699,7 @@ a[i]=b[i]+a[i-1]</script><p>所以若对b[i]进行修改，那么包括位置i�
 <p>答案很大，你只需要给出方案数除以 2020 的余数即可。</p>
 </blockquote>
 <p><strong>答案提交</strong><br>这是一道结果填空题，你只需要算出结果后提交即可。<br>本题的结果为一个整数，在提交答案时只填写这个整数，填写多余的内容将无法得分。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由题意我们大概可以简要得到下图的信息。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051634.PNG" alt="示例图（1）" style="zoom:50%;" /></p>
 <script type="math/tex; mode=display">
@@ -1753,7 +1753,7 @@ f[i][j-1]\quad \quad\quad\quad\quad\quad, i-1<j
 <p>例如 12 和 345 可以拼成 12345 或 34512。</p>
 <p>注意交换 A<sub>i</sub>  和 A<sub>j</sub>   的顺序总是被视为 2种拼法，即便是  A<sub>i</sub>  = A<sub>j</sub>   时。</p>
 <p>请你计算有多少种拼法满足拼出的整数是 K 的倍数。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行包含 22 个整数 n 和 K。</p>
 <p>第二行包含 n 个整数  A<sub>1</sub> , A<sub>2</sub> ,⋅⋅⋅, A<sub>n</sub> 。</p>
 <h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>一个整数代表答案。</p>
@@ -1799,7 +1799,7 @@ ans=ans+cnt[\ log_{10}a[j]\ ][\ (a[i]\  × 10^{log_{10}a[j]}) \ \% \ k \ ]</scri
 <p>结合以上叙述的种种，本蒟蒻唯有靠积累做贪心的经验、加强数学思维锻炼，以增强自身直觉能力一途可走。</p>
 <p>以下为本人做过的贪心习题记录与我自己写的题解分析总结。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <p><a href="https://www.acwing.com/problem/content/1057/">Acwing 1055. 股票买卖 II</a>  </p>
 <p><a href="https://www.acwing.com/problem/content/106/">Acwing 104.货仓选址</a></p>
 <p><a href="https://www.acwing.com/problem/content/124/">Acwing 122.糖果传递</a></p>
@@ -1830,7 +1830,7 @@ ans=ans+cnt[\ log_{10}a[j]\ ][\ (a[i]\  × 10^{log_{10}a[j]}) \ \% \ k \ ]</scri
 </ol>
 <p>例如一块 6×5 的巧克力可以切出 6 块 2×2 的巧克力或者 2 块 3×3 的巧克力。</p>
 <p>当然小朋友们都希望得到的巧克力尽可能大，你能帮小明计算出最大的边长是多少么？</p>
-<a id="more"></a>
+<span id="more"></span>
 <h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行包含两个整数 N 和 K。</p>
 <p>以下 N 行每行包含两个整数H<sub>i</sub>和W<sub>i</sub> 。</p>
 <p>输入保证每位小朋友至少能获得一块1×1 的巧克力。</p>
@@ -1857,7 +1857,7 @@ else \quad R=mid-1</script><h4 id="代码"><a href="#代码" class="headerlink" 
     <content><![CDATA[<p><a href="https://www.acwing.com/problem/content/1232/">题目链接</a></p>
 <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个长度为 N的数列，A<sub>1</sub>,A<sub>2</sub>,…A<sub>N</sub>，如果其中一段连续的子序列 A<sub>i</sub>,A<sub>i+1</sub>,…A<sub>j</sub>之和是 K的倍数，我们就称这个区间 【i,j】 是 K倍区间。</p>
 <p>你能求出数列中总共有多少个 K 倍区间吗？</p>
-<a id="more"></a>
+<span id="more"></span>
 <h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>输出一个整数，代表 K倍区间的数目。</p>
 <h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>1 ≤ N , K ≤ 100000<br>1 ≤ A<sub>i</sub> ≤100000</p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>首先看到 Max(N)=1e5 ,可以判断出这题时间复杂度需在O(NlogN)以内。</p>
@@ -1894,7 +1894,7 @@ s[R]\%k = s[L-1]\%k</script><p>所以，我们只要统计一下,在R固定的�
 <p>并在相关知识点最后给出了对应的应用场景和习题令读者加深理解。</p>
 <p>以下为本人对本章的学习笔记</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309050829.png" alt="信息的表示和处理"></p>
 <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="2-1、信息存储"><a href="#2-1、信息存储" class="headerlink" title="2.1、信息存储"></a>2.1、信息存储</h3><h4 id="2-1-1、字数据大小"><a href="#2-1-1、字数据大小" class="headerlink" title="2.1.1、字数据大小"></a>2.1.1、字数据大小</h4><p><strong>定义</strong>：每台计算机都有一个<strong>字长</strong>(word size),指明指针数据的标称大小。</p>
 <p>我们常常说一个计算机是32位的、64位的，说的就是计算机的字长。</p>
@@ -2009,7 +2009,7 @@ B2T_ω (\vec{x})=-x_{ω-1}2^{ω-1}\ +\ \sum_{i=0}^{ω-2}x_i2^i</script><p>其中
 <p>这类问题如果自身码力不够且之前没接触过的话，有一定的翻车概率。</p>
 <p>为避免自己在该问题上翻车，特此整理一下。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="日期问题"><a href="#日期问题" class="headerlink" title="日期问题"></a>日期问题</h2><p>对于日期问题，无论它怎么考，有个点肯定是少不了的，那就是判断闰年。虽然这判断的完成难度是语法课级别的，但由于条件容易忘记<del>（也许这只是我菜的问题）</del>所以我觉得这里还是有必要记录下，以防到时忘记翻车。</p>
 <h4 id="闰年判断"><a href="#闰年判断" class="headerlink" title="闰年判断"></a>闰年判断</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span> <span class="params">(<span class="keyword">int</span> year)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(year%<span class="number">4</span> == <span class="number">0</span> &amp;&amp; year%<span class="number">100</span> || year%<span class="number">400</span>==<span class="number">0</span> )<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>除了闰年判断外，这个东西有玩头的莫过于给两个日期，然后问你在这两个日期间有多少符合题目给定的约束条件的、这两个日期间有多少天之类。如果是简单循环模拟的话，其实也不是辣么好写，可能存在一些边界情况。</p>
@@ -2037,7 +2037,7 @@ B2T_ω (\vec{x})=-x_{ω-1}2^{ω-1}\ +\ \sum_{i=0}^{ω-2}x_i2^i</script><p>其中
     <title>Hello World</title>
     <url>/2020/10/04/hello-world/</url>
     <content><![CDATA[<p>这大概算是我第一次建站吧，瞎搞了两三天，一步一个坑的终于把它部署好了。当我输入自定义的域名，Chrome成功加载出页面那一刻，感觉一切都值了！</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>以前虽然也想过自己搭建一个Blog写博文，但当时过于心浮气躁，没能沉下心研究怎么建站，就随便在博客园上申请了个账号，佛系的时不时写几篇博文，<em><del>(果然容易得到的就是不知道珍惜啊)</del></em>也没啥长进。</p>
 <p>况且脑子里一直有个声音<strong>搞技术的怎么可以没有一个自己搭的个站呢？</strong>于是，在种种原因下，这次终于把个站搞起来了。</p>
 <p>88大洋买了3年的域名，跟过去说88。日后戒骄戒躁，脚踏实地努力修仙。</p>

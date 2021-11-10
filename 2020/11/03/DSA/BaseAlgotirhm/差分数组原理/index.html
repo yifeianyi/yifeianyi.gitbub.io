@@ -103,7 +103,7 @@
 <p>但是若数据量级达到百万千万级别以上，频繁的进行区间修改的话，<strong>O(n)</strong>复杂度还是太慢了。</p>
 <p>而对于一组不会发生增删节点的离线数据来说，差分数组是区间修改的最优选择。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>差分，其实可以看成前缀和的一种逆运算。即：</p>
 <script type="math/tex; mode=display">
 b[i]=a[i]-a[i-1]</script><p>其中<strong>a[i]</strong>为原数组<strong>(你也可以把它看成前缀和数组)</strong>，<strong>b[i]</strong>为差分数组。</p>

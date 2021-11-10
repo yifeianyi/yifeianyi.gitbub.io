@@ -100,7 +100,7 @@
   <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>定时器，顾名思义是拿来定时的，但除了定时之外，我们还可以利用定时器的计数特性，演变出其他有意思的功能出来（诸如控制马达转速）。不过在这之前，我们还是先了解了解定时器的工作原理叭。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="本文概览"><a href="#本文概览" class="headerlink" title="本文概览"></a>本文概览</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/image-20210424160856026.png" alt="image-20210424160856026"></p>
 <h2 id="一、定时器基本概念"><a href="#一、定时器基本概念" class="headerlink" title="一、定时器基本概念"></a>一、定时器基本概念</h2><h3 id="1-1、计数宽度"><a href="#1-1、计数宽度" class="headerlink" title="1.1、计数宽度"></a>1.1、计数宽度</h3><p>这里指计数器的位数。如：CM3内核中Systick定时器的计数位有24位，即最大计数值为 2<sup>24</sup> -1= 16,777,215。我们就说Systick的计数宽度为24。</p>
 <h3 id="1-2、工作模式"><a href="#1-2、工作模式" class="headerlink" title="1.2、工作模式"></a>1.2、工作模式</h3><p>定时器是人设计，而设计是自由的。既然你规定了计数的数值范围，那么我们从0数到16,777,215，跟从16,777,215 数到 0 都是可以的不是嘛，所以这就引申出了工作模式的概念：</p>
