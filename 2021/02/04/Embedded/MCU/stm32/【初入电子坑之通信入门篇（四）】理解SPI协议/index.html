@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">832</span>
+            <span class="post-count">833</span>
         </span>
     </span>
 
@@ -97,11 +97,13 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+  <h2 id="简介">简介</h2>
+<blockquote>
 <p>SPI 协议(Serial Peripheral Interface)，即串行外设接口，是一种高速串行全双工的通信总线。它被广泛地使用在 ADC、LCD 等设备与 MCU 间，要求通讯速率较高的场合。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/SPI%E5%8D%8F%E8%AE%AE%E6%A1%86%E5%9B%BE.png" alt="SPI协议框图"></p>
+<h2 id="物理层">物理层</h2>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/SPI%E5%8D%8F%E8%AE%AE%E6%A1%86%E5%9B%BE.png" alt="SPI协议框图"></p>
 <p>上面是SPI的物理连接图。主要可以分为四部分：</p>
 <ul>
 <li>SCK：由主机产生，协议不设上面，频率上限主要看设备。</li>
@@ -110,15 +112,19 @@
 <li>SS：也称为NSS、CS，片选信号线。用于选择从机，一条片选线对应一个从机。</li>
 </ul>
 <p>拓扑结构上比I2C稍微复杂一丢丢，但十分好理解。</p>
-<h2 id="协议层"><a href="#协议层" class="headerlink" title="协议层"></a>协议层</h2><p>I2C协议只有两根总线，所有信息传输更是只能通过那一根数据总线进行，所以规定了3种传输方式。</p>
+<h2 id="协议层">协议层</h2>
+<p>I2C协议只有两根总线，所有信息传输更是只能通过那一根数据总线进行，所以规定了3种传输方式。</p>
 <p>而SPI协议有四根线，可操作空间大，自然不比像I2C一样限定多种模式。在传输模式上比较自由，没有固定的传输模式，只需学习原子操作即可。（PS：传输模式其实是有的，不过具体到每个外设的传输模式都不同，还需要具体情况具体分析。）</p>
-<h3 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h3><h4 id="1）起始和停止信号"><a href="#1）起始和停止信号" class="headerlink" title="1）起始和停止信号"></a>1）起始和停止信号</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%89%87%E9%80%89%E7%BA%BF.png" alt="片选线"></p>
+<h3 id="原子操作">原子操作</h3>
+<h4 id="1-起始和停止信号">1）起始和停止信号</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E7%89%87%E9%80%89%E7%BA%BF.png" alt="片选线"></p>
 <p>非常简单易看。以连接主机和从机的NSS线状态为准：</p>
 <ul>
 <li>高——&gt;低：起始信号</li>
 <li>低——&gt;高：停止信号</li>
 </ul>
-<h4 id="2）数据有效性"><a href="#2）数据有效性" class="headerlink" title="2）数据有效性"></a>2）数据有效性</h4><p>由于SPI线多，财大气粗，所以相对而言比较随心所欲，没有固定的表示0/1电平的形式。</p>
+<h4 id="2-数据有效性">2）数据有效性</h4>
+<p>由于SPI线多，财大气粗，所以相对而言比较随心所欲，没有固定的表示0/1电平的形式。</p>
 <p>但究其通信本质，数据信号线的状态无非就三种：</p>
 <ul>
 <li>空闲没东西发</li>
@@ -130,12 +136,14 @@
 <li>CPOL：clock pole，时钟极性。</li>
 <li>CPHA：clock phase，时钟相位。</li>
 </ul>
-<h5 id="CPOL时钟极性"><a href="#CPOL时钟极性" class="headerlink" title="CPOL时钟极性"></a>CPOL时钟极性</h5><p>定义了时钟线空闲状态时的电平情况。</p>
+<h5 id="cpol时钟极性">CPOL时钟极性</h5>
+<p>定义了时钟线空闲状态时的电平情况。</p>
 <ul>
 <li>CPOL=0：低电平空闲</li>
 <li>CPOL=1：高电平空闲</li>
 </ul>
-<h5 id="CPHA时钟相位"><a href="#CPHA时钟相位" class="headerlink" title="CPHA时钟相位"></a>CPHA时钟相位</h5><p>SPI的0/1信号 由边沿触发时表示。我们知道，边沿有两不同的状态——上下边沿。而一个时钟周期有两个边沿（上下边沿）。所以要精确的进行数据表示的话，我们必须留出一个边沿来作为电平切换用，即数据无效区。说白的就是一个时钟周期只能传输1位数据。</p>
+<h5 id="cpha时钟相位">CPHA时钟相位</h5>
+<p>SPI的0/1信号 由边沿触发时表示。我们知道，边沿有两不同的状态——上下边沿。而一个时钟周期有两个边沿（上下边沿）。所以要精确的进行数据表示的话，我们必须留出一个边沿来作为电平切换用，即数据无效区。说白的就是一个时钟周期只能传输1位数据。</p>
 <p>而CPHA就是定义了具体数据线MOSI和MISO在哪个边沿表示的数据有效。</p>
 <ul>
 <li>CPHA=0：奇数边沿采样</li>
@@ -143,7 +151,8 @@
 </ul>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="时序图"></p>
 <p>这个边沿的计数从SS片选线的起始信号开始后，SCK的第一个边沿开始计算。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，对于SPI协议的主干内容就结束了。。。没错，结束了。。。官方文档其余的内容，更多的是关于寄存器和相关参数的内容，协议本身的核心内容就辣么点。</p>
+<h2 id="总结">总结</h2>
+<p>至此，对于SPI协议的主干内容就结束了。。。没错，结束了。。。官方文档其余的内容，更多的是关于寄存器和相关参数的内容，协议本身的核心内容就辣么点。</p>
 <p>跟I2C相比，SPI协议本身连应答确认机制都没有，十分的简单的粗暴。。。好处是，相对于无标准状态下，各路厂家自由放飞导致的不同厂家间接口不兼容，SPI提供了一个相对普适的基础通信框架。既统一了标准，又给足了厂家们根据自身产品需求对该框架魔改的空间。</p>
  
       <!-- reward -->

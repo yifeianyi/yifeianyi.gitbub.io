@@ -97,48 +97,74 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
+  <h3 id="问题描述">问题描述</h3>
+<blockquote>
 <p>把 1 ∼ 2020 放在 2 × 1010 的矩阵里。</p>
 <p>要求同一行中右边的比左边大，同一列中下边的比上边的大。一共有多少种方案？</p>
 <p>答案很大，你只需要给出方案数除以 2020 的余数即可。</p>
 </blockquote>
-<p><strong>答案提交</strong><br>这是一道结果填空题，你只需要算出结果后提交即可。<br>本题的结果为一个整数，在提交答案时只填写这个整数，填写多余的内容将无法得分。</p>
+<p><strong>答案提交</strong><br>
+这是一道结果填空题，你只需要算出结果后提交即可。<br>
+本题的结果为一个整数，在提交答案时只填写这个整数，填写多余的内容将无法得分。</p>
 <a id="more"></a>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由题意我们大概可以简要得到下图的信息。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051634.PNG" alt="示例图（1）" style="zoom:50%;" /></p>
-<script type="math/tex; mode=display">
+<h3 id="分析">分析</h3>
+<p>由题意我们大概可以简要得到下图的信息。</p>
+<img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051634.PNG" alt="示例图（1）" style="zoom:50%;" />
+$$
 \begin{cases}
   A<C<D \\
   A<B<D
+<p>\end{cases}</p>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Can&#039;t use function &#039;$&#039; in math mode at position 345: …:33%;&quot; /&gt;
 
-\end{cases}</script><p>从上图示意中，我们可以发现A一定是最小的数。而与A相邻的B和C一定是仅小于A的两个数。例如：<strong>若A=1，那么D绝对不可能等于2。</strong></p>
-<p>因此，对于每个数的放法，一定是从最左边开始的。</p>
-<p>对于一个新放的数：</p>
-<ul>
-<li>要么紧挨着放在上边一行</li>
-<li>要么紧挨着放在下边一行</li>
-</ul>
-<p>且对于第二种情况必然是建立在上边一行已经放置的情况之下。</p>
-<p>这种后一个的放法，仅受前一个放法影响的问题，显然具备无后效性，可以用DP的思想思考它。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051649.PNG" alt="DP分析过程" style="zoom:33%;" /></p>
-<p>上述的 $ f[i][j] $表示第一行有 i 个数，第二行有 j 个数放法。</p>
-<p>当我们要放一个数的时,合理放法（即: <strong>i - 1 ≥  j</strong>）:</p>
-<ul>
-<li>若放第一行，那放法数就有f[ i-1 ][ j ] 种</li>
-<li>若放第二行，那放法数就有f[ i ][ j-1 ] 种</li>
-</ul>
-<p>经我们上面的推导，<strong>第一行已放置的i个数的个数必然大于等于第二行已放置的j个数的个数</strong>。</p>
-<p>所以，当出现如下图这种$ i = j $的情况时：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051726.png" alt="流程解释"></p>
-<p>新的数必然只能放第一行，此时的放法总数与 $ f[i][j-1]  $ 相等。</p>
-<p>所以综上所述</p>
-<script type="math/tex; mode=display">
-f[i][j]=
-\begin{cases}
-f[i-1][j]+f[i][j-1] \quad ,i-1≥j\\
-f[i][j-1]\quad \quad\quad\quad\quad\quad, i-1<j
-\end{cases}</script><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">1020</span>][<span class="number">1020</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;               <span class="comment">// 两行一个数字都不放，也是一种方案</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1010</span>; i ++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j ++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i - <span class="number">1</span> &gt;= j)    </span><br><span class="line">            	f[i][j] += f[i - <span class="number">1</span>][j] % <span class="number">2020</span>;</span><br><span class="line">            <span class="keyword">if</span>(j)</span><br><span class="line">            	f[i][j] += f[i][j - <span class="number">1</span>] % <span class="number">2020</span>;</span><br><span class="line">        &#125;</span><br><span class="line">   	<span class="built_in">cout</span>&lt;&lt;f[<span class="number">1010</span>][<span class="number">1010</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这题其实是经典例题<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/273/">Acwing 271. 杨老师的照相排列</a>的简化版。</p>
+上述的 $̲ f\[i][j] $表示第一…'>从上图示意中，我们可以发现A一定是最小的数。而与A相邻的B和C一定是仅小于A的两个数。例如：**若A=1，那么D绝对不可能等于2。**
+
+因此，对于每个数的放法，一定是从最左边开始的。
+
+对于一个新放的数：
+
+- 要么紧挨着放在上边一行
+- 要么紧挨着放在下边一行
+
+且对于第二种情况必然是建立在上边一行已经放置的情况之下。
+
+这种后一个的放法，仅受前一个放法影响的问题，显然具备无后效性，可以用DP的思想思考它。
+
+&lt;img src=&quot;https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051649.PNG&quot; alt=&quot;DP分析过程&quot; style=&quot;zoom:33%;&quot; /&gt;
+
+上述的 $ f\[i][j] $表示第一行有 i 个数，第二行有 j 个数放法。
+
+当我们要放一个数的时,合理放法（即: **i - 1 ≥  j**）:
+
+- 若放第一行，那放法数就有f\[ i-1 ][ j ] 种
+- 若放第二行，那放法数就有f\[ i ][ j-1 ] 种
+
+经我们上面的推导，**第一行已放置的i个数的个数必然大于等于第二行已放置的j个数的个数**。
+
+所以，当出现如下图这种$ i = j $的情况时：
+
+![流程解释](https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/20210309051726.png)
+
+新的数必然只能放第一行，此时的放法总数与 $ f\[i][j-1]  $ 相等。
+
+所以综上所述
+</p>
+<p>f[i][j]=<br>
+\begin{cases}<br>
+f[i-1][j]+f[i][j-1] \quad ,i-1≥j\<br>
+f[i][j-1]\quad \quad\quad\quad\quad\quad, i-1&lt;j<br>
+\end{cases}</p>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;#&#039; at position 3: 
+
+#̲### 代码
+
+&lt;!--cod…'>
+
+#### 代码
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">1020</span>][<span class="number">1020</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;               <span class="comment">// 两行一个数字都不放，也是一种方案</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1010</span>; i ++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j ++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i - <span class="number">1</span> &gt;= j)    </span><br><span class="line">            	f[i][j] += f[i - <span class="number">1</span>][j] % <span class="number">2020</span>;</span><br><span class="line">            <span class="keyword">if</span>(j)</span><br><span class="line">            	f[i][j] += f[i][j - <span class="number">1</span>] % <span class="number">2020</span>;</span><br><span class="line">        &#125;</span><br><span class="line">   	<span class="built_in">cout</span>&lt;&lt;f[<span class="number">1010</span>][<span class="number">1010</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+这题其实是经典例题[Acwing 271. 杨老师的照相排列](https://www.acwing.com/problem/content/description/273/)的简化版。</p>
  
       <!-- reward -->
       
