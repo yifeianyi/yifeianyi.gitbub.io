@@ -97,17 +97,22 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+  <h2 id="前言">前言</h2>
+<blockquote>
 <p>最近开始对RTOS感兴趣，故开新坑做下学习记录。</p>
 <p>因为是基于stm32基础上学习RTOS，且本人在学习RTOS之前没有使用过hal库开发，所以阅读本系列的前置技能应为有一定固件库基础的读者朋友。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="内容概览"><a href="#内容概览" class="headerlink" title="内容概览"></a>内容概览</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/RTOS_Primer_catalogue.png" alt="RTOS_Primer_catalogue"></p>
+<h2 id="内容概览">内容概览</h2>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/RTOS_Primer_catalogue.png" alt="RTOS_Primer_catalogue"></p>
 <p>RTOS（实时操作系统）属于 OS 的一种，而 OS 的知识体系非常庞大，RTOS作为它的子集体量也不小，所以为了兼顾 原理的认识 和 便于萌新易上手 两方面考虑，RTOS的初步认识将分为三篇叙述。本文为第一篇——跑起来。</p>
-<h2 id="跑起来"><a href="#跑起来" class="headerlink" title="跑起来"></a>跑起来</h2><p>对于刚接触 RTOS 的朋友们来说，我相信使用固件库并手动移植RTOS代码是个很蛋疼的过程。这个过程容易出错且繁琐，大大增加了我们学习 RTOS 核心内容的难度。</p>
+<h2 id="跑起来">跑起来</h2>
+<p>对于刚接触 RTOS 的朋友们来说，我相信使用固件库并手动移植RTOS代码是个很蛋疼的过程。这个过程容易出错且繁琐，大大增加了我们学习 RTOS 核心内容的难度。</p>
 <p>所以在这里，我强烈建议原来使用固件库的朋友们使用 stm32CubeMX 学习 RTOS，这能让我们少掉很多根头发。。。</p>
 <p>ok，在本文中我们先尽可能抛开所有和 OS 相关的概念，先让一个运行着 FreeRTOS 的 stm32板子跑起来，让一盏 LED 闪烁先。</p>
-<h3 id="一、系统移植"><a href="#一、系统移植" class="headerlink" title="一、系统移植"></a>一、系统移植</h3><h4 id="1-1、CubeMX的使用"><a href="#1-1、CubeMX的使用" class="headerlink" title="1.1、CubeMX的使用"></a>1.1、CubeMX的使用</h4><p>这小节将叙述如何使用 Hal库和CubeMX，如果已经掌握的朋友，可以跳过。</p>
+<h3 id="一-系统移植">一、系统移植</h3>
+<h4 id="1-1-cubemx的使用">1.1、CubeMX的使用</h4>
+<p>这小节将叙述如何使用 Hal库和CubeMX，如果已经掌握的朋友，可以跳过。</p>
 <p>首先，Hal库我们不需要自己下载，只需要下载安装 CubeMX 即可，下载完后，所需要的Hal库包 CubeMX 会为我们自动下载，至于 CubeMX 的下载安装过程，这里略过。</p>
 <p>回忆一下，对于一个LED工程的创建流程，大概有以下步骤：</p>
 <ol>
@@ -115,33 +120,37 @@
 <li>时钟配置</li>
 <li>LED引脚配置</li>
 </ol>
-<h5 id="1-1-1、芯片选型"><a href="#1-1-1、芯片选型" class="headerlink" title="1.1.1、芯片选型"></a>1.1.1、芯片选型</h5><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_UI_select(1" alt="CubeMX_UI_select(1)">.png)</p>
+<h5 id="1-1-1-芯片选型">1.1.1、芯片选型</h5>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_UI_select(1).png" alt="CubeMX_UI_select(1)"></p>
 <p>点击第一个即可。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_UI_select(2" alt="CubeMX_UI_select(2)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_UI_select(2).png" alt="CubeMX_UI_select(2)"></p>
 <p>右下方的是各种 STM32 的，我们只要找到想要的芯片型号并双击即可创建一个专属的芯片设置环境。但因为这实在太多，所以我们可以使用左上方的搜索框输入芯片型号即可。</p>
 <p>这里我使用的是蓝桥杯嵌入式的新板子，芯片型号为：STM32G431RBTx 。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_UI_select(3" alt="CubeMX_UI_select(3)">.png)</p>
-<h5 id="1-1-2、时钟界面"><a href="#1-1-2、时钟界面" class="headerlink" title="1.1.2、时钟界面"></a>1.1.2、时钟界面</h5><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_Config(1" alt="CubeMX_Config(1)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_UI_select(3).png" alt="CubeMX_UI_select(3)"></p>
+<h5 id="1-1-2-时钟界面">1.1.2、时钟界面</h5>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_Config(1).png" alt="CubeMX_Config(1)"></p>
 <p>可以看到，进来后，右边是一个芯片的放大图，四周对应着的是芯片引出来的引脚，我们可以直接点击这些引脚，对其进行配置，相比使用固件库做相关配置时的体验来说是相当的香了。左边可以看到有一排东西，最上面的是 CPU 内核的一些外设配置。</p>
 <p>我们要做的第一件事是配时钟，所以直接点击 RCC 。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_Config(2" alt="CubeMX_Config(2)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_Config(2).png" alt="CubeMX_Config(2)"></p>
 <p>多么熟悉的选项，还不用我们自己配置，直接在选最后一个 水晶/陶瓷谐振器 （外部晶振） 即可。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_Config(3" alt="CubeMX_Config(3)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_Config(3).png" alt="CubeMX_Config(3)"></p>
 <p>如果想要微操改动部分总线的时钟频率，可以点击界面上方的 Clock Configuration， 整个时钟树尽收眼底，要改哪直接在图形界面输入相应的频率数值即可，相当方便。当然，本次工程中我们使用默认配置即可。</p>
-<h5 id="1-1-3、LED引脚配置"><a href="#1-1-3、LED引脚配置" class="headerlink" title="1.1.3、LED引脚配置"></a>1.1.3、LED引脚配置</h5><p>ok，接下来进入到LED引脚配置环节。</p>
+<h5 id="1-1-3-led引脚配置">1.1.3、LED引脚配置</h5>
+<p>ok，接下来进入到LED引脚配置环节。</p>
 <p>因为我使用的是蓝桥杯的板子，这比赛的板子向来有个特点：为了节约引脚，LED灯前面必加一个锁存器。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_Led.png" alt="Blue_led"></p>
 <p>通过原理图上的写着的锁存器的芯片型号 <strong>SN74HC573ADWR</strong> ，我们可以找到它的芯片手册查看它的真值表：</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Lock_FunctionTable.png" alt="image-20211121232320456"></p>
-<p>可以看到，当  $\overline{OE}$  为低电平时，这个锁存器才有意义。当 $LE$ 处于高电平时，输出电平随 $D$ 变化而变化，而 $LE$ 处于低电平时，就像上锁了一样，无论 $D$ 端输入如何变化，输出的电平都为 $LE$ 为高电平时的电平状态。</p>
+<p>可以看到，当  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mrow><mi>O</mi><mi>E</mi></mrow><mo stretchy="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">\overline{OE}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8833300000000001em;vertical-align:0em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span></span>  为低电平时，这个锁存器才有意义。当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">LE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span> 处于高电平时，输出电平随 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span></span></span> 变化而变化，而 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">LE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span> 处于低电平时，就像上锁了一样，无论 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span></span></span> 端输入如何变化，输出的电平都为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">LE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span> 为高电平时的电平状态。</p>
 <p>有了以上对锁存器的认识，还有使用固件库配置 gpio 的经验，我们就可以开干了。</p>
-<p>从上面的原理中可以看到，  $\overline{OE}$ 已经接地，我们只需要通过配置 $PD2$ 对 $LE$ 操作即可。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(1" alt="Blue_led(1)">.png)</p>
+<p>从上面的原理中可以看到，  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mrow><mi>O</mi><mi>E</mi></mrow><mo stretchy="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">\overline{OE}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8833300000000001em;vertical-align:0em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span></span> 已经接地，我们只需要通过配置 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>D</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">PD2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord">2</span></span></span></span> 对 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">LE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span> 操作即可。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(1).png" alt="Blue_led(1)"></p>
 <p>点击配置，完成后对应引脚显示绿色。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(2" alt="Blue_led(2)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(2).png" alt="Blue_led(2)"></p>
 <p>如上对 GPIO 进行操作。流程跟固件库一样，只是原来需要手敲的代码，变成了点点点~</p>
-<h5 id="1-1-4、代码生成"><a href="#1-1-4、代码生成" class="headerlink" title="1.1.4、代码生成"></a>1.1.4、代码生成</h5><p>在自动代码生成前，我们还需要对设置一下这个工程的一些信息。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(3" alt="Blue_led(3)">.png)</p>
+<h5 id="1-1-4-代码生成">1.1.4、代码生成</h5>
+<p>在自动代码生成前，我们还需要对设置一下这个工程的一些信息。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(3).png" alt="Blue_led(3)"></p>
 <p>如上图：</p>
 <ol>
 <li>点击 Project Manager ，进入界面。</li>
@@ -151,11 +160,12 @@
 <li>选择代码生成的 IDE 环境。</li>
 <li>基本不用管，默认值就好。</li>
 </ol>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(4" alt="Blue_led(4)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(4).png" alt="Blue_led(4)"></p>
 <p>然后是上图，这里需要注意几点：</p>
 <ol>
 <li>点击 Code Generator 可以进入当前界面。</li>
-<li>这里是选择导入工程的包文件方式：<ol>
+<li>这里是选择导入工程的包文件方式：
+<ol>
 <li>可以全部导入</li>
 <li>导入需要部分</li>
 <li>导入的是本地库的链接，不是拷贝，非常不利于移植工程，不推荐使用</li>
@@ -164,22 +174,25 @@
 <li>这里强烈建议勾上第一个，不然所有配置代码都堆在 main 函数里，代码会非常难看且难调。</li>
 </ol>
 <p>Project Manager 页面还有最后一个子页面：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(5" alt="Blue_led(5)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(5).png" alt="Blue_led(5)"></p>
 <p>这里主要是调节函数相关的内容，你可以设置生成代码中函数的调用顺序、函数的属性等。</p>
 <p>哦，对了还有一个配置。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(6" alt="Blue_led(6)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(6).png" alt="Blue_led(6)"></p>
 <p>看玩野火的教程，我觉得最好把 SYS 中的 Debug 选上 Serial Wire。据说不这么操作的话，烧录一次程序过后程序会烧不进去？具体原因我还没有研究，不过为了减少初学时的麻烦就先照着做吧，反正总比刚开始学灯都还没点亮就出现各种问题影响心情强不是嘛。</p>
 <p>好了，晚上以上步骤之后，点击右上方的 GENERATE CODE 即可生成代码。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(7" alt="Blue_led(7)">.png)</p>
-<h4 id="1-2、工程源码"><a href="#1-2、工程源码" class="headerlink" title="1.2、工程源码"></a>1.2、工程源码</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Hal_code(1" alt="Hal_code(1)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Blue_led(7).png" alt="Blue_led(7)"></p>
+<h4 id="1-2-工程源码">1.2、工程源码</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Hal_code(1).png" alt="Hal_code(1)"></p>
 <p>如上图，打开 main 函数可以看到有上图中框出来的三个函数，其中后两个是我们自己配置的。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Hal_code(2" alt="Hal_code(2)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Hal_code(2).png" alt="Hal_code(2)"></p>
 <p>进入 GPIO 的初始化函数可以看到，端口使能、GPIO引脚初始化、电平设置 都和我们在 CubeMX 中设置的一模一样。硬要说不同的话可能就是一些 api 的名字有一丢丢差别了。</p>
 <p>但是这对我们的使用影响不大，后面照着固件库时的开发方式在keil中把具体功能逻辑实现即可。</p>
-<h3 id="二、任务创建"><a href="#二、任务创建" class="headerlink" title="二、任务创建"></a>二、任务创建</h3><h4 id="2-1、CubeMX设置"><a href="#2-1、CubeMX设置" class="headerlink" title="2.1、CubeMX设置"></a>2.1、CubeMX设置</h4><p>任务是RTOS运行的基本单位，一个按键控制可以是一个任务，一个LED闪烁也可以是一个任务。这里，暂时先不刨根问底的让一个任务跑起来。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(1" alt="CubeMX_RTOS(1)">.png)</p>
+<h3 id="二-任务创建">二、任务创建</h3>
+<h4 id="2-1-cubemx设置">2.1、CubeMX设置</h4>
+<p>任务是RTOS运行的基本单位，一个按键控制可以是一个任务，一个LED闪烁也可以是一个任务。这里，暂时先不刨根问底的让一个任务跑起来。</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(1).png" alt="CubeMX_RTOS(1)"></p>
 <p>回到 CubeMX 界面，点开 Middle ware 中间件选项，可以看到有个大大的 FreeRTOS 在这，我们进入相关页面后，选择 V1 即可。这里 v1 和 v2 的区别我还没有研究过，不过就先这样吧。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(2" alt="CubeMX_RTOS(2)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(2).png" alt="CubeMX_RTOS(2)"></p>
 <p>选择玩其中一个版本后，我们就可以看到上图的场景（没有 3 的场景）。</p>
 <ol>
 <li>点击 Tasks and Queues ，可以看到任务和队列相关项。</li>
@@ -187,16 +200,18 @@
 <li>因为我们这里只有一个任务，所以只需要设置任务名 Task Name 和  进入函数 Entry Function 的名字即可。</li>
 </ol>
 <p>这时候，基本已经完成了。但是如果这时候直接生成代码的话，会有这么一个弹框：</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(3" alt="CubeMX_RTOS(3)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(3).png" alt="CubeMX_RTOS(3)"></p>
 <p>这是因为 Hal 库自身实现了一个 Delay 函数，而这个函数的实现用的定时器是 systick 。systick 这个定时器本身在 os 中起的是一个脉搏的作用具体情况后面会叙述。所以这里我们需要先修改一下 Hal 库延时使用的定时器。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(4" alt="CubeMX_RTOS(4)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/CubeMX_RTOS(4).png" alt="CubeMX_RTOS(4)"></p>
 <p>这个设置在 sys 里，有个 TimeBase Source的选项，我们换成其他任意一个时钟即可。</p>
-<h4 id="2-2、工程源码"><a href="#2-2、工程源码" class="headerlink" title="2.2、工程源码"></a>2.2、工程源码</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/RTOS_code(1" alt="RTOS_code(1)">.png)</p>
+<h4 id="2-2-工程源码">2.2、工程源码</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/RTOS_code(1).png" alt="RTOS_code(1)"></p>
 <p>打开源码可以看到有 RTOS 的初始化调用函数、系统内核的启动函数，这些我们都不用动它。</p>
-<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/RTOS_code(2" alt="RTOS_code(2)">.png)</p>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/RTOS_code(2).png" alt="RTOS_code(2)"></p>
 <p>我们需要操作的在 app_freertos.c 这个文件里。点进去后我们可以发现有一个 LedTask 的函数（这个名字就是 CubeMX 中任务设置里的 TaskName）。</p>
 <p>我们把 Led 闪烁的功能写进 for 循环里即可。</p>
-<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Led_photo.png" alt="Led_photo"></p>
+<h3 id="效果图">效果图</h3>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/Embedded/RTOS/Led_photo.png" alt="Led_photo"></p>
  
       <!-- reward -->
       

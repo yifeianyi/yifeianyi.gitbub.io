@@ -97,20 +97,24 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+  <h2 id="简介">简介</h2>
+<blockquote>
 <p>I2C 通讯协议(Inter－Integrated Circuit)，是一种比较简单的同步串行协议。因其所需引脚少、硬件实现简单、扩展性强，现在广泛用于系统内多个集成电路（IC）间的通讯。</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<h2 id="目录">目录</h2>
+<ul>
 <li>物理层</li>
-<li>协议层<ul>
+<li>协议层
+<ul>
 <li>传输过程</li>
 <li>原子操作</li>
 </ul>
 </li>
 </ul>
 <p>按照学习通讯协议的套路，以下分别讨论I2C的物理层和协议层。</p>
-<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F.png" alt="I2C常用连接方式"></p>
+<h2 id="物理层">物理层</h2>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F.png" alt="I2C常用连接方式"></p>
 <p>上图中我们可以看到：</p>
 <ul>
 <li>它只有一条数据线</li>
@@ -118,22 +122,29 @@
 </ul>
 <p>那么以掌握的简单通信知识经验来看，我们可以得出以下初步结论：</p>
 <ul>
-<li>如果主机和从机间可以交互，那么这必然是一个半双工的协议</li>
-<li><p>一条数据线连接着多个设备，可能存在多个设备访问总线产生数据冲突问题</p>
+<li>
+<p>如果主机和从机间可以交互，那么这必然是一个半双工的协议</p>
 </li>
-<li><p>每个设备必然有一个独立地址</p>
+<li>
+<p>一条数据线连接着多个设备，可能存在多个设备访问总线产生数据冲突问题</p>
+</li>
+<li>
+<p>每个设备必然有一个独立地址</p>
 </li>
 </ul>
 <p>带着以上的初步认识去看协议具体内容，我们可以很快的接受并记住I2C的物理层特性。</p>
-<h3 id="物理层特性"><a href="#物理层特性" class="headerlink" title="物理层特性"></a>物理层特性</h3><ol>
+<h3 id="物理层特性">物理层特性</h3>
+<ol>
 <li>它是一个支持设备的总线。可连接多个 I2C 通讯设备，支持多个通讯主机、从机。</li>
 <li>每个连接到总线的设备都有一个独立的地址。</li>
-<li>总线通过上拉电阻接到电源。当 I2C 设备空闲时，会输出高阻态，而当所有设备都空<br> 闲，都输出高阻态时，由上拉电阻把总线拉成高电平</li>
+<li>总线通过上拉电阻接到电源。当 I2C 设备空闲时，会输出高阻态，而当所有设备都空<br>
+闲，都输出高阻态时，由上拉电阻把总线拉成高电平</li>
 <li>多个主机同时使用总线时，为了防止数据冲突，会利用仲裁方式决定由哪个设备占用总线。</li>
 <li>具有三种传输模式：标准模式传输速率为 <strong>100kbit/s</strong> ，快速模式为 <strong>400kbit/s</strong> ，高速模式下可达 <strong>3.4Mbit/s</strong>。</li>
 <li>连接到相同总线的 IC 数量受到总线的最大电容 400pF 限制 。</li>
 </ol>
-<h2 id="协议层"><a href="#协议层" class="headerlink" title="协议层"></a>协议层</h2><p>协议层定义了：</p>
+<h2 id="协议层">协议层</h2>
+<p>协议层定义了：</p>
 <ul>
 <li>起始和停止信号</li>
 <li>数据有效性</li>
@@ -142,10 +153,12 @@
 <li>时钟同步和广播地址</li>
 </ul>
 <p>说白的就是定义了在传输过程中01串的意义。</p>
-<h3 id="传输过程"><a href="#传输过程" class="headerlink" title="传输过程"></a>传输过程</h3><p>我把起始和停止信号、响应信号等基本最基础的操作，称为原子操作。</p>
+<h3 id="传输过程">传输过程</h3>
+<p>我把起始和停止信号、响应信号等基本最基础的操作，称为原子操作。</p>
 <p>在讨论原子操作具体如何实现前，让我们先对I2C的传输过程有个整体认识。</p>
 <p>大致上，I2C的传输过程有这么三种情况：写、读、读写混合</p>
-<h4 id="写过程"><a href="#写过程" class="headerlink" title="写过程"></a>写过程</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E5%86%99%E8%BF%87%E7%A8%8B.png" alt="I2C写过程"></p>
+<h4 id="写过程">写过程</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E5%86%99%E8%BF%87%E7%A8%8B.png" alt="I2C写过程"></p>
 <p>由上图可知，整个写过程由以下部分组成：</p>
 <ul>
 <li>发送起始信号</li>
@@ -158,7 +171,8 @@
 </ul>
 <p>这是个很严谨的过程，每发送一个具体都需要等待对方的应答，只有确定接收端收到之后，才会继续发送数据。在最大程度上保证了数据传输的可靠性。</p>
 <p>值得注意的是，这里的从机地址协议规定了可以选7位或10位，不过绝大多数情况下都是使用7位地址。</p>
-<h4 id="读过程"><a href="#读过程" class="headerlink" title="读过程"></a>读过程</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E8%AF%BB%E8%BF%87%E7%A8%8B.png" alt="I2C读过程"></p>
+<h4 id="读过程">读过程</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E8%AF%BB%E8%BF%87%E7%A8%8B.png" alt="I2C读过程"></p>
 <p>整个读过程由以下部分组成：</p>
 <ul>
 <li>发送起始信号</li>
@@ -169,7 +183,8 @@
 <li>应答or非应答信号</li>
 <li>若是非应答则，主机发送停止信号</li>
 </ul>
-<h4 id="读写混合模式"><a href="#读写混合模式" class="headerlink" title="读写混合模式"></a>读写混合模式</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E8%AF%BB%E5%86%99%E6%B7%B7%E5%90%88%E8%BF%87%E7%A8%8B.png" alt="I2C读写混合过程"></p>
+<h4 id="读写混合模式">读写混合模式</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/I2C%E8%AF%BB%E5%86%99%E6%B7%B7%E5%90%88%E8%BF%87%E7%A8%8B.png" alt="I2C读写混合过程"></p>
 <p>读写混合过程相较于单独读、写模式来说，复杂了一丢丢。</p>
 <p>它一次通讯有两次操作过程：</p>
 <ul>
@@ -198,9 +213,11 @@
 <li>只需要读取的，应该是传感器的数据</li>
 <li>像读写混合这样先定位准确的位置，再读写数据的，应该只能是存储器了</li>
 </ul>
-<h3 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h3><p>以上传输过程相对来说，还比较宏观。下面我们看看I2C在是如何实现以上种种信号的。</p>
+<h3 id="原子操作">原子操作</h3>
+<p>以上传输过程相对来说，还比较宏观。下面我们看看I2C在是如何实现以上种种信号的。</p>
 <p>以下实现皆为协议具体设计，是人为定位的，虽有一定内在设计逻辑在里面，但只需记住定义即可。</p>
-<h4 id="起始和停止信号"><a href="#起始和停止信号" class="headerlink" title="起始和停止信号"></a>起始和停止信号</h4><p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E8%B5%B7%E5%A7%8B%E5%92%8C%E5%81%9C%E6%AD%A2%E4%BF%A1%E5%8F%B7%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="起始和停止信号时序图"></p>
+<h4 id="起始和停止信号">起始和停止信号</h4>
+<p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E8%B5%B7%E5%A7%8B%E5%92%8C%E5%81%9C%E6%AD%A2%E4%BF%A1%E5%8F%B7%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="起始和停止信号时序图"></p>
 <p>同时满足以下条件时，便是起始信号：</p>
 <ul>
 <li>SCL高电平</li>
@@ -211,7 +228,8 @@
 <li>SCL高电平</li>
 <li>SDA由低电平转高电平</li>
 </ul>
-<h4 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h4><p>也叫数据有效性，它具体定义了01数据的电平表示。</p>
+<h4 id="数据表示">数据表示</h4>
+<p>也叫数据有效性，它具体定义了01数据的电平表示。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E6%95%B0%E6%8D%AE%E6%9C%89%E6%95%88%E6%80%A7.png" alt="数据有效性"></p>
 <p>1的表示：</p>
 <ul>
@@ -226,7 +244,8 @@
 <p>而当SCL为低电平时，SDA没有任何意义，这时候就是01表示切换的时机。</p>
 <p>由以上定义可以看出，I2C一个时钟周期只能传输1位数据。</p>
 <p>小结上面几点就是：<strong>SCL为高电平时，数据有效。</strong></p>
-<h4 id="地址及数据方向"><a href="#地址及数据方向" class="headerlink" title="地址及数据方向"></a>地址及数据方向</h4><p>协议定义了地址为7位 or 10位，这个自己选，一般选7位。</p>
+<h4 id="地址及数据方向">地址及数据方向</h4>
+<p>协议定义了地址为7位 or 10位，这个自己选，一般选7位。</p>
 <p><img src="https://photos-1302100213.cos.ap-guangzhou.myqcloud.com/imgs/Blog/%E5%9C%B0%E5%9D%80%E5%8F%8A%E6%96%B9%E5%90%91.png" alt="地址及方向"></p>
 <p>原因很简单，单字节就是8位。地址位7位+方向位恰好是一个字节。</p>
 <p>所以对应的也引申出了两种需要注意的地址叫法：</p>
@@ -234,10 +253,12 @@
 <li>最高的7位数据——从机地址</li>
 <li>整个8位数据——写地址/读地址</li>
 </ul>
-<h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><p>接收端每次接受完一个字节信号后，都要向发送端发送一个应答（ACK）或者不应答（NACK）信号。</p>
+<h4 id="响应">响应</h4>
+<p>接收端每次接受完一个字节信号后，都要向发送端发送一个应答（ACK）或者不应答（NACK）信号。</p>
 <p>协议规定了这个信号在传输一个字节数据后的第9个时钟周期产生。</p>
 <p>这时，若SDA为低电平，则表示应答信号，反之为非应答信号。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>有了以上对I2C协议的理解后。会发现，说白的xxx通讯协议，就是控制电平按照协议标准的方式在总线上变化。只要能实现协议规定的特征电平，就能实现该协议。所以无论是软件还是硬件都可以实现这个协议通信。区别在于，软件实现会消耗CPU资源，而硬件通信可以减少CPU的负担。</p>
+<h2 id="小结">小结</h2>
+<p>有了以上对I2C协议的理解后。会发现，说白的xxx通讯协议，就是控制电平按照协议标准的方式在总线上变化。只要能实现协议规定的特征电平，就能实现该协议。所以无论是软件还是硬件都可以实现这个协议通信。区别在于，软件实现会消耗CPU资源，而硬件通信可以减少CPU的负担。</p>
  
       <!-- reward -->
       
